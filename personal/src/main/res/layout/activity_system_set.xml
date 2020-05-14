@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f3f4f5"
+    android:orientation="vertical"
+    >
+
+    <com.rvakva.travel.devkit.widget.MyTitleBar
+        android:id="@+id/systemSettingMtb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:divider="@drawable/size_1_ebebeb"
+        android:dividerPadding="@dimen/size_16dp"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/systemSettingTvRemindSetting"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableEnd="@drawable/common_icon_expand"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:text="提醒设置"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/systemSettingTvPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableEnd="@drawable/common_icon_expand"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:text="隐私政策"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp" />
+
+        <TextView
+            android:id="@+id/systemSettingTvUserAssignment"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableEnd="@drawable/common_icon_expand"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:text="用户协议"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp" />
+
+        <TextView
+            android:id="@+id/systemSettingTvUpdateCheck"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableEnd="@drawable/common_icon_expand"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:text="检查更新"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp" />
+
+
+        <LinearLayout
+            android:id="@+id/systemSettingLlContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
+                android:text="联系平台"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16sp" />
+
+            <TextView
+                android:id="@+id/systemSettingTvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
+                android:text="当前版本"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16sp" />
+
+            <TextView
+                android:id="@+id/systemSettingTvCurrentVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/systemSettingTvExit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:background="@drawable/cor4_white_st1_black_sub"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/size_16sp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:paddingStart="@dimen/size_16dp"
+        android:paddingEnd="@dimen/size_16dp"
+        android:text="退出登录"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/size_16sp" />
+
+</LinearLayout>

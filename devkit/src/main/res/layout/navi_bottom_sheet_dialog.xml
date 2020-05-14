@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/naviBottomSheetDialogLl"
+    android:background="@drawable/top_cor4_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_44dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="请选择您的导航方式"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16sp"
+        android:textStyle="bold" />
+
+    <View style="@style/LineHorizontal" />
+
+    <TextView
+        android:id="@+id/naviBottomSheetDialogTvDrive"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:gravity="center"
+        android:text="驾车"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16sp" />
+
+    <TextView
+        android:id="@+id/naviBottomSheetDialogTvRide"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:gravity="center"
+        android:text="骑行"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16sp" />
+
+    <TextView
+        android:id="@+id/naviBottomSheetDialogTvWalk"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:gravity="center"
+        android:text="步行"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16sp" />
+
+</LinearLayout>

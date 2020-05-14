@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cor4_white"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/size_16dp"
+    android:paddingBottom="@dimen/size_24dp">
+
+
+    <ImageView
+        android:id="@+id/codeDialogIvClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/size_16dp"
+        android:paddingTop="@dimen/size_12dp"
+        android:src="@drawable/common_icon_close" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="请输入收件码"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/size_8dp"
+        android:paddingBottom="@dimen/size_24dp"
+        android:text="让收件人出示收件码，防止他人误取"
+        android:textColor="@color/black_desc"
+        android:textSize="@dimen/size_14sp" />
+
+    <com.rvakva.travel.devkit.widget.PasswordInputView
+        android:id="@+id/codeDialogIvPiv"
+        android:layout_width="224dp"
+        android:layout_height="@dimen/size_48dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        android:inputType="number"
+        app:pwv_borderColor="@color/color_line"
+        app:pwv_borderStyle="box"
+        app:pwv_haveInputBorderColor="@color/blue"
+        app:pwv_maxLength="4"
+        app:pwv_pwdColor="@color/blue"
+        app:pwv_pwdStyle="plaintext"
+        app:pwv_radius="@dimen/size_2dp"
+        app:pwv_spacing="@dimen/size_16dp"
+        app:pwv_strokeWidth="@dimen/size_1px" />
+
+</LinearLayout>

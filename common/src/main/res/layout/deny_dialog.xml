@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_cor4_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/size_16dp"
+    android:paddingEnd="@dimen/size_16dp"
+    android:paddingBottom="@dimen/size_60dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_54dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/common_icon_close"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拒单说明"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <com.sherloki.devkit.widget.MyRecyclerView
+        android:id="@+id/myRecyclerViewDeny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/size_76dp"-->
+<!--        android:layout_marginBottom="@dimen/size_32dp"-->
+<!--        android:background="@color/f3f4f5"-->
+<!--        android:paddingStart="@dimen/size_12dp"-->
+<!--        android:paddingTop="@dimen/size_8dp"-->
+<!--        android:paddingEnd="@dimen/size_12dp"-->
+<!--        android:paddingBottom="@dimen/size_8dp">-->
+
+<!--        <EditText-->
+<!--            android:textColorHint="@color/black_desc"-->
+<!--            android:hint="请输入拒绝理由"-->
+<!--            android:id="@+id/denyDialogEt"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@null"-->
+<!--            android:gravity="start"-->
+<!--            android:maxLength="50"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="@dimen/size_14sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/denyDialogTvCount"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end|bottom"-->
+<!--            android:text="0/50"-->
+<!--            android:textColor="@color/black_desc"-->
+<!--            android:textSize="@dimen/size_12sp" />-->
+<!--    </FrameLayout>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/size_44dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/denyDialogTvEnsure"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginEnd="@dimen/size_8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/cor4_blue"-->
+<!--            android:gravity="center"-->
+<!--            android:text="确定"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/size_16sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/denyDialogTvCancel"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginEnd="@dimen/size_8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/cor4_st1_blue"-->
+<!--            android:gravity="center"-->
+<!--            android:text="取消"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="@dimen/size_16sp" />-->
+
+<!--    </LinearLayout>-->
+
+</LinearLayout>

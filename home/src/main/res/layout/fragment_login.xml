@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/size_32dp"
+    android:paddingEnd="@dimen/size_32dp"
+    tools:context=".ui.login.LoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="@color/black_desc"
+            android:textSize="@dimen/size_12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText
+                android:id="@+id/loginEtPhone"
+                style="@style/NumberInputMax11"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入手机号"
+                android:paddingTop="@dimen/size_8dp"
+                android:paddingBottom="@dimen/size_8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/cccccc"
+                android:textCursorDrawable="@drawable/cursor_black"
+                android:textSize="@dimen/size_15sp" />
+            <ImageView
+                android:id="@+id/logonPhoneClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home_log_in_eliminate"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:src="@color/color_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textColor="@color/black_desc"
+            android:textSize="@dimen/size_12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText
+                android:id="@+id/loginEtPsw"
+                style="@style/PasswordInput"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入登录密码"
+                android:paddingTop="@dimen/size_8dp"
+                android:paddingBottom="@dimen/size_8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/cccccc"
+                android:textCursorDrawable="@drawable/cursor_black"
+                android:textSize="@dimen/size_14sp" />
+            <ImageView
+                android:id="@+id/logonPasswordSee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selected_login_pas_see"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:src="@color/color_line" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/loginTvAgreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/selected_home_icon_agreement"
+        android:drawablePadding="@dimen/size_8dp"
+        android:paddingTop="@dimen/size_8dp"
+        android:textColor="@color/black_desc"
+        android:textSize="@dimen/size_12sp"
+        android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/loginTvAction"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:layout_marginTop="@dimen/size_56dp"
+        android:background="@drawable/cor10_enable__ddd__blue"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16sp" />
+
+    <TextView
+        android:id="@+id/loginTvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/size_12dp"
+        android:text="注册司机账号"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/size_14sp" />
+
+</LinearLayout>

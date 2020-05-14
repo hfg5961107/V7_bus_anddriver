@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="slideToUnlockView">
+        <attr name="iconPaddingStart" format="reference|dimension" />
+        <attr name="iconPaddingEnd" format="reference|dimension" />
+        <attr name="iconResId" format="reference" />
+        <attr name="text" format="string|reference" />
+        <attr name="textSize" format="dimension|reference" />
+        <attr name="textColorResId" format="color|reference" />
+        <attr name="isTextBold" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="switchView">
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+        <attr name="offColor" format="color" />
+        <attr name="offColorDark" format="color" />
+        <attr name="barColor" format="color" />
+        <attr name="bgColor" format="color" />
+        <attr name="shadowColor" format="color" />
+        <attr name="ratioAspect" format="float" />
+        <attr name="isOpened" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="passwordInputView">
+        <!--         最大长度-->
+        <attr name="pwv_maxLength" format="integer" />
+        <!--        边框颜色-->
+        <attr name="pwv_borderColor" format="color" />
+        <!--        密码颜色-->
+        <attr name="pwv_pwdColor" format="color" />
+        <!--        已输入部分边框的颜色-->
+        <attr name="pwv_haveInputBorderColor" format="color" />
+        <!--        边框宽度-->
+        <attr name="pwv_strokeWidth" format="dimension" />
+        <!--        圆角半径-->
+        <attr name="pwv_radius" format="dimension" />
+        <!--        每个密码框之间的间距-->
+        <attr name="pwv_spacing" format="dimension" />
+        <!--        当密码风格为星号风格时，可以用任意字符替换星号，替换的字符为pwv_asterisk的第一个字符-->
+        <attr name="pwv_asterisk" format="string" />
+
+        <!--            边框风格 方框 和 下划线-->
+        <attr name="pwv_borderStyle" format="enum">
+            <enum name="box" value="0" />
+            <enum name="line" value="1" />
+        </attr>
+        <!--            密码风格 圆点、星号、明文-->
+        <attr name="pwv_pwdStyle" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="asterisk" value="1" />
+            <enum name="plaintext" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+</resources>

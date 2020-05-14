@@ -1,0 +1,126 @@
+package com.rvakva.bus.home.ui.work
+
+import android.os.Bundle
+import android.view.View
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.rvakva.bus.home.R
+import com.rvakva.bus.home.viewmodel.work.WorkViewModel
+import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.base.KtxFragment
+import com.rvakva.travel.devkit.expend.bind
+import com.rvakva.travel.devkit.expend.getPrivateValue
+import com.rvakva.travel.devkit.model.UserInfoModel
+import com.rvakva.travel.devkit.observer.request.RequestResultObserver
+import kotlinx.android.synthetic.main.activity_main_indicator.*
+import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_work.*
+
+/**
+ * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
+ * @Description:
+ * @Author:         胡峰
+ * @CreateDate:     2020/5/13 下午6:38
+ */
+class WorkFragment : KtxFragment(R.layout.fragment_work) {
+
+    val workViewModel by activityViewModels<WorkViewModel>()
+
+    var status: Int = 0
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            WorkFragment().apply {
+                arguments = Bundle().apply {
+
+                }
+            }
+    }
+
+    override fun initObserver() {
+        workViewModel.workStatusViewModel.observe(
+            viewLifecycleOwner,
+            RequestResultObserver(
+                successBlock = {
+                    workViewModel.getUserInfo()
+                },
+                fragmentManager = parentFragmentManager, handleResult = true
+            )
+        )
+        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
+            status = it.status
+        })
+    }
+
+    override fun initView(view: View, savedInstanceState: Bundle?) {
+        initTabLayout()
+        setOnClick()
+
+        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
+            it.status?.let { it1 -> showStatus(it1) }
+        })
+    }
+
+    override fun initData(isFirstInit: Boolean) {
+
+    }
+
+    val fragmentList = mutableListOf(
+        WorkOrderFragment.newInstance(
+            OrderStatusTypeEnum.ORDER_TYPE_POOL
+        ),
+        WorkOrderFragment.newInstance(
+            OrderStatusTypeEnum.ORDER_TYPE_ASSIGN
+        )
+    )
+
+    private fun initTabLayout() {
+        mainVp.let {
+            (it.getPrivateValue(
+                "mRecyclerView",
+                ViewPager2::class.java
+            ) as? RecyclerView)?.overScrollMode =
+                View.OVER_SCROLL_NEVER
+
+            it.adapter = object : FragmentStateAdapter(this) {
+
+                override fun getItemCount() = fragmentList.size
+
+                override fun createFragment(position: Int) = fragmentList[position]
+            }
+            it.offscreenPageLimit = 1
+            mainMi.bind(mutableListOf("新订单", "进行中"), it)
+        }
+    }
+
+    private fun setOnClick() {
+        workStatusBtn.setOnClickListener {
+            if (status == 1) {
+                workViewModel.changeStatus(2)
+            } else if (status == 2) {
+                workViewModel.changeStatus(1)
+            }
+        }
+    }
+
+    private fun showStatus(status: Int) {
+        if (status == 1) {
+            workStatusIv.setImageResource(R.drawable.home_workbench_work)
+            workStatusOnlineTv.visibility = View.VISIBLE
+            workStatusRestTv.visibility = View.GONE
+        } else if (status == 2) {
+            workStatusIv.setImageResource(R.drawable.home_workbench_rest)
+            workStatusOnlineTv.visibility = View.GONE
+            workStatusRestTv.visibility = View.VISIBLE
+        }
+    }
+
+}

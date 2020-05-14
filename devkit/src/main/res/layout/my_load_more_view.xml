@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_44dp"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/loadMorePbLoading"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="加载中"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/loadMoreTvError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="加载失败，点击重试"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/loadMoreTvFinish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="已经是最后一页啦~"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <Space
+        android:id="@+id/loadMoreSp"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_0dp"/>
+
+</FrameLayout>

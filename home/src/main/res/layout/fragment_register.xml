@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/size_32dp"
+    android:paddingEnd="@dimen/size_32dp"
+    android:paddingBottom="@dimen/size_32dp"
+    tools:context=".ui.login.LoginFragment">
+
+    <EditText
+        android:id="@+id/registerEtInvite"
+        style="@style/NumberInputMax4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cor4_ddd"
+        android:drawableStart="@drawable/home_icon_invite"
+        android:drawablePadding="@dimen/size_16dp"
+        android:gravity="center_vertical"
+        android:hint="请输入平台号"
+        android:paddingStart="@dimen/size_16dp"
+        android:paddingTop="@dimen/size_12dp"
+        android:paddingEnd="@dimen/size_16dp"
+        android:paddingBottom="@dimen/size_12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_desc"
+        android:textCursorDrawable="@drawable/cursor_black"
+        android:textSize="@dimen/size_14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/home_icon_alert"
+        android:drawablePadding="@dimen/size_4dp"
+        android:paddingTop="@dimen/size_8dp"
+        android:text="请向签约平台索要平台号"
+        android:textColor="@color/black_desc"
+        android:textSize="@dimen/size_14sp" />
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:id="@+id/registerEtPhone"
+        style="@style/NumberInputMax11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cor4_ddd"
+        android:drawableStart="@drawable/home_icon_phone"
+        android:drawablePadding="@dimen/size_16dp"
+        android:gravity="center_vertical"
+        android:hint="请输入您的手机号码"
+        android:paddingStart="@dimen/size_16dp"
+        android:paddingTop="@dimen/size_12dp"
+        android:paddingEnd="@dimen/size_16dp"
+        android:paddingBottom="@dimen/size_12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_desc"
+        android:textCursorDrawable="@drawable/cursor_black"
+        android:textSize="@dimen/size_14sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp">
+
+        <EditText
+            android:id="@+id/registerEtSmsCode"
+            style="@style/NumberInputMax4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cor4_ddd"
+            android:drawableStart="@drawable/home_icon_sms"
+            android:drawablePadding="@dimen/size_16dp"
+            android:gravity="center_vertical"
+            android:hint="请输入短信验证码"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_12dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_desc"
+            android:textCursorDrawable="@drawable/cursor_black"
+            android:textSize="@dimen/size_14sp" />
+
+        <TextView
+            android:id="@+id/registerTvGetIdentity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:enabled="false"
+            android:paddingEnd="@dimen/size_8dp"
+            android:text="获取验证码"
+            android:textColor="@color/enable__blue__sub"
+            android:textSize="@dimen/size_14sp" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/registerEtPassword"
+        style="@style/PasswordInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:background="@drawable/cor4_ddd"
+        android:drawableStart="@drawable/home_icon_password"
+        android:drawablePadding="@dimen/size_16dp"
+        android:gravity="center_vertical"
+        android:hint="请输入登录密码"
+        android:paddingStart="@dimen/size_16dp"
+        android:paddingTop="@dimen/size_12dp"
+        android:paddingEnd="@dimen/size_16dp"
+        android:paddingBottom="@dimen/size_12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_desc"
+        android:textCursorDrawable="@drawable/cursor_black"
+        android:textSize="@dimen/size_14sp" />
+
+
+    <TextView
+        android:id="@+id/registerTvAction"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:layout_marginTop="@dimen/size_44dp"
+        android:background="@drawable/cor10_enable__ddd__blue"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="注册"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16sp" />
+
+    <TextView
+        android:id="@+id/registerTvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/size_12dp"
+        android:text="已有账号，直接登录"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/size_16sp" />
+
+</LinearLayout>

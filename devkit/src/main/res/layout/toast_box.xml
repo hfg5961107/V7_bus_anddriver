@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/cor4_4040"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/toastBoxIv"
+        android:background="@drawable/spinner"
+        android:layout_width="22dp"
+        android:layout_height="22dp" />
+
+    <TextView
+        android:id="@+id/toastBoxTv"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:paddingTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    signingConfigs {
+        defaultConfig {
+            storeFile file('../v7_driver.keystore')
+            storePassword 'easymin'
+            keyAlias = '司机端'
+            keyPassword 'easymin'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        applicationId "com.rvakva.bus.driver"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled = true
+        manifestPlaceholders = [
+                AMAP_APIKEY: '00346ec07c95b0eeee9d90cac67fa1f9',
+                WECHAT_ID  : 'wx05f7827a40707d17'
+        ]
+
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.defaultConfig
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.defaultConfig
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "eym.${defaultConfig.versionName}-${defaultConfig.versionCode}" +
+                    ".${variant.productFlavors[0].name}.${releaseTime()}.apk"
+        }
+    }
+
+    flavorDimensions 'app'
+    productFlavors {
+        product {
+            dimension = 'app'
+            buildConfigField "String", "HOST", '"https://sapi.rvaka.cn/"'
+            buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
+            buildConfigField "String", "IMG_SERVER", '"https://eyimg.rvaka.cn/"'
+        }
+        dev {
+            dimension = 'app'
+            buildConfigField "String", "HOST", '"http://10.10.2.3:8080/"'
+            buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
+            buildConfigField "String", "IMG_SERVER", '"http://q6ndef29k.bkt.clouddn.com/"'
+        }
+    }
+}
+
+static def releaseTime() {
+    return new Date().format("yyyyMMddHHmm")
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':home')
+    implementation project(path: ':personal')
+    kapt deps.arouter_compiler
+}

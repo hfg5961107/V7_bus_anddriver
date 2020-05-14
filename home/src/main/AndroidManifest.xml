@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rvakva.bus.home">
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.IndexActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.work.WorkActivity"
+            android:screenOrientation="portrait"/>
+    </application>
+</manifest>

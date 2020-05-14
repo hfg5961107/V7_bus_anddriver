@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/updateDialogIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        android:src="@drawable/common_update_dialog_background" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/updateDialogIv"
+        android:layout_alignBottom="@id/updateDialogIv"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/size_24dp">
+
+        <TextView
+            android:id="@+id/updateDialogTvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/updateDialogTvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size_2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/updateDialogLlAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/updateDialogIv"
+        android:layout_alignStart="@id/updateDialogIv"
+        android:layout_alignEnd="@id/updateDialogIv"
+        android:background="@drawable/bottom_cor4_white"
+        android:orientation="vertical"
+        android:padding="@dimen/size_24dp"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_120dp"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <TextView
+                android:id="@+id/updateDialogTvContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp" />
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/size_32dp">
+
+            <TextView
+                android:id="@+id/updateDialogTvUpdate"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_44dp"
+                android:layout_weight="1"
+                android:background="@drawable/cor6_blue"
+                android:gravity="center"
+                android:text="立即更新"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_16sp" />
+
+            <TextView
+                android:id="@+id/updateDialogTvCancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_44dp"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_weight="1"
+                android:background="@drawable/cor6_blue"
+                android:gravity="center"
+                android:text="暂不更新"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/updateDialogLlProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/updateDialogIv"
+        android:layout_alignStart="@id/updateDialogIv"
+        android:layout_alignEnd="@id/updateDialogIv"
+        android:background="@drawable/bottom_cor4_white"
+        android:orientation="vertical"
+        android:padding="@dimen/size_24dp">
+
+        <ProgressBar
+            android:id="@+id/updateDialogPb"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_16dp"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_blue" />
+
+        <TextView
+            android:id="@+id/updateDialogTvProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_12dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+include ':personal'
+include ':home'
+include ':common'
+include ':devkit'
+include ':app'
+include ':alipaySdk-15.7.3-20200217092949-noUtdid'
+rootProject.name = "V7_bus_anddriver"
