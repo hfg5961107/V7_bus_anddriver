@@ -11,6 +11,7 @@ import com.rvakva.travel.devkit.x.XActivityManager
 import com.rvakva.travel.devkit.x.XDataBase
 import com.rvakva.travel.devkit.x.XMMKV
 import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -66,7 +67,7 @@ class Ktx private constructor(){
 
             //注册ActManager
             it.registerActivityLifecycleCallbacks(XActivityLifeCycleCallback())
-
+            weChatApi = WXAPIFactory.createWXAPI(application, Config.WECHAT_ID, false)
         }
     }
 

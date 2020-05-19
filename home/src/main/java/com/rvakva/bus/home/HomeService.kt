@@ -1,10 +1,9 @@
 package com.rvakva.bus.home
 
+import com.rvakva.bus.common.model.OrderDataModel
 import com.rvakva.travel.devkit.retrofit.result.BaseResult
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import com.rvakva.travel.devkit.retrofit.result.EmResult
+import retrofit2.http.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -30,4 +29,25 @@ interface HomeService {
     suspend fun changeStatus(
         @Field("status") status: Int
     ): BaseResult?
+
+    @GET("api/v1/driver/order/new")
+    suspend fun getOrderNewList(
+//        @Query("orderType") orderType: Int?,
+//        @Query("isTip") isTip: Boolean?,
+//        @Query("orderByDistance") orderByDistance: Int?
+    ): EmResult<List<OrderDataModel>>?
+
+    @GET("/api/v1/driver/order/assign")
+    suspend fun getOrderAssignList(
+//        @Query("orderType") orderType: Int?,
+//        @Query("isTip") isTip: Boolean?,
+//        @Query("orderByDistance") orderByDistance: Int?
+    ): EmResult<List<OrderDataModel>>?
+
+    @GET("api/v1/driver/order/running")
+    suspend fun getOrderRunningList(
+//        @Query("orderType") orderType: Int?,
+//        @Query("isTip") isTip: Boolean?,
+//        @Query("orderByDistance") orderByDistance: Int?
+    ): EmResult<List<OrderDataModel>>?
 }

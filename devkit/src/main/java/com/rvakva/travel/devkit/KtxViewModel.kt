@@ -16,6 +16,6 @@ object KtxViewModel {
 //    val locationLiveData = CreateStateLiveData<LocationModel>()
 //    val mqttLiveData = CreateStateEventLiveData<MqttMessage>()
     val progressLiveData = ResumeStateEventLiveData<ProgressModel>()
-//    val emptyClickLiveData = ResumeStateEventLiveData<Int>()
+    val emptyClickLiveData = ResumeStateEventLiveData<Int>()
 
 }

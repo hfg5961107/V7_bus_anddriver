@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
 class UserConfigModel(
     @PrimaryKey @ColumnInfo(name = "innerId") var innerId: Long = 0,
     @ColumnInfo(name = "id") var id: Long = 0,
-    @ColumnInfo(name = "receiptLimit") var receiptLimit: Long = 0,
+    @ColumnInfo(name = "balanceLimit") var balanceLimit: Long = 0,
     @ColumnInfo(name = "companyName") var companyName: String? = "",
     @ColumnInfo(name = "driverHelpPhone") var driverHelpPhone: String? = "",
     @ColumnInfo(name = "balance") var balance: Double = 0.0,

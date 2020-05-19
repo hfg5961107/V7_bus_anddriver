@@ -9,6 +9,8 @@ import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.jumpByARouter
 import com.rvakva.travel.devkit.expend.callPhone
+import com.rvakva.travel.devkit.expend.glideInto
+import com.rvakva.travel.devkit.expend.glideWithRoundInto
 import kotlinx.android.synthetic.main.fragment_person_center.*
 
 /**
@@ -33,8 +35,15 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     override fun initObserver() {
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
             pcDriverNameTv.text = it.name
-            pcDriverPhoneTv.text = it.phone
+            pcDriverPhoneTv.text = it.phone?.let {
+                it.substring(0,3)+"****"+it.substring(7,it.length)
+            }
+
             pcServicePhoneTv.text = it.driverServicePhone
+            it.headPortrait?.let {
+                pcHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it,10)
+            } ?: pcHeaderIv.setImageResource(R.drawable.home_personal_profile_photo)
+
         })
     }
 
@@ -43,12 +52,12 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     }
 
     override fun initData(isFirstInit: Boolean) {
-        if (isFirstInit){
+        if (isFirstInit) {
 
         }
     }
 
-    private fun setOnClick(){
+    private fun setOnClick() {
         pcWalletLl.setOnClickListener {
             jumpByARouter(Config.USER_WALLET)
         }

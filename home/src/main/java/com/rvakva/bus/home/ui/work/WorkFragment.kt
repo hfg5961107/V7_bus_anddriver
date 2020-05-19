@@ -2,25 +2,23 @@ package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.rvakva.bus.common.X
+import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.viewmodel.work.WorkViewModel
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.bind
 import com.rvakva.travel.devkit.expend.getPrivateValue
-import com.rvakva.travel.devkit.model.UserInfoModel
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import kotlinx.android.synthetic.main.activity_main_indicator.*
-import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_work.*
 
 /**
@@ -33,7 +31,7 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
 
     val workViewModel by activityViewModels<WorkViewModel>()
 
-    var status: Int = 0
+
 
     companion object {
         @JvmStatic
@@ -56,16 +54,17 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
             )
         )
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            status = it.status
+            it.status?.let { it1 ->
+                showStatus(it1)
+            }
         })
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         initTabLayout()
         setOnClick()
-
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            it.status?.let { it1 -> showStatus(it1) }
+            Config.status = it.status
         })
     }
 
@@ -75,10 +74,10 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
 
     val fragmentList = mutableListOf(
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_POOL
+            OrderStatusTypeEnum.ORDER_TYPE_NEW
         ),
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_ASSIGN
+            OrderStatusTypeEnum.ORDER_TYPE_ING
         )
     )
 
@@ -103,9 +102,17 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
 
     private fun setOnClick() {
         workStatusBtn.setOnClickListener {
-            if (status == 1) {
-                workViewModel.changeStatus(2)
-            } else if (status == 2) {
+            if (Config.status == 1) {
+                AlertDialog.Builder(context!!)
+                    .setMessage("关闭听单后将收不到新订单，确认关闭吗？")
+                    .setPositiveButton("确定") { dialogInterface, i ->
+                        workViewModel.changeStatus(2)
+                    }
+                    .setNeutralButton("取消", null)
+                    .create()
+                    .show()
+            } else if (Config.status == 2) {
+                X.getInstance().myMediaPlayer.play(MyMediaPlayerType.ONLINE)
                 workViewModel.changeStatus(1)
             }
         }
@@ -122,5 +129,4 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
             workStatusRestTv.visibility = View.VISIBLE
         }
     }
-
 }

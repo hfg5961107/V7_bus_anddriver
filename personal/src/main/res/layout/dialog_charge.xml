@@ -4,23 +4,39 @@
     android:layout_height="wrap_content"
     android:background="@drawable/cor4_white"
     android:orientation="vertical"
-    android:paddingStart="@dimen/size_16dp"
-    android:paddingTop="@dimen/size_32dp"
-    android:paddingEnd="@dimen/size_16dp"
-    android:paddingBottom="@dimen/size_24dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="@dimen/size_16dp"
+    android:paddingBottom="@dimen/size_16dp">
 
-    <TextView
-        android:id="@+id/chargeDialogTvTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/size_8dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_14sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/chargeDialogTvTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_16dp"
+            android:text="充值金额"/>
+
+        <ImageView
+            android:id="@+id/chargeCancelIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/common_icon_close"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_34dp"
-        android:layout_marginBottom="@dimen/size_8dp"
+       android:layout_marginTop="@dimen/size_8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -37,54 +53,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:inputType="number|numberDecimal"
+            android:digits="1234567890."
             android:paddingStart="@dimen/size_4dp"
             android:textColor="@color/black"
+            android:hint="请输入充值金额"
+            android:textColorHint="@color/cccccc"
             android:textCursorDrawable="@drawable/cursor_black"
-            android:textSize="@dimen/size_24sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/size_24sp"/>
 
     </LinearLayout>
 
-    <View style="@style/LineHorizontal" />
+    <View style="@style/LineHorizontal"
+        android:layout_marginTop="@dimen/size_4dp"/>
 
-    <TextView
-        android:id="@+id/chargeDialogTvDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/size_8dp"
-        android:paddingBottom="@dimen/size_32dp"
-        android:textColor="@color/black_desc"
-        android:textSize="@dimen/size_14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_44dp"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/size_16dp"
-        android:paddingEnd="@dimen/size_16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/size_24dp">
 
-        <TextView
-            android:id="@+id/chargeDialogTvAction"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/size_20dp"
-            android:layout_weight="1"
-            android:background="@drawable/cor6_blue"
+        <LinearLayout
+            android:id="@+id/chargeWechatLl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_44dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_16sp" />
+            android:background="@drawable/cor4_green_line_sub">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_44dp"
+                android:gravity="center"
+                android:textColor="@color/green"
+                android:textSize="@dimen/size_16sp"
+                android:text="微信充值"
+                android:drawablePadding="@dimen/size_8dp"
+                android:drawableStart="@drawable/person_wallet_pay_wechat"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/chargeDialogTvCancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/cor6_blue"
+
+        <LinearLayout
+            android:id="@+id/chargeAlipayLl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_44dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="取消"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_16sp" />
+            android:background="@drawable/cor4_blue_line_sub"
+            android:layout_marginTop="@dimen/size_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_44dp"
+                android:gravity="center"
+                android:drawablePadding="@dimen/size_8dp"
+                android:text="支付宝充值"
+                android:drawableStart="@drawable/person_wallet_pay_alipay"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/size_16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

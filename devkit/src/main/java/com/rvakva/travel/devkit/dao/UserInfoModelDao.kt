@@ -23,4 +23,7 @@ interface UserInfoModelDao {
     @Query("DELETE FROM userInfo")
     fun deleteAllUsers()
 
+    @Query("SELECT * FROM userInfo LIMIT 1 OFFSET 0")
+    fun getUserInfoModel(): UserInfoModel
+
 }

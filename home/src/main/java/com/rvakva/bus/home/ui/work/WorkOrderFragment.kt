@@ -2,16 +2,29 @@ package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.google.common.base.Strings.isNullOrEmpty
+import com.rvakva.bus.common.X
+import com.rvakva.bus.common.model.OrderDataModel
+import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
+import com.rvakva.bus.home.ui.adapter.OrderAdapter
+import com.rvakva.bus.home.viewmodel.work.WorkFragmentViewModel
+import com.rvakva.bus.home.viewmodel.work.WorkViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxFragment
+import com.rvakva.travel.devkit.expend.handleExceptionDesc
+import com.rvakva.travel.devkit.expend.initialize
+import com.rvakva.travel.devkit.expend.onDataErrorAndException
+import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
 import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
+import com.rvakva.travel.devkit.widget.ToastBar
+import kotlinx.android.synthetic.main.fragment_work_order.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -24,9 +37,10 @@ enum class OrderTipEnum(val value: Boolean) {
 }
 
 enum class OrderStatusTypeEnum(val value: Int) {
-    ORDER_TYPE_POOL(Config.ORDER_TYPE_POOL),
-    ORDER_TYPE_ASSIGN(Config.ORDER_TYPE_ASSIGN),
-    ORDER_TYPE_ING(Config.ORDER_TYPE_ING)
+    ORDER_TYPE_NEW(Config.ORDER_TYPE_NEW),
+    ORDER_TYPE_ING(Config.ORDER_TYPE_ING),
+    ORDER_TYPE_COMPLETE(Config.ORDER_TYPE_COMPLETE),
+    ORDER_TYPE_CANCEL(Config.ORDER_TYPE_CANCEL)
 }
 
 enum class OrderDistanceTypeEnum(val value: Int) {
@@ -35,27 +49,29 @@ enum class OrderDistanceTypeEnum(val value: Int) {
 
 class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_work_order) {
 
+    val workViewModel by activityViewModels<WorkViewModel>()
+
     private var orderStatusType: OrderStatusTypeEnum =
-        OrderStatusTypeEnum.ORDER_TYPE_ING
+        OrderStatusTypeEnum.ORDER_TYPE_NEW
 
 
     override fun initObserver() {
 
-//        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-//            mainFragmentViewModel.userInfo = it
-//        })
-//
-//        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_POOL) {
+        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
+            workFragmentViewModel.userInfo = it
+        })
+
+//        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_NEW) {
 //            XViewModel.newOrderLiveData.observe(
 //                viewLifecycleOwner,
 //                EventObserver(::checkRequestAndAction)
 //            )
 //
 //        } else if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ASSIGN) {
-//            mainFragmentViewModel.countDownOrderListLiveData.observe(this, Observer {
+//            workFragmentViewModel.countDownOrderListLiveData.observe(this, Observer {
 //                mainMrv.getData<OrderDataModel>()?.toMutableList().apply {
 //                    if (isNullOrEmpty()) {
-//                        mainFragmentViewModel.cancelJob()
+//                        workFragmentViewModel.cancelJob()
 //                    }
 //                }?.filter {
 //                    it.orderAssignResponseTime.parseSecondsOffsetToSecond() > 0
@@ -77,28 +93,32 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //        }
 //        addExtraLiveDataObserver()
 //
-//        mainFragmentViewModel.orderListLiveData.observe(
-//            viewLifecycleOwner,
-//            RequestResultObserver(
-//                successBlock = {
-//                    sendAssignOrderCount(it.total)
+        workFragmentViewModel.orderListLiveData.observe(
+            viewLifecycleOwner,
+            RequestResultObserver(
+                successBlock = {
+                    //                    sendAssignOrderCount(it.total)
 //                    mainMrv.onDataSuccessAndEmpty(it.data?.toMutableList(), orderStatusType.value)
-//                    mainFragmentViewModel.countDownTimer(orderStatusType)
-//                }, failBlock = {
-//                    sendAssignOrderCount()
-//                    mainFragmentViewModel.checkError(it)
+//                    workFragmentViewModel.countDownTimer(orderStatusType)
+                    var list = mutableListOf<OrderDataModel>()
+                    mainMrv.onDataSuccessAndEmpty(list, orderStatusType.value)
+                }, failBlock = {
+                    //                    sendAssignOrderCount()
+//                    workFragmentViewModel.checkError(it)
 //                    mainMrv.onDataErrorAndException(it)
-//                }, completeBlock = {
-//                    mainFragmentViewModel.let {
-//                        it.cancelJob()
-//                        it.isRequest = false
-//                    }
-//                    changeIconVisible()
-//                }
-//            )
-//        )
-//
-//        mainFragmentViewModel.grabLiveData.observe(
+                    var list = mutableListOf<OrderDataModel>()
+                    mainMrv.onDataSuccessAndEmpty(list, orderStatusType.value)
+                }, completeBlock = {
+                    workFragmentViewModel.let {
+                        it.cancelJob()
+                        it.isRequest = false
+                    }
+                    changeIconVisible()
+                }
+            )
+        )
+
+//        workFragmentViewModel.grabLiveData.observe(
 //            viewLifecycleOwner,
 //            RequestEmResultObserver(
 //                successBlock = {
@@ -115,7 +135,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //            )
 //        )
 //
-//        mainFragmentViewModel.denyConfigRequestLiveData.observe(
+//        workFragmentViewModel.denyConfigRequestLiveData.observe(
 //            viewLifecycleOwner,
 //            RequestEmResultObserver(
 //                successBlock = {
@@ -130,18 +150,17 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //            )
 //        )
 //
-//        KtxViewModel.emptyClickLiveData.observe(viewLifecycleOwner, EventObserver {
-//            if (it == OrderStatusTypeEnum.ORDER_TYPE_POOL.value) {
-//                checkRequestAndAction()
-//            } else {
-//                mainActivitySharedViewModel.viewpagerChangeLiveData.postEventValue(true)
-//            }
-//        })
+        KtxViewModel.emptyClickLiveData.observe(viewLifecycleOwner, EventObserver {
+            if (it == OrderStatusTypeEnum.ORDER_TYPE_NEW.value) {
+                X.getInstance().myMediaPlayer.play(MyMediaPlayerType.ONLINE)
+                workViewModel.changeStatus(1)
+            }
+        })
 //
 //        mainActivitySharedViewModel.filterTypeChangeLiveData.observe(
 //            viewLifecycleOwner,
 //            EventObserver {
-//                mainFragmentViewModel.checkRequest {
+//                workFragmentViewModel.checkRequest {
 //                    if (mainActivitySharedViewModel.fragmentFilterType[orderStatusType] != it) {
 //                        mainActivitySharedViewModel.fragmentFilterType[orderStatusType] = it
 //                        checkRequestAndAction()
@@ -154,24 +173,24 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //        })
     }
 
-//    private fun changeIconVisible() {
-//        // null -> false
-//        // isEmpty -> false
-//        // isNotEmpty ->true
+    private fun changeIconVisible() {
+        // null -> false
+        // isEmpty -> false
+        // isNotEmpty ->true
 //        mainActivitySharedViewModel.iconVisibleLiveData.postEventValue(
-//            mainFragmentViewModel.orderListLiveData.value?.data?.data?.isNotEmpty() == true
+//            workFragmentViewModel.orderListLiveData.value?.data?.data?.isNotEmpty() == true
 //        )
-//    }
-//
-//    private fun sendAssignOrderCount(count: Int = 0) {
-//        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ASSIGN) {
+    }
+
+    private fun sendAssignOrderCount(count: Int = 0) {
+        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_COMPLETE) {
 //            mainActivitySharedViewModel.assignOrderLiveData.postValue(count)
-//        }
-//    }
+        }
+    }
 
     private fun addExtraLiveDataObserver() {
 //        when (orderStatusType) {
-//            OrderStatusTypeEnum.ORDER_TYPE_POOL,
+//            OrderStatusTypeEnum.ORDER_TYPE_NEW,
 //            OrderStatusTypeEnum.ORDER_TYPE_ASSIGN -> mutableListOf(
 //                XViewModel.grabOrderLiveData
 //            )
@@ -186,52 +205,52 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //                })
 //            }
 //        }
-//
-//        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ASSIGN) {
+
+        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_COMPLETE) {
 //            XViewModel.denyOrderLiveData.observe(viewLifecycleOwner, EventObserver {
 //                removeFromRv(mutableListOf(it))
 //            })
-//        }
+        }
     }
 
     private fun removeFromRv(it: MutableList<Long>) {
-//        it.forEach { id ->
-//            mainMrv.getData<OrderDataModel>()?.firstOrNull {
+        it.forEach { id ->
+            //            mainMrv.getData<OrderDataModel>()?.firstOrNull {
 //                it.id == id
 //            }?.let {
 //                mainMrv.removeData(it)
 //            }
-//        }
+        }
     }
 
 
     private fun showToast(e: Exception) {
-//        e.handleExceptionDesc().let {
-//            ToastBar.show(it)
-//        }
+        e.handleExceptionDesc().let {
+            ToastBar.show(it)
+        }
     }
 
-//    private val mainFragmentViewModel by viewModels<MainFragmentViewModel>()
+    private val workFragmentViewModel by viewModels<WorkFragmentViewModel>()
 //    private val mainActivitySharedViewModel by activityViewModels<MainActivitySharedViewModel>()
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-//        orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? OrderStatusTypeEnum
-//            ?: OrderStatusTypeEnum.ORDER_TYPE_ING
-//
+        orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? OrderStatusTypeEnum
+            ?: OrderStatusTypeEnum.ORDER_TYPE_ING
+
 //        mainActivitySharedViewModel.fragmentFilterType[orderStatusType] = null
-//
-//        mainMrv.initialize(
-//            adapter = OrderAdapter(orderStatusType),
-//            onEmptyClickBlock = ::requestData,
-//            onRefreshBlock = ::requestData,
-//            initializeBlock = {
-//                addHeaderView(
-//                    layoutInflater.inflate(
-//                        R.layout.fragment_main_order_item_header,
-//                        mainMrv,
-//                        false
-//                    )
-//                )
+
+        mainMrv.initialize(
+            adapter = OrderAdapter(orderStatusType),
+            onEmptyClickBlock = ::requestData,
+            onRefreshBlock = ::requestData,
+            initializeBlock = {
+                addHeaderView(
+                    layoutInflater.inflate(
+                        R.layout.fragment_main_order_item_header,
+                        mainMrv,
+                        false
+                    )
+                )
 //                setOnItemClickBlock<OrderDataModel> { adapter, view, position ->
 //                    adapter?.let {
 //                        it.data[position].let { data ->
@@ -256,7 +275,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //                    adapter?.let {
 //                        it.data[position].let { data ->
 //                            when (view.id) {
-//                                R.id.fragmentMainOrderItemPoolTvAction, R.id.fragmentMainOrderItemAssignLlAction -> mainFragmentViewModel.grabOrder(
+//                                R.id.fragmentMainOrderItemPoolTvAction, R.id.fragmentMainOrderItemAssignLlAction -> workFragmentViewModel.grabOrder(
 //                                    data.id
 //                                )
 //                                R.id.fragmentMainOrderItemContentTvTakeDistance -> {
@@ -281,14 +300,15 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //                        }
 //                    }
 //                }
-//            },
-//            emptyString =
-//            if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_POOL)
-//                "一大波订单正在赶到"
-//            else if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ASSIGN)
-//                "暂无指派单，去抢单池接单吧"
-//            else "暂无进行中订单，快去抢单池接单吧"
-//        )
+            },
+            emptyString =
+            when (orderStatusType) {
+                OrderStatusTypeEnum.ORDER_TYPE_NEW -> "休息中，开启工作后可接单"
+                OrderStatusTypeEnum.ORDER_TYPE_ING -> "暂无进行中订单"
+                OrderStatusTypeEnum.ORDER_TYPE_COMPLETE -> "暂无已完成订单"
+                OrderStatusTypeEnum.ORDER_TYPE_CANCEL -> "暂无已取消订单"
+            }
+        )
     }
 
 //    var dialog: DenyDialog? = null
@@ -309,18 +329,27 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private fun checkRequestAndAction(refreshEnable: Boolean = true) {
-//        mainFragmentViewModel.checkRequest {
+//        workFragmentViewModel.checkRequest {
 //            requestWithAction(refreshEnable)
 //        }
     }
 
     private fun requestData() {
-//        mainFragmentViewModel.isRequest = true
-//        mainFragmentViewModel.getOrderList(
-//            orderStatusType,
+        workFragmentViewModel.isRequest = true
+        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.status == 1) {
+                workFragmentViewModel.getOrderList(
+                    orderStatusType
 //            mainActivitySharedViewModel.fragmentFilterType[orderStatusType]
-//        )
-//        mainFragmentViewModel.getDenyConfig()
+                )
+            } else {
+                workFragmentViewModel.getOrderList(
+                    orderStatusType
+                )
+            }
+        })
+
+//        workFragmentViewModel.getDenyConfig()
     }
 
     private fun requestWithAction(refreshEnable: Boolean = true) {

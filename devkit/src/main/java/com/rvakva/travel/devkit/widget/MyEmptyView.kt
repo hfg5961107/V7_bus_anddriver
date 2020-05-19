@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.lifecycle.Observer
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.R
 import com.rvakva.travel.devkit.expend.jumpByARouter
 import com.rvakva.travel.devkit.expend.setImageResource
 import com.rvakva.travel.devkit.retrofit.ApiConstant
+import com.rvakva.travel.devkit.x.XDataBase
 import com.sherloki.simpleadapter.widget.IBaseEmptyView
 import kotlinx.android.synthetic.main.my_empty_view.view.*
 
@@ -94,11 +97,19 @@ class MyEmptyView : IBaseEmptyView {
         myEmptyViewTvError.text = emptyText
         var textContent = ""
         when (emptyViewCode) {
-            Config.ORDER_TYPE_POOL -> {
-                textContent = "刷新获取"
+            Config.ORDER_TYPE_NEW -> {
+                if (Config.status == 1) {
+                    textContent = ""
+                    myEmptyViewTvError.text = "正在为您听单，请注意通知"
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
+                } else {
+                    textContent = "开始工作"
+                    myEmptyViewTvError.text = "休息中，开启工作后可接单"
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
+                }
             }
-            Config.ORDER_TYPE_ASSIGN, Config.ORDER_TYPE_ING -> {
-                textContent = "前往抢单"
+            Config.ORDER_TYPE_COMPLETE, Config.ORDER_TYPE_ING, Config.ORDER_TYPE_CANCEL -> {
+                myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
             }
         }
         if (textContent.isNotEmpty()) {
@@ -106,7 +117,7 @@ class MyEmptyView : IBaseEmptyView {
                 it.text = textContent
                 it.visibility = View.VISIBLE
                 it.setOnClickListener {
-//                    KtxViewModel.emptyClickLiveData.postEventValue(emptyViewCode)
+                    KtxViewModel.emptyClickLiveData.postEventValue(emptyViewCode)
                 }
             }
         }

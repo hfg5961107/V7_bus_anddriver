@@ -11,7 +11,6 @@ import com.rvakva.travel.devkit.expend.bind
 import com.rvakva.travel.devkit.expend.getPrivateValue
 import kotlinx.android.synthetic.main.activity_main_indicator.*
 import kotlinx.android.synthetic.main.fragment_order.*
-import kotlinx.android.synthetic.main.fragment_work.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -46,13 +45,13 @@ class OrderFragment: KtxFragment(R.layout.fragment_order) {
 
     val fragmentList = mutableListOf(
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_POOL
-        ),
-        WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_ASSIGN
-        ),
-        WorkOrderFragment.newInstance(
             OrderStatusTypeEnum.ORDER_TYPE_ING
+        ),
+        WorkOrderFragment.newInstance(
+            OrderStatusTypeEnum.ORDER_TYPE_COMPLETE
+        ),
+        WorkOrderFragment.newInstance(
+            OrderStatusTypeEnum.ORDER_TYPE_CANCEL
         )
     )
 

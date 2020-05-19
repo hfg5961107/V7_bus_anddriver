@@ -2,6 +2,7 @@ package com.rvakva.travel.devkit.expend
 
 import android.text.InputFilter
 import android.text.Spanned
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
@@ -43,7 +44,40 @@ fun EditText.bindPrizeFilters(maxLength: Int = 10) {
             }
             return source ?: "";
         }
-    }, InputFilter.LengthFilter(maxLength)).let {
+    }, object : InputFilter {
+        override fun filter(
+            source: CharSequence?,
+            start: Int,
+            end: Int,
+            dest: Spanned?,
+            dstart: Int,
+            dend: Int
+        ): CharSequence {
+            if (dest?.contains(".") == true) {
+
+                if (source!! == "."){
+                    return ""
+                }
+
+                var intString = dest.toString().split(".")[0]
+
+                if (dest.length <= intString.length+2) {
+                    return source ?: ""
+                } else {
+                    return ""
+                }
+            } else {
+                dest?.let {
+                    if (it.length < maxLength) {
+                        return source ?: ""
+                    } else {
+                        return ""
+                    }
+                }
+            }
+            return source ?: ""
+        }
+    }).let {
         filters = it
     }
 }

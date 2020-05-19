@@ -26,6 +26,7 @@ enum class AlertExceptionEnum(val code: Int) {
     DRIVER_FROZEN(ApiConstant.ERROR_CODE_DRIVER_FROZEN),
     NOT_ENOUGH(ApiConstant.ERROR_CODE_NOT_ENOUGH),
     OUT_OF_LIMIT(ApiConstant.ERROR_CODE_OUT_OF_LIMIT),
+
 }
 
 interface OnAlertDialogClickListener {
@@ -137,7 +138,7 @@ class AlertDialog private constructor() : BaseDialogFragment() {
                     Ktx.getInstance().userDataSource.userConfigLiveData.observe(
                         viewLifecycleOwner,
                         Observer {
-                            alertDialogTvContent.text = "至少有${it.receiptLimit}元余额才能接单"
+                            alertDialogTvContent.text = "至少有${it.balanceLimit}元余额才能接单"
                         })
                 }
             }

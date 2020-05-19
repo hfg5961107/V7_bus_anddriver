@@ -39,9 +39,9 @@ interface CommonService {
     suspend fun getUserStatistics(): EmResult<UserStatisticsModel>
 
     /**
-     * 获取用户配置
+     * 获取用户余额及其限制
      */
-    @GET("api/v1/driver/info/config")
+    @GET("api/v1/driver/info/balance")
     suspend fun getUserConfig(): EmResult<UserConfigModel>?
 
     /**

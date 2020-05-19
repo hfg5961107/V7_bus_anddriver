@@ -19,10 +19,10 @@ import com.rvakva.travel.devkit.retrofit.result.EmResult
 class PayViewModel(application: Application) : AndroidViewModel(application) {
     val chargeLiveData by RequestLiveData<EmResult<Any>>()
 
-    fun charge(fee: String) {
+    fun charge(fee: String,payType:String) {
         launchRequest(block = {
             ApiManager.getInstance().createService(CommonService::class.java)
-                .recharge(Config.CHANNEL_APP_ALI, fee)
+                .recharge(payType, fee)
                 .requestMap()
 
         }, requestLiveData = chargeLiveData)

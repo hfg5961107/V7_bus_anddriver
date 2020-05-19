@@ -9,11 +9,16 @@ package com.rvakva.travel.devkit
 object Config{
     //value
     const val HOST_UP_PIC = "http://up-z2.qiniu.com"
+
     const val CHANNEL_APP_ALI = "CHANNEL_APP_ALI"
     const val CHANNEL_APP_WECHAT = "CHANNEL_APP_WECHAT"
-    const val ORDER_TYPE_POOL = 100001
-    const val ORDER_TYPE_ASSIGN = 100002
-    const val ORDER_TYPE_ING = 100003
+    const val ORDER_TYPE_NEW = 100001
+    const val ORDER_TYPE_ING = 100002
+    const val ORDER_TYPE_COMPLETE = 100003
+    const val ORDER_TYPE_CANCEL = 100004
+
+    var status: Int = 0
+
 
     var WECHAT_ID: String? = null
     var BASE_URL = ""

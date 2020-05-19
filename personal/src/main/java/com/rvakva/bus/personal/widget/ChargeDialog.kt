@@ -16,66 +16,68 @@ import kotlinx.android.synthetic.main.dialog_charge.*
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
  * @Description:
  * @Author:         胡峰
- * @CreateDate:     2020/5/14 下午2:02
+ * @CreateDate:     2020/5/15 下午4:17
  */
-enum class WalletType {
-    CHARGE, CASH_OUT
-}
-
-class ChargeDialog private constructor() : BaseDialogFragment() {
+class ChargeDialog private constructor() : BaseDialogFragment()  {
 
     companion object {
 
-        private const val WALLET_TYPE = "WALLET_TYPE"
         private const val CLICK_BLOCK = "CLICK_BLOCK"
 
-        fun newInstance(walletType: WalletType, block: ((prise: String) -> Unit)? = null) =
+        fun newInstance(block: ((prise: String,payType:String) -> Unit)? = null) =
             ChargeDialog().apply {
                 arguments = bundleOf(
-                    WALLET_TYPE to walletType,
                     CLICK_BLOCK to block
                 )
             }
-
     }
 
-    override fun getViewHeight() = ViewGroup.LayoutParams.WRAP_CONTENT
 
-    override fun getViewWidth() = Resources.getSystem().displayMetrics.widthPixels - 32.dpToPx<Int>()
+    override fun getViewWidth(): Int  =
+        Resources.getSystem().displayMetrics.widthPixels - 32.dpToPx<Int>()
 
-    override fun getWindowAnimation() = 0
-
-    override fun getLayoutId() = R.layout.dialog_charge
+    override fun getWindowAnimation(): Int = 0
 
     override fun initView(view: View?) {
         arguments?.let { bundle ->
-            if (bundle.getSerializable(WALLET_TYPE) == WalletType.CHARGE) {
-                chargeDialogTvTitle.text = "充值金额"
-                chargeDialogTvDesc.text = "仅支持支付宝充值"
-                chargeDialogTvAction.text = "确认充值"
-                chargeDialogEtValue.inputType =
-                    InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-                chargeDialogEtValue.bindPrizeFilters()
-            } else {
-                chargeDialogTvTitle.text = "提现金额"
-                chargeDialogTvDesc.text = "发起提现申请"
-                chargeDialogTvAction.text = "确认提现"
-                chargeDialogEtValue.inputType = InputType.TYPE_CLASS_NUMBER
-                chargeDialogEtValue.bindPrizeFilters(3)
-            }
-            chargeDialogTvCancel.setOnClickListener { dismiss() }
-            chargeDialogTvAction.setOnClickListener { _ ->
+
+            chargeDialogEtValue.bindPrizeFilters(3)
+
+            //禁止长按阻止复制
+            chargeDialogEtValue.isLongClickable = false
+
+            chargeCancelIv.setOnClickListener { dismiss() }
+
+            chargeAlipayLl.setOnClickListener { _ ->
                 chargeDialogEtValue.text.let {
                     if (it.isNotEmpty()) {
                         dismiss()
-                        (bundle.get(CLICK_BLOCK) as? (String) -> Unit)?.invoke(
-                            it.toString()
+                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                            it.toString(),
+                            "CHANNEL_APP_ALI"
                         )
                     } else {
-                        ToastBar.show("请输入金额")
+//                        ToastBar.show("请输入金额")
+                    }
+                }
+            }
+            chargeWechatLl.setOnClickListener { _ ->
+                chargeDialogEtValue.text.let {
+                    if (it.isNotEmpty()) {
+                        dismiss()
+                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                            it.toString(),
+                            "CHANNEL_APP_WECHAT"
+                        )
+                    } else {
+//                        ToastBar.show("请输入金额")
                     }
                 }
             }
         }
     }
+
+    override fun getViewHeight(): Int = ViewGroup.LayoutParams.WRAP_CONTENT
+
+    override fun getLayoutId(): Int = R.layout.dialog_charge
 }

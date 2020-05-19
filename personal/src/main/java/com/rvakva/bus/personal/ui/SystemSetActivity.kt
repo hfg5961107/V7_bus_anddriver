@@ -65,11 +65,11 @@ class SystemSetActivity : KtxActivity(R.layout.activity_system_set), OnAlertDial
 
         systemSettingTvCurrentVersion.text = Config.VERSION_NAME
 
-        systemSettingLlContact.setOnClickListener {
-            if (!systemSettingTvPhone.text.isNullOrBlank()) {
-                callPhone(systemSettingTvPhone.text.toString())
-            }
-        }
+//        systemSettingLlContact.setOnClickListener {
+//            if (!systemSettingTvPhone.text.isNullOrBlank()) {
+//                callPhone(systemSettingTvPhone.text.toString())
+//            }
+//        }
         systemSettingTvUpdateCheck.setOnClickListener {
             systemSettingViewModel.getAppInfo()
         }
@@ -90,9 +90,9 @@ class SystemSetActivity : KtxActivity(R.layout.activity_system_set), OnAlertDial
                 fragmentManager = supportFragmentManager
             )
         )
-        Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
-            systemSettingTvPhone.text = it.driverHelpPhone
-        })
+//        Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
+//            systemSettingTvPhone.text = it.driverHelpPhone
+//        })
     }
 
     override fun initData(isFirstInit: Boolean) {

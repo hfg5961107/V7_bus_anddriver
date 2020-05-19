@@ -8,7 +8,6 @@ import com.rvakva.bus.common.base.PayActivity
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.viewmodel.WalletActivityViewModel
 import com.rvakva.bus.personal.widget.ChargeDialog
-import com.rvakva.bus.personal.widget.WalletType
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.expend.numberFormat
@@ -37,15 +36,15 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
         }
     }
 
-    private fun createDialog(walletType: WalletType, block: (String) -> Unit) {
-        ChargeDialog.newInstance(walletType, block).show(supportFragmentManager)
+    private fun createDialog( block: (String,String) -> Unit) {
+        ChargeDialog.newInstance(block).show(supportFragmentManager)
     }
 
     override fun initView(savedInstanceState: Bundle?) {
 
         walletTvCharge.setOnClickListener {
-            createDialog(WalletType.CHARGE) {
-                payViewModel.charge(it)
+            createDialog(){ it,payType ->
+                payViewModel.charge(it,payType)
             }
         }
         walletTvDetail.setOnClickListener {
@@ -61,7 +60,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
 
     override fun initData(isFirstInit: Boolean) {
         if (isFirstInit) {
-//            getUserBalance(true)
+            getUserBalance(true)
         }
     }
 
@@ -94,7 +93,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
         )
 
         Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
-            walletTvDesc.text = "请保持至少${it?.receiptLimit}元余额，否则将无法接单"
+            walletTvDesc.text = "请保持至少${it?.balanceLimit}元余额，否则将无法接单"
         })
 
     }
