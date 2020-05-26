@@ -1,6 +1,6 @@
 package com.rvakva.bus.home.ui.adapter
 
-import com.rvakva.bus.common.model.OrderDataModel
+import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.ui.work.OrderStatusTypeEnum
 import com.sherloki.simpleadapter.adapter.SimpleMultipleProAdapter
 
@@ -11,15 +11,15 @@ import com.sherloki.simpleadapter.adapter.SimpleMultipleProAdapter
  * @CreateDate:     2020/5/18 下午6:21
  */
 class OrderAdapter(var orderStatusType: OrderStatusTypeEnum?) :
-    SimpleMultipleProAdapter<OrderDataModel>() {
+    SimpleMultipleProAdapter<ScheduleDataModel>() {
 
     override fun addItemProvider() {
-//        addItemProvider(PoolOrderProvider())
-//        addItemProvider(AssignOrderProvider())
-//        addItemProvider(IngOrderProvider())
+        addItemProvider(NewOrderProvider())
+        addItemProvider(NewOrderProvider())
+        addItemProvider(NewOrderProvider())
     }
 
-    override fun getItemType(data: List<OrderDataModel>, position: Int) =
+    override fun getItemType(data: List<ScheduleDataModel>, position: Int) =
         orderStatusType?.value ?: OrderStatusTypeEnum.ORDER_TYPE_NEW.value
 
 }

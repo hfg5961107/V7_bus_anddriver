@@ -2,12 +2,11 @@ package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rvakva.bus.common.X
-import com.rvakva.bus.common.model.OrderDataModel
+import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.ui.adapter.OrderAdapter
@@ -97,17 +96,13 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             viewLifecycleOwner,
             RequestResultObserver(
                 successBlock = {
-                    //                    sendAssignOrderCount(it.total)
-//                    mainMrv.onDataSuccessAndEmpty(it.data?.toMutableList(), orderStatusType.value)
-//                    workFragmentViewModel.countDownTimer(orderStatusType)
-                    var list = mutableListOf<OrderDataModel>()
-                    mainMrv.onDataSuccessAndEmpty(list, orderStatusType.value)
+                    sendAssignOrderCount(it.total)
+                    mainMrv.onDataSuccessAndEmpty(it.data?.toMutableList(), orderStatusType.value)
+                    workFragmentViewModel.countDownTimer(orderStatusType)
                 }, failBlock = {
-                    //                    sendAssignOrderCount()
-//                    workFragmentViewModel.checkError(it)
-//                    mainMrv.onDataErrorAndException(it)
-                    var list = mutableListOf<OrderDataModel>()
-                    mainMrv.onDataSuccessAndEmpty(list, orderStatusType.value)
+                    sendAssignOrderCount()
+                    workFragmentViewModel.checkError(it)
+                    mainMrv.onDataErrorAndException(it)
                 }, completeBlock = {
                     workFragmentViewModel.let {
                         it.cancelJob()
@@ -156,7 +151,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                 workViewModel.changeStatus(1)
             }
         })
-//
+
 //        mainActivitySharedViewModel.filterTypeChangeLiveData.observe(
 //            viewLifecycleOwner,
 //            EventObserver {
@@ -174,9 +169,9 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private fun changeIconVisible() {
-        // null -> false
-        // isEmpty -> false
-        // isNotEmpty ->true
+//        null -> false
+//        isEmpty -> false
+//        isNotEmpty ->true
 //        mainActivitySharedViewModel.iconVisibleLiveData.postEventValue(
 //            workFragmentViewModel.orderListLiveData.value?.data?.data?.isNotEmpty() == true
 //        )
@@ -251,19 +246,20 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                         false
                     )
                 )
-//                setOnItemClickBlock<OrderDataModel> { adapter, view, position ->
-//                    adapter?.let {
-//                        it.data[position].let { data ->
-//                            when (view.id) {
-//                                R.id.fragmentMainOrderItemPoolLl,
-//                                R.id.fragmentMainOrderItemAssignLl,
-//                                R.id.fragmentMainOrderItemIngFl -> {
+                setOnItemClickBlock<ScheduleDataModel> { adapter, view, position ->
+                    adapter?.let {
+                        it.data[position].let { data ->
+                            when (view.id) {
+                                R.id.homeOrderItemNew,
+                                R.id.homeOrderItemNew,
+                                R.id.homeOrderItemNew -> {
 //                                    jumpToOrderDetail(data)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                                    ToastBar.show("点击了列表")
+                                }
+                            }
+                        }
+                    }
+                }
 //                addChildClickViewIds(
 //                    R.id.fragmentMainOrderItemContentTvTakeDistance,
 //                    R.id.fragmentMainOrderItemContentTvSendDistance,
@@ -329,9 +325,9 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private fun checkRequestAndAction(refreshEnable: Boolean = true) {
-//        workFragmentViewModel.checkRequest {
-//            requestWithAction(refreshEnable)
-//        }
+        workFragmentViewModel.checkRequest {
+            requestWithAction(refreshEnable)
+        }
     }
 
     private fun requestData() {
@@ -339,12 +335,13 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
             if (it.status == 1) {
                 workFragmentViewModel.getOrderList(
-                    orderStatusType
-//            mainActivitySharedViewModel.fragmentFilterType[orderStatusType]
+                    orderStatusType,
+                    mainMrv.currentPage + 1
                 )
             } else {
                 workFragmentViewModel.getOrderList(
-                    orderStatusType
+                    orderStatusType,
+                    mainMrv.currentPage + 1
                 )
             }
         })
@@ -353,11 +350,11 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private fun requestWithAction(refreshEnable: Boolean = true) {
-//        if (mainMrv.getData<OrderDataModel>().isNullOrEmpty()) {
-//            mainMrv.performEmptyClick()
-//        } else if (refreshEnable) {
-//            mainMrv.performRefreshPull()
-//        }
+        if (mainMrv.getData<ScheduleDataModel>().isNullOrEmpty()) {
+            mainMrv.performEmptyClick()
+        } else if (refreshEnable) {
+            mainMrv.performRefreshPull()
+        }
     }
 
 

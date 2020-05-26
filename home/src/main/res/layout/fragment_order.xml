@@ -11,7 +11,11 @@
         android:gravity="center"
         android:background="@color/white">
 
-        <include layout="@layout/activity_main_indicator"/>
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/mainMi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
     </LinearLayout>
     
     <FrameLayout

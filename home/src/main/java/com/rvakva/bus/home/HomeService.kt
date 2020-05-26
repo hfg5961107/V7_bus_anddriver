@@ -1,6 +1,7 @@
 package com.rvakva.bus.home
 
-import com.rvakva.bus.common.model.OrderDataModel
+import com.rvakva.bus.common.model.ScheduleDataModel
+import com.rvakva.travel.devkit.mqtt.MqttConfigModel
 import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 import retrofit2.http.*
@@ -30,24 +31,17 @@ interface HomeService {
         @Field("status") status: Int
     ): BaseResult?
 
-    @GET("api/v1/driver/order/new")
-    suspend fun getOrderNewList(
-//        @Query("orderType") orderType: Int?,
-//        @Query("isTip") isTip: Boolean?,
-//        @Query("orderByDistance") orderByDistance: Int?
-    ): EmResult<List<OrderDataModel>>?
+    /**
+     * 新班次获取
+     */
+    @GET("api/v1/driver/order")
+    suspend fun getOrderList(
+        @Query("driverId") driverId: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("status") status: Int
+    ): EmResult<List<ScheduleDataModel>>?
 
-    @GET("/api/v1/driver/order/assign")
-    suspend fun getOrderAssignList(
-//        @Query("orderType") orderType: Int?,
-//        @Query("isTip") isTip: Boolean?,
-//        @Query("orderByDistance") orderByDistance: Int?
-    ): EmResult<List<OrderDataModel>>?
-
-    @GET("api/v1/driver/order/running")
-    suspend fun getOrderRunningList(
-//        @Query("orderType") orderType: Int?,
-//        @Query("isTip") isTip: Boolean?,
-//        @Query("orderByDistance") orderByDistance: Int?
-    ): EmResult<List<OrderDataModel>>?
+    @GET("api/v1/common/mqtt_config")
+    suspend fun getMqttConfig(): EmResult<MqttConfigModel>?
 }

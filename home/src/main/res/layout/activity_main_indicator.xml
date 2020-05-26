@@ -11,20 +11,17 @@
 
     <TextView
         android:id="@+id/mainTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/size_20dp"
-        android:layout_marginTop="@dimen/size_2dp"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:layout_marginTop="14dp"
         android:background="@drawable/cor100_red"
         android:paddingStart="@dimen/size_4dp"
         android:paddingTop="@dimen/size_2dp"
         android:paddingEnd="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_2dp"
-        android:text="100"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_10sp" />
+        android:visibility="gone" />
 
 
 </FrameLayout>

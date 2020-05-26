@@ -1,16 +1,26 @@
 package com.rvakva.bus.home.ui.work
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.rvakva.bus.common.X
+import com.rvakva.bus.common.XViewModel
+import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
+import com.rvakva.bus.home.viewmodel.work.WorkViewModel
+import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.bind
 import com.rvakva.travel.devkit.expend.getPrivateValue
+import com.rvakva.travel.devkit.expend.toJsonModel
+import com.rvakva.travel.devkit.mqtt.MqttResultModel
+import com.rvakva.travel.devkit.observer.EventObserver
 import kotlinx.android.synthetic.main.activity_main_indicator.*
 import kotlinx.android.synthetic.main.activity_work.*
 
@@ -21,6 +31,8 @@ import kotlinx.android.synthetic.main.activity_work.*
  * @CreateDate:     2020/5/13 下午1:50
  */
 class WorkActivity : KtxActivity(R.layout.activity_work) {
+
+    private val workViewModel by viewModels<WorkViewModel>()
 
     private var currentFragment: Fragment = Fragment()
 
@@ -35,12 +47,53 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
     }
 
     override fun initObserver() {
+        KtxViewModel.mqttLiveData.observe(this, EventObserver { it ->
+            String(it.payload).toJsonModel<MqttResultModel>()?.let {
+                when (it.msg) {
+                    "Assign" -> {
+                        workViewModel.showNotification(true, createIntent())
+                        X.getInstance().myMediaPlayer.play(MyMediaPlayerType.NEW_ORDER)
+                        XViewModel.newOrderLiveData.postEventValue(true)
+                    }
+//                    "cancel" -> {
+//                        it.data?.let {
+//                            XViewModel.addCancelOrderData(it.orderId)
+//                        }
+//                    }
+                    else -> {
 
+                    }
+                }
+            }
+        })
     }
 
     override fun initData(isFirstInit: Boolean) {
-
+        if (isFirstInit) {
+            workViewModel.getMqttConfig()
+            workViewModel.startLocation()
+        }
+//        workViewModel.getUserInfo()
+//        workViewModel.getUserConfig()
+//        workViewModel.getUserStatistics()
     }
+
+    private fun createIntent() =
+        Intent(this, WorkActivity::class.java)
+            .let {
+                it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                it.action = Intent.ACTION_MAIN
+                it.addCategory(Intent.CATEGORY_LAUNCHER)
+            }
+
+
+
+
+
+
+
+
+
 
     private fun setOnClick(){
         workBottomTaiLl.setOnClickListener {
@@ -56,7 +109,6 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
             switchFragment(personFragment).commit()
         }
     }
-
 
     var workFragment : WorkFragment =  WorkFragment.newInstance()
     var orderFragment : OrderFragment =  OrderFragment.newInstance()

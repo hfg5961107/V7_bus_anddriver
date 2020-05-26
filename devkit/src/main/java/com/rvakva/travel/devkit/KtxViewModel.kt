@@ -1,6 +1,9 @@
 package com.rvakva.travel.devkit
 
+import com.rvakva.travel.devkit.livedata.CreateStateEventLiveData
+import com.rvakva.travel.devkit.livedata.CreateStateLiveData
 import com.rvakva.travel.devkit.livedata.ResumeStateEventLiveData
+import com.rvakva.travel.devkit.model.LocationModel
 import com.rvakva.travel.devkit.model.ProgressModel
 import org.eclipse.paho.client.mqttv3.MqttMessage
 
@@ -13,8 +16,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 object KtxViewModel {
 
     val payStatusLiveData = ResumeStateEventLiveData<Boolean>()
-//    val locationLiveData = CreateStateLiveData<LocationModel>()
-//    val mqttLiveData = CreateStateEventLiveData<MqttMessage>()
+    val locationLiveData = CreateStateLiveData<LocationModel>()
+    val mqttLiveData = CreateStateEventLiveData<MqttMessage>()
     val progressLiveData = ResumeStateEventLiveData<ProgressModel>()
     val emptyClickLiveData = ResumeStateEventLiveData<Int>()
 

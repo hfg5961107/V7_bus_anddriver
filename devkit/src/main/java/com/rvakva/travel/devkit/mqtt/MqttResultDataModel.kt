@@ -1,4 +1,4 @@
-package com.rvakva.bus.common.model
+package com.rvakva.travel.devkit.mqtt
 
 import com.rvakva.travel.devkit.model.IModel
 
@@ -6,8 +6,6 @@ import com.rvakva.travel.devkit.model.IModel
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
  * @Description:
  * @Author:         胡峰
- * @CreateDate:     2020/5/18 下午6:06
+ * @CreateDate:     2020/5/26 上午9:56
  */
-class OrderDataModel(
-    val id: Long = 0
-) : IModel
+class MqttResultDataModel(val orderId: Long = 0, val count: Int = 0) : IModel

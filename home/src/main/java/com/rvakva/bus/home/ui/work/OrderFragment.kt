@@ -9,7 +9,6 @@ import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.bind
 import com.rvakva.travel.devkit.expend.getPrivateValue
-import kotlinx.android.synthetic.main.activity_main_indicator.*
 import kotlinx.android.synthetic.main.fragment_order.*
 
 /**

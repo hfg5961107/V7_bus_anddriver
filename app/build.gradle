@@ -31,7 +31,7 @@ android {
 
         multiDexEnabled = true
         manifestPlaceholders = [
-                AMAP_APIKEY: '00346ec07c95b0eeee9d90cac67fa1f9',
+                AMAP_APIKEY: '23b628f27e059de2526afbb3fd4e8d5e',
                 WECHAT_ID  : 'wx05f7827a40707d17'
         ]
 

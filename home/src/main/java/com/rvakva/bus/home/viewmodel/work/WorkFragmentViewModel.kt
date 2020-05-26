@@ -3,7 +3,7 @@ package com.rvakva.bus.home.viewmodel.work
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.rvakva.bus.common.model.OrderDataModel
+import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.HomeService
 import com.rvakva.bus.home.ui.work.OrderStatusTypeEnum
 import com.rvakva.travel.devkit.Ktx
@@ -29,9 +29,9 @@ import java.lang.Exception
  */
 class WorkFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    val orderListLiveData by RequestLiveData<EmResult<List<OrderDataModel>>>()
+    val orderListLiveData by RequestLiveData<EmResult<List<ScheduleDataModel>>>()
 
-    val grabLiveData by RequestLiveData<EmResult<OrderDataModel>>()
+    val grabLiveData by RequestLiveData<EmResult<ScheduleDataModel>>()
 
     val countDownOrderListLiveData = MutableLiveData<Int>()
 
@@ -95,23 +95,37 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 //    }
 
     fun getOrderList(
-        orderStatusTypeEnum: OrderStatusTypeEnum? = null
+        orderStatusTypeEnum: OrderStatusTypeEnum? = null,
+        page:Int
     ) {
         launchRequest(block = {
             when (orderStatusTypeEnum) {
                 OrderStatusTypeEnum.ORDER_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
-                        .getOrderNewList(
-
+                        .getOrderList(
+                            Ktx.getInstance().userDataSource.userId,
+                            page,
+                            10,
+                            orderStatusTypeEnum.value
                         )
                 OrderStatusTypeEnum.ORDER_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
-                        .getOrderAssignList(
-
+                        .getOrderList(
+                            Ktx.getInstance().userDataSource.userId,
+                            page,
+                            10,
+                            orderStatusTypeEnum.value
                         )
-                else -> ApiManager.getInstance().createService(HomeService::class.java)
-                    .getOrderRunningList(
-                    )
+
+                else -> {
+                    ApiManager.getInstance().createService(HomeService::class.java)
+                        .getOrderList(
+                            Ktx.getInstance().userDataSource.userId,
+                            page,
+                            10,
+                            orderStatusTypeEnum!!.value
+                        )
+                }
             }
                 .requestMap()
         }, requestLiveData = orderListLiveData, showToastBar = false)

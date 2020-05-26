@@ -12,8 +12,8 @@ object Config{
 
     const val CHANNEL_APP_ALI = "CHANNEL_APP_ALI"
     const val CHANNEL_APP_WECHAT = "CHANNEL_APP_WECHAT"
-    const val ORDER_TYPE_NEW = 100001
-    const val ORDER_TYPE_ING = 100002
+    const val ORDER_TYPE_NEW = 10
+    const val ORDER_TYPE_ING = 25
     const val ORDER_TYPE_COMPLETE = 100003
     const val ORDER_TYPE_CANCEL = 100004
 

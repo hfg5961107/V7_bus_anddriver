@@ -12,7 +12,7 @@ import com.rvakva.travel.devkit.Ktx
  * @CreateDate:     2020/5/18 下午4:26
  */
 enum class MyMediaPlayerType {
-    ONLINE
+    ONLINE,NEW_ORDER
 }
 
 class MyMediaPlayer private constructor() : MediaPlayer.OnCompletionListener {
@@ -28,7 +28,8 @@ class MyMediaPlayer private constructor() : MediaPlayer.OnCompletionListener {
     private var mediaPlayer: MediaPlayer? = null
 
     private val playTypeMap = mapOf(
-        MyMediaPlayerType.ONLINE to R.raw.work_online
+        MyMediaPlayerType.ONLINE to R.raw.work_online,
+        MyMediaPlayerType.NEW_ORDER to R.raw.new_scheduled
     )
 
     fun play(playerType: MyMediaPlayerType) {

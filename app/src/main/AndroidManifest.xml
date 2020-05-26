@@ -25,6 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- amap.location -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${AMAP_APIKEY}" />
+
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
