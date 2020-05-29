@@ -11,6 +11,7 @@ import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.ui.adapter.OrderAdapter
+import com.rvakva.bus.home.viewmodel.work.WorkActivitySharedViewModel
 import com.rvakva.bus.home.viewmodel.work.WorkFragmentViewModel
 import com.rvakva.bus.home.viewmodel.work.WorkViewModel
 import com.rvakva.travel.devkit.Config
@@ -24,6 +25,8 @@ import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
 import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
+import kotlinx.android.synthetic.main.activity_main_indicator.*
+import kotlinx.android.synthetic.main.fragment_work.*
 import kotlinx.android.synthetic.main.fragment_work_order.*
 
 /**
@@ -51,8 +54,10 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 
     val workViewModel by activityViewModels<WorkViewModel>()
 
+     val workActivitySharedViewModel by activityViewModels<WorkActivitySharedViewModel>()
+
     private var orderStatusType: OrderStatusTypeEnum =
-        OrderStatusTypeEnum.ORDER_TYPE_NEW
+            OrderStatusTypeEnum.ORDER_TYPE_NEW
 
 
     override fun initObserver() {
@@ -61,22 +66,15 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             workFragmentViewModel.userInfo = it
         })
 
-        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_NEW) {
-            XViewModel.newOrderLiveData.observe(
-                viewLifecycleOwner,
-                EventObserver(::checkRequestAndAction)
-            )
-        }
-//        addExtraLiveDataObserver()
 
         workFragmentViewModel.orderListLiveData.observe(
-            viewLifecycleOwner,
-            RequestResultObserver(
-                successBlock = {
-                    sendAssignOrderCount(it.total)
-                    mainMrv.onDataSuccessAndEmpty(it.data?.toMutableList(), orderStatusType.value)
-                    workFragmentViewModel.countDownTimer(orderStatusType)
-                }, failBlock = {
+                viewLifecycleOwner,
+                RequestResultObserver(
+                        successBlock = {
+                            sendAssignOrderCount(it.total)
+                            mainMrv.onDataSuccessAndEmpty(it.data?.toMutableList(), orderStatusType.value)
+                            workFragmentViewModel.countDownTimer(orderStatusType)
+                        }, failBlock = {
                     sendAssignOrderCount()
                     workFragmentViewModel.checkError(it)
                     mainMrv.onDataErrorAndException(it)
@@ -87,7 +85,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                     }
                     changeIconVisible()
                 }
-            )
+                )
         )
 
 //        workFragmentViewModel.grabLiveData.observe(
@@ -140,10 +138,11 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //                }
 //            })
 //
-//        mainActivitySharedViewModel.refreshDataLiveData.observe(viewLifecycleOwner, EventObserver {
-//            checkRequestAndAction()
-//        })
+        workActivitySharedViewModel.newScheduledCountLiveData.observe(this, Observer {
+            requestData()
+        })
     }
+
 
     private fun changeIconVisible() {
 //        null -> false
@@ -207,36 +206,36 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? OrderStatusTypeEnum
-            ?: OrderStatusTypeEnum.ORDER_TYPE_ING
+                ?: OrderStatusTypeEnum.ORDER_TYPE_ING
 
 //        mainActivitySharedViewModel.fragmentFilterType[orderStatusType] = null
 
         mainMrv.initialize(
-            adapter = OrderAdapter(orderStatusType),
-            onEmptyClickBlock = ::requestData,
-            onRefreshBlock = ::requestData,
-            initializeBlock = {
-                addHeaderView(
-                    layoutInflater.inflate(
-                        R.layout.fragment_main_order_item_header,
-                        mainMrv,
-                        false
+                adapter = OrderAdapter(orderStatusType),
+                onEmptyClickBlock = ::requestData,
+                onRefreshBlock = ::requestData,
+                initializeBlock = {
+                    addHeaderView(
+                            layoutInflater.inflate(
+                                    R.layout.fragment_main_order_item_header,
+                                    mainMrv,
+                                    false
+                            )
                     )
-                )
-                setOnItemClickBlock<ScheduleDataModel> { adapter, view, position ->
-                    adapter?.let {
-                        it.data[position].let { data ->
-                            when (view.id) {
-                                R.id.homeOrderItemNew,
-                                R.id.homeOrderItemNew,
-                                R.id.homeOrderItemNew -> {
+                    setOnItemClickBlock<ScheduleDataModel> { adapter, view, position ->
+                        adapter?.let {
+                            it.data[position].let { data ->
+                                when (view.id) {
+                                    R.id.homeOrderItemNew,
+                                    R.id.homeOrderItemNew,
+                                    R.id.homeOrderItemNew -> {
 //                                    jumpToOrderDetail(data)
-                                    ToastBar.show("点击了列表")
+                                        ToastBar.show("点击了列表")
+                                    }
                                 }
                             }
                         }
                     }
-                }
 //                addChildClickViewIds(
 //                    R.id.fragmentMainOrderItemContentTvTakeDistance,
 //                    R.id.fragmentMainOrderItemContentTvSendDistance,
@@ -273,14 +272,14 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //                        }
 //                    }
 //                }
-            },
-            emptyString =
-            when (orderStatusType) {
-                OrderStatusTypeEnum.ORDER_TYPE_NEW -> "休息中，开启工作后可接单"
-                OrderStatusTypeEnum.ORDER_TYPE_ING -> "暂无进行中订单"
-                OrderStatusTypeEnum.ORDER_TYPE_COMPLETE -> "暂无已完成订单"
-                OrderStatusTypeEnum.ORDER_TYPE_CANCEL -> "暂无已取消订单"
-            }
+                },
+                emptyString =
+                when (orderStatusType) {
+                    OrderStatusTypeEnum.ORDER_TYPE_NEW -> "休息中，开启工作后可接单"
+                    OrderStatusTypeEnum.ORDER_TYPE_ING -> "暂无进行中订单"
+                    OrderStatusTypeEnum.ORDER_TYPE_COMPLETE -> "暂无已完成订单"
+                    OrderStatusTypeEnum.ORDER_TYPE_CANCEL -> "暂无已取消订单"
+                }
         )
     }
 
@@ -303,23 +302,17 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     private fun checkRequestAndAction(refreshEnable: Boolean = true) {
         workFragmentViewModel.checkRequest {
             requestWithAction(refreshEnable)
+
         }
     }
 
     private fun requestData() {
         workFragmentViewModel.isRequest = true
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            if (it.status == 1) {
-                workFragmentViewModel.getOrderList(
+            workFragmentViewModel.getOrderList(
                     orderStatusType,
                     mainMrv.currentPage + 1
-                )
-            } else {
-                workFragmentViewModel.getOrderList(
-                    orderStatusType,
-                    mainMrv.currentPage + 1
-                )
-            }
+            )
         })
 
     }
@@ -339,10 +332,10 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 
         @JvmStatic
         fun newInstance(orderStatusType: OrderStatusTypeEnum) =
-            WorkOrderFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ORDER_TYPE, orderStatusType)
+                WorkOrderFragment().apply {
+                    arguments = Bundle().apply {
+                        putSerializable(ORDER_TYPE, orderStatusType)
+                    }
                 }
-            }
     }
 }

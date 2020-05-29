@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import com.rvakva.bus.common.XViewModel
+import com.rvakva.travel.devkit.livedata.ResumeStateEventLiveData
 import com.rvakva.travel.devkit.observer.EventObserver
 
 /**
@@ -13,7 +14,6 @@ import com.rvakva.travel.devkit.observer.EventObserver
  * @CreateDate:     2020/5/26 上午9:19
  */
 class WorkActivitySharedViewModel(application: Application) : AndroidViewModel(application) {
-
 
     val newScheduledCountLiveData = MediatorLiveData<Boolean>().apply {
 //        addSource(assignOrderLiveData) {
