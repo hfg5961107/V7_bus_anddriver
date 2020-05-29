@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rvakva.bus.common.X
+import com.rvakva.bus.common.XViewModel
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
@@ -60,38 +61,14 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             workFragmentViewModel.userInfo = it
         })
 
-//        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_NEW) {
-//            XViewModel.newOrderLiveData.observe(
-//                viewLifecycleOwner,
-//                EventObserver(::checkRequestAndAction)
-//            )
-//
-//        } else if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ASSIGN) {
-//            workFragmentViewModel.countDownOrderListLiveData.observe(this, Observer {
-//                mainMrv.getData<OrderDataModel>()?.toMutableList().apply {
-//                    if (isNullOrEmpty()) {
-//                        workFragmentViewModel.cancelJob()
-//                    }
-//                }?.filter {
-//                    it.orderAssignResponseTime.parseSecondsOffsetToSecond() > 0
-//                }?.let {
-//                    //                    it.firstOrNull { it.id == dialog?.orderId && dialog?.isAdded == true }
-////                        ?: dialog?.dismiss()
-//                    sendAssignOrderCount(it.size)
-//                    mainMrv.onDataSuccessAndEmpty(
-//                        it.toMutableList(),
-//                        orderStatusType.value
-//                    )
-//                }
-//            })
-//            XViewModel.assignOrderLiveData.observe(
-//                viewLifecycleOwner,
-//                EventObserver(::checkRequestAndAction)
-//            )
-//
-//        }
+        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_NEW) {
+            XViewModel.newOrderLiveData.observe(
+                viewLifecycleOwner,
+                EventObserver(::checkRequestAndAction)
+            )
+        }
 //        addExtraLiveDataObserver()
-//
+
         workFragmentViewModel.orderListLiveData.observe(
             viewLifecycleOwner,
             RequestResultObserver(
@@ -321,7 +298,6 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
         } else {
             checkRequestAndAction(false)
         }
-//        changeIconVisible()
     }
 
     private fun checkRequestAndAction(refreshEnable: Boolean = true) {
@@ -346,7 +322,6 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             }
         })
 
-//        workFragmentViewModel.getDenyConfig()
     }
 
     private fun requestWithAction(refreshEnable: Boolean = true) {

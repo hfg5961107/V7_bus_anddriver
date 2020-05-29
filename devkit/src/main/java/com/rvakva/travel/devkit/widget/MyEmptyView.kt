@@ -98,15 +98,15 @@ class MyEmptyView : IBaseEmptyView {
         var textContent = ""
         when (emptyViewCode) {
             Config.ORDER_TYPE_NEW -> {
-                if (Config.status == 1) {
+//                if (Config.status == 1) {
                     textContent = ""
-                    myEmptyViewTvError.text = "正在为您听单，请注意通知"
+                    myEmptyViewTvError.text = "暂无新订单"
                     myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
-                } else {
-                    textContent = "开始工作"
-                    myEmptyViewTvError.text = "休息中，开启工作后可接单"
-                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
-                }
+//                } else {
+//                    textContent = "开始工作"
+//                    myEmptyViewTvError.text = "休息中，开启工作后可接单"
+//                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
+//                }
             }
             Config.ORDER_TYPE_COMPLETE, Config.ORDER_TYPE_ING, Config.ORDER_TYPE_CANCEL -> {
                 myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
