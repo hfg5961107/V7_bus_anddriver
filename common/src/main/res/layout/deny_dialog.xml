@@ -30,7 +30,7 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
-    <com.sherloki.devkit.widget.MyRecyclerView
+    <com.rvakva.travel.devkit.widget.MyRecyclerView
         android:id="@+id/myRecyclerViewDeny"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

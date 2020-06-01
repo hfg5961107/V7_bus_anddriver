@@ -69,6 +69,10 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
                 context?.callPhone(pcServicePhoneTv.text.toString())
             }
         }
+
+        pcHistoryScheduleLl.setOnClickListener {
+            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
+        }
     }
 
 }

@@ -3,9 +3,9 @@ package com.rvakva.bus.home.viewmodel.work
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.HomeService
-import com.rvakva.bus.home.ui.work.OrderStatusTypeEnum
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.expend.launch
 import com.rvakva.travel.devkit.expend.launchRepeat

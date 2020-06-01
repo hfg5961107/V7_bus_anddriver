@@ -64,7 +64,36 @@
         android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_16dp"
         android:background="@color/white">
-
+        <LinearLayout
+            android:id="@+id/pcHistoryScheduleLl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_52dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home_personage_wallet"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="历史班次"
+                android:textSize="@dimen/size_14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="4dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/common_icon_expand"
+                android:layout_marginRight="@dimen/size_16dp"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1px"
+            android:src="@color/color_line"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"/>
         <LinearLayout
             android:id="@+id/pcWalletLl"
             android:layout_width="match_parent"

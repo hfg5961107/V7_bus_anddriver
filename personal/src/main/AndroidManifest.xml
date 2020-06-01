@@ -6,5 +6,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.SystemSetActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.HistoryScheduleActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 </manifest>

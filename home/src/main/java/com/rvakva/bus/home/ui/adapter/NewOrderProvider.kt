@@ -1,9 +1,9 @@
 package com.rvakva.bus.home.ui.adapter
 
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.R
-import com.rvakva.bus.home.ui.work.OrderStatusTypeEnum
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.

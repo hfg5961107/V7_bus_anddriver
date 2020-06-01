@@ -1,5 +1,6 @@
 package com.rvakva.bus.common.model
 
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.model.IModel
 
 /**
@@ -8,6 +9,14 @@ import com.rvakva.travel.devkit.model.IModel
  * @Author:         胡峰
  * @CreateDate:     2020/5/18 下午6:06
  */
+
+enum class OrderStatusTypeEnum(val value: Int) {
+    ORDER_TYPE_NEW(Config.ORDER_TYPE_NEW),
+    ORDER_TYPE_ING(Config.ORDER_TYPE_ING),
+    ORDER_TYPE_COMPLETE(Config.ORDER_TYPE_COMPLETE),
+    ORDER_TYPE_CANCEL(Config.ORDER_TYPE_CANCEL)
+}
+
 class ScheduleDataModel(
 
     val id: Long = 0,

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.bind

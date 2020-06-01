@@ -14,7 +14,7 @@ object Config{
     const val CHANNEL_APP_WECHAT = "CHANNEL_APP_WECHAT"
     const val ORDER_TYPE_NEW = 10
     const val ORDER_TYPE_ING = 25
-    const val ORDER_TYPE_COMPLETE = 100003
+    const val ORDER_TYPE_COMPLETE = 30
     const val ORDER_TYPE_CANCEL = 100004
 
     var status: Int = 0
@@ -44,7 +44,7 @@ object Config{
     const val ORDER_ID_KEY = "ORDER_ID_KEY"
 
     //path
-    const val USER_ORDER_MANAGE = "/user/orderManage/"
+    const val USER_HISTORY_SCHEDULE = "/user/history/schedule"
     const val USER_WALLET = "/personal/wallet/"
     const val USER_ORDER_DETAIL = "/user/order/detail"
     const val USER_SYSTEM_SETTING = "/personal/system/set"

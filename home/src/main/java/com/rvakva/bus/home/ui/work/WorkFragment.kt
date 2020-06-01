@@ -11,6 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.rvakva.bus.common.X
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.viewmodel.work.WorkActivitySharedViewModel
