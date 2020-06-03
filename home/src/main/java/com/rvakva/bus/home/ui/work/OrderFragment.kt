@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
+import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.bind
@@ -45,13 +45,13 @@ class OrderFragment: KtxFragment(R.layout.fragment_order) {
 
     val fragmentList = mutableListOf(
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_ING
+            ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING
         ),
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_COMPLETE
+            ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE
         ),
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_CANCEL
+            ScheduleStatusTypeEnum.SCHEDULE_TYPE_CANCEL
         )
     )
 

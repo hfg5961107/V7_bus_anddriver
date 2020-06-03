@@ -2,10 +2,7 @@ package com.rvakva.bus.personal.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.rvakva.bus.common.model.AppInfoModel
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
-import com.rvakva.bus.common.repository.AppUpdateRepository
 import com.rvakva.bus.personal.PersonalService
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.expend.launchRequest
@@ -25,7 +22,6 @@ class PersonScheduleViewModel(application: Application) : AndroidViewModel(appli
     val orderListLiveData by RequestLiveData<EmResult<List<ScheduleDataModel>>>()
 
     fun getOrderList(
-        orderStatusTypeEnum: OrderStatusTypeEnum? = null,
         page: Int
     ) {
         launchRequest(block = {
@@ -34,7 +30,7 @@ class PersonScheduleViewModel(application: Application) : AndroidViewModel(appli
                     Ktx.getInstance().userDataSource.userId,
                     page,
                     10,
-                    orderStatusTypeEnum!!.value
+                    "45,60"
                 )
                 .requestMap()
         }, requestLiveData = orderListLiveData, showToastBar = false)

@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rvakva.bus.common.X
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
+import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
@@ -39,8 +39,8 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 
     val workActivitySharedViewModel by activityViewModels<WorkActivitySharedViewModel>()
 
-    private var orderStatusType: OrderStatusTypeEnum =
-        OrderStatusTypeEnum.ORDER_TYPE_NEW
+    private var orderStatusType: ScheduleStatusTypeEnum =
+        ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW
 
 
     override fun initObserver() {
@@ -104,7 +104,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //        )
 //
         KtxViewModel.emptyClickLiveData.observe(viewLifecycleOwner, EventObserver {
-            if (it == OrderStatusTypeEnum.ORDER_TYPE_NEW.value) {
+            if (it == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value) {
                 X.getInstance().myMediaPlayer.play(MyMediaPlayerType.ONLINE)
                 workViewModel.changeStatus(1)
             }
@@ -137,7 +137,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private fun sendAssignOrderCount(count: Int = 0) {
-        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_COMPLETE) {
+        if (orderStatusType == ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE) {
 //            mainActivitySharedViewModel.assignOrderLiveData.postValue(count)
         }
     }
@@ -160,7 +160,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //            }
 //        }
 
-        if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_COMPLETE) {
+        if (orderStatusType == ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE) {
 //            XViewModel.denyOrderLiveData.observe(viewLifecycleOwner, EventObserver {
 //                removeFromRv(mutableListOf(it))
 //            })
@@ -188,8 +188,8 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //    private val mainActivitySharedViewModel by activityViewModels<MainActivitySharedViewModel>()
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? OrderStatusTypeEnum
-            ?: OrderStatusTypeEnum.ORDER_TYPE_ING
+        orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? ScheduleStatusTypeEnum
+            ?: ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING
 
 //        mainActivitySharedViewModel.fragmentFilterType[orderStatusType] = null
 
@@ -209,8 +209,6 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                     adapter?.let {
                         it.data[position].let { data ->
                             when (view.id) {
-                                R.id.homeOrderItemNew,
-                                R.id.homeOrderItemNew,
                                 R.id.homeOrderItemNew -> {
                                     jumpToOrderDetail(data)
                                 }
@@ -257,10 +255,10 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             },
             emptyString =
             when (orderStatusType) {
-                OrderStatusTypeEnum.ORDER_TYPE_NEW -> "休息中，开启工作后可接单"
-                OrderStatusTypeEnum.ORDER_TYPE_ING -> "暂无进行中订单"
-                OrderStatusTypeEnum.ORDER_TYPE_COMPLETE -> "暂无已完成订单"
-                OrderStatusTypeEnum.ORDER_TYPE_CANCEL -> "暂无已取消订单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW -> "休息中，开启工作后可接单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING -> "暂无进行中订单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE -> "暂无已完成订单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_CANCEL -> "暂无已取消订单"
             }
         )
     }
@@ -311,7 +309,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
         private const val ORDER_TYPE = "ORDER_TYPE"
 
         @JvmStatic
-        fun newInstance(orderStatusType: OrderStatusTypeEnum) =
+        fun newInstance(orderStatusType: ScheduleStatusTypeEnum) =
             WorkOrderFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ORDER_TYPE, orderStatusType)

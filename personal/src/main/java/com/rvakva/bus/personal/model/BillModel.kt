@@ -10,25 +10,24 @@ import com.rvakva.travel.devkit.model.IModel
  */
 class BillModel(
     /**
-     * 流水类型 1支出  2收入
+     * 流水类型 2-收入 3-充值 4-提现
      */
     val type: Int = 0,
     /**
      * 金额
      */
-    val money: Double = 0.0,
+    val fee: Double = 0.0,
     /**
      * 车牌号
      */
-    val carNumber: String = "",
+    val licenseNo: String = "",
     /**
      * 座位数
      */
-    val seatNumber: Int = 0,
+    val vehicleSeat: Int = 0,
     /**
      * 创建时间
      */
-    val createTime: Long = 0
-
+    val created: Long = 0
 
 ) : IModel

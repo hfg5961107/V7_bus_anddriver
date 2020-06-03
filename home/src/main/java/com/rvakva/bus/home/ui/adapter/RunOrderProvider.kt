@@ -9,12 +9,12 @@ import com.rvakva.bus.home.R
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
  * @Description:
  * @Author:         胡峰
- * @CreateDate:     2020/5/21 下午4:17
+ * @CreateDate:     2020/6/3 下午3:43
  */
-class NewOrderProvider : OrderProvider() {
+class RunOrderProvider : OrderProvider() {
 
     override val itemViewType: Int
-        get() = ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value
+        get() = ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING.value
 
     override val layoutId: Int
         get() = R.layout.fragment_home_order_item_new

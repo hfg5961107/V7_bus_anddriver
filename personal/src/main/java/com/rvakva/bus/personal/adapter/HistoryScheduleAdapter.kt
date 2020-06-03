@@ -1,10 +1,6 @@
 package com.rvakva.bus.personal.adapter
 
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
-import com.rvakva.bus.personal.R
 import com.sherloki.simpleadapter.adapter.SimpleMultipleProAdapter
 
 /**

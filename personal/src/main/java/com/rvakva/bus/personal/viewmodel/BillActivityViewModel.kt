@@ -2,11 +2,8 @@ package com.rvakva.bus.personal.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
-import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.PersonalService
 import com.rvakva.bus.personal.model.BillModel
-import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.expend.launchRequest
 import com.rvakva.travel.devkit.expend.requestMap
 import com.rvakva.travel.devkit.livedata.RequestLiveData

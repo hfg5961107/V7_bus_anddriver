@@ -1,17 +1,11 @@
 package com.rvakva.bus.home.ui.adapter
 
-import android.text.SpannableStringBuilder
-import android.view.View
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.core.util.TimeUtils
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.expend.formatDate
-import com.rvakva.travel.devkit.expend.setImageResource
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -32,26 +26,28 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
     }
 
 
-    fun resetView(helper: BaseViewHolder, vararg ids: Int) {
-        for (id in ids) {
-            helper.getView<View>(id).let {
-                if (it is TextView) {
-                    it.let {
-                        it.setImageResource()
-                        (it.layoutParams as? RelativeLayout.LayoutParams)?.let { layoutParams ->
-                            it.layoutParams = layoutParams.apply {
-                                removeRule(RelativeLayout.CENTER_IN_PARENT)
-                            }
-                        }
-                    }
-                } else {
-                    it.visibility = View.GONE
-                }
-            }
-        }
-    }
+//    fun resetView(helper: BaseViewHolder, vararg ids: Int) {
+//        for (id in ids) {
+//            helper.getView<View>(id).let {
+//                if (it is TextView) {
+//                    it.let {
+//                        it.setImageResource()
+//                        (it.layoutParams as? RelativeLayout.LayoutParams)?.let { layoutParams ->
+//                            it.layoutParams = layoutParams.apply {
+//                                removeRule(RelativeLayout.CENTER_IN_PARENT)
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    it.visibility = View.GONE
+//                }
+//            }
+//        }
+//    }
 
     override fun convert(helper: BaseViewHolder, item: ScheduleDataModel) {
+        helper.setText(R.id.homeOrderCarNoTv, "${item.licenseNo} / ${item.vehicleSeat}座")
+
         helper.setText(R.id.homeOrderTypeTv, createType(item))
 
         helper.setText(R.id.homeOrderAddressTv, "${item.startStationName} - ${item.endStationName}")
@@ -65,8 +61,8 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
 
     private fun createStatus(item: ScheduleDataModel) = run {
         when(item.status){
-            Config.ORDER_TYPE_NEW -> "等待行程开始"
-            Config.ORDER_TYPE_ING -> "行程中"
+            Config.SCHEDULE_TYPE_NEW -> "等待行程开始"
+            Config.SCHEDULE_TYPE_ING -> "行程中"
             else -> "等待行程开始"
         }
     }

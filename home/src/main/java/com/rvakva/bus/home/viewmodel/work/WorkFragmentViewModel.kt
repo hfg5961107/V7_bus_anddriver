@@ -3,7 +3,7 @@ package com.rvakva.bus.home.viewmodel.work
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
+import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.HomeService
 import com.rvakva.travel.devkit.Ktx
@@ -51,8 +51,8 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     fun cancelJob() = job?.cancel()
 
-    fun countDownTimer(orderStatusTypeEnum: OrderStatusTypeEnum) {
-        if (orderStatusTypeEnum == OrderStatusTypeEnum.ORDER_TYPE_NEW) {
+    fun countDownTimer(orderStatusTypeEnum: ScheduleStatusTypeEnum) {
+        if (orderStatusTypeEnum == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW) {
             cancelJob()
             job = launchRepeat(delayTimeMillis = 1_000) { count ->
                 countDownOrderListLiveData.postValue(0)
@@ -95,12 +95,12 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 //    }
 
     fun getOrderList(
-        orderStatusTypeEnum: OrderStatusTypeEnum? = null,
+        orderStatusTypeEnum: ScheduleStatusTypeEnum? = null,
         page:Int
     ) {
         launchRequest(block = {
             when (orderStatusTypeEnum) {
-                OrderStatusTypeEnum.ORDER_TYPE_NEW ->
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
                         .getOrderList(
                             Ktx.getInstance().userDataSource.userId,
@@ -108,7 +108,7 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
                             10,
                             orderStatusTypeEnum.value
                         )
-                OrderStatusTypeEnum.ORDER_TYPE_NEW ->
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
                         .getOrderList(
                             Ktx.getInstance().userDataSource.userId,

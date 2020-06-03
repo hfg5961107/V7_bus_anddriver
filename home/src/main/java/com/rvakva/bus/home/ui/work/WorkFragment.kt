@@ -1,7 +1,6 @@
 package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
@@ -11,7 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.rvakva.bus.common.X
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
+import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.viewmodel.work.WorkActivitySharedViewModel
@@ -21,7 +20,6 @@ import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.bind
 import com.rvakva.travel.devkit.expend.getPrivateValue
-import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import kotlinx.android.synthetic.main.activity_main_indicator.*
 import kotlinx.android.synthetic.main.fragment_work.*
@@ -87,10 +85,10 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
 
     val fragmentList = mutableListOf(
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_NEW
+            ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW
         ),
         WorkOrderFragment.newInstance(
-            OrderStatusTypeEnum.ORDER_TYPE_ING
+            ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING
         )
     )
 
@@ -109,7 +107,7 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
                 override fun createFragment(position: Int) = fragmentList[position]
             }
             it.offscreenPageLimit = 1
-            mainMi.bind(mutableListOf("新排班", "进行中"), it)
+            mainMi.bind(mutableListOf("新排班", "行程中"), it)
         }
 
         mainVp.registerOnPageChangeCallback(object : OnPageChangeCallback(){

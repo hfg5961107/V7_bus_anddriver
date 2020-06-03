@@ -4,15 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.lifecycle.Observer
 import com.rvakva.travel.devkit.Config
-import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.R
 import com.rvakva.travel.devkit.expend.jumpByARouter
 import com.rvakva.travel.devkit.expend.setImageResource
 import com.rvakva.travel.devkit.retrofit.ApiConstant
-import com.rvakva.travel.devkit.x.XDataBase
 import com.sherloki.simpleadapter.widget.IBaseEmptyView
 import kotlinx.android.synthetic.main.my_empty_view.view.*
 
@@ -97,7 +94,7 @@ class MyEmptyView : IBaseEmptyView {
         myEmptyViewTvError.text = emptyText
         var textContent = ""
         when (emptyViewCode) {
-            Config.ORDER_TYPE_NEW -> {
+            Config.SCHEDULE_TYPE_NEW -> {
 //                if (Config.status == 1) {
                     textContent = ""
                     myEmptyViewTvError.text = "暂无新订单"
@@ -108,7 +105,7 @@ class MyEmptyView : IBaseEmptyView {
 //                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
 //                }
             }
-            Config.ORDER_TYPE_COMPLETE, Config.ORDER_TYPE_ING, Config.ORDER_TYPE_CANCEL -> {
+            Config.SCHEDULE_TYPE_COMPLETE, Config.SCHEDULE_TYPE_ING, Config.SCHEDULE_TYPE_CANCEL -> {
                 myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
             }
         }

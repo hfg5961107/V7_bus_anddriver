@@ -10,6 +10,7 @@ import com.rvakva.bus.personal.viewmodel.WalletActivityViewModel
 import com.rvakva.bus.personal.widget.ChargeDialog
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.expend.numberFormat
 import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
 import com.rvakva.travel.devkit.retrofit.exception.SpecialApiException
@@ -48,7 +49,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
             }
         }
         walletTvDetail.setOnClickListener {
-//            jumpTo<BillListActivity>()
+            jumpTo<BillListActivity>()
         }
 
 //        walletTvWithdraw.setOnClickListener {

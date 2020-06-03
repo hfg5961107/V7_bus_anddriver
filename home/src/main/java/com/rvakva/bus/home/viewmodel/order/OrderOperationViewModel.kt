@@ -18,7 +18,7 @@ import com.rvakva.travel.devkit.retrofit.result.EmResult
  */
 class OrderOperationViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val scheduleDetailLiveData by RequestLiveData<EmResult<MutableList<ScheduleDataModel>>>()
+     val scheduleDetailLiveData by RequestLiveData<EmResult<ScheduleDataModel>>()
 
     fun qureyScheduleById(scheduleId:Long){
         launchRequest(

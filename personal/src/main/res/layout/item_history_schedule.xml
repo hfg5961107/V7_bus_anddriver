@@ -11,18 +11,32 @@
         android:layout_height="wrap_content"
         android:background="@drawable/cor4_white"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/size_16dp"
-        android:paddingRight="@dimen/size_16dp">
-
-        <TextView
-            android:id="@+id/pcHistoryTypeTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_16dp"
-            android:layout_marginBottom="@dimen/size_16dp"
-            android:text="站点 - 站点"
-            android:textColor="@color/black_sub"
-            android:textSize="@dimen/size_12sp" />
+        android:paddingLeft="@dimen/size_16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/pcHistoryCarNoTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/black_sub"
+                android:textSize="@dimen/size_12sp" />
+            <TextView
+                android:id="@+id/pcHistoryTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="--"
+                android:background="@drawable/cor_left_007aff_bg"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@color/color_blue"
+                android:textSize="@dimen/size_12sp"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/pcHistoryAddressTv"
@@ -31,41 +45,44 @@
             android:drawableStart="@drawable/home_icon_route"
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:text="珠江国际写字楼 - 南湖公园"
+            android:text="--"
             android:textColor="@color/black"
-            android:textSize="@dimen/size_14sp" />
+            android:textSize="@dimen/size_14sp"
+            android:layout_marginRight="@dimen/size_16dp"/>
 
         <TextView
-            android:id="@+id/pcHistoryTimeTv"
+            android:id="@+id/pcHistoryBeginTimeTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:drawableStart="@drawable/home_icon_time"
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:text="2020-05-15  检票 14:00  出发 14:10"
+            android:text="--"
             android:textColor="@color/black_sub"
-            android:textSize="@dimen/size_14sp" />
+            android:textSize="@dimen/size_14sp"
+            android:layout_marginRight="@dimen/size_16dp"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1px"
             android:layout_marginTop="@dimen/size_16dp"
-            android:src="@color/color_line" />
+            android:src="@color/color_line"
+            android:layout_marginRight="@dimen/size_16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/size_16dp">
 
             <TextView
-                android:id="@+id/pcHistoryPassengerTv"
+                android:id="@+id/pcHistoryTimeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/home_icon_seat"
                 android:drawablePadding="8dp"
-                android:text="乘客 1  余座 3"
+                android:text="--"
                 android:textColor="@color/black_sub"
                 android:textSize="@dimen/size_12sp" />
 
@@ -76,7 +93,7 @@
                 android:drawableRight="@drawable/common_icon_expand"
                 android:drawablePadding="@dimen/size_8dp"
                 android:gravity="right"
-                android:text="等待行程开始"
+                android:text="--"
                 android:textColor="@color/black_sub"
                 android:textSize="@dimen/size_12sp" />
         </LinearLayout>

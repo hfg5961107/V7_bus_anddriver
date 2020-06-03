@@ -57,6 +57,6 @@ interface HomeService {
     /**
      * 根据班次id查询班次详情
      */
-    @GET("api/v1/driver/order")
-    suspend fun queryScheduleById(@Query("scheduleId") scheduleId: Long) : EmResult<MutableList<ScheduleDataModel>>?
+    @GET("api/v1/driver/order/detail/{orderDriverId}")
+    suspend fun queryScheduleById(@Path("orderDriverId") orderDriverId: Long) : EmResult<ScheduleDataModel>?
 }

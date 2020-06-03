@@ -86,24 +86,15 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                 it.addCategory(Intent.CATEGORY_LAUNCHER)
             }
 
-
-
-
-
-
-
-
-
-
     private fun setOnClick(){
         workBottomTaiLl.setOnClickListener {
             replaceResuoce(1)
             switchFragment(workFragment).commit()
         }
-        workBottomOrderLl.setOnClickListener {
-            replaceResuoce(2)
-            switchFragment(orderFragment).commit()
-        }
+//        workBottomOrderLl.setOnClickListener {
+//            replaceResuoce(2)
+//            switchFragment(orderFragment).commit()
+//        }
         workBottomPersonLl.setOnClickListener {
             replaceResuoce(3)
             switchFragment(personFragment).commit()
@@ -111,7 +102,7 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
     }
 
     var workFragment : WorkFragment =  WorkFragment.newInstance()
-    var orderFragment : OrderFragment =  OrderFragment.newInstance()
+//    var orderFragment : OrderFragment =  OrderFragment.newInstance()
     var personFragment : PersonCenterFragment =  PersonCenterFragment.newInstance()
 
     private fun switchFragment(targetFragment: Fragment): FragmentTransaction {
@@ -143,16 +134,16 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                 workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal)
                 workBottomPersonTv.setTextColor(resources.getColor(R.color.black))
             }
-            2 -> {
-                workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench)
-                workBottomTaiTv.setTextColor(resources.getColor(R.color.black))
-
-                workBottomOrderIcon.setImageResource(R.drawable.home_icon_home_order_selected)
-                workBottomOrderTv.setTextColor(resources.getColor(R.color.blue))
-
-                workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal)
-                workBottomPersonTv.setTextColor(resources.getColor(R.color.black))
-            }
+//            2 -> {
+//                workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench)
+//                workBottomTaiTv.setTextColor(resources.getColor(R.color.black))
+//
+//                workBottomOrderIcon.setImageResource(R.drawable.home_icon_home_order_selected)
+//                workBottomOrderTv.setTextColor(resources.getColor(R.color.blue))
+//
+//                workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal)
+//                workBottomPersonTv.setTextColor(resources.getColor(R.color.black))
+//            }
             3 -> {
                 workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench)
                 workBottomTaiTv.setTextColor(resources.getColor(R.color.black))

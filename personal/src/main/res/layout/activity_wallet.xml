@@ -68,7 +68,9 @@
         android:paddingBottom="@dimen/size_20dp"
         android:text="账单明细"
         android:textColor="@color/black"
-        android:textSize="@dimen/size_16sp" />
+        android:textSize="@dimen/size_16sp"
+        android:drawableRight="@drawable/com_icon_arrow"
+        android:layout_marginRight="16dp"/>
 
     <View
         style="@style/LineHorizontal"

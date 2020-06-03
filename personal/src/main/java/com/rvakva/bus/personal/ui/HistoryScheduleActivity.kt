@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.adapter.HistoryScheduleAdapter
@@ -85,7 +84,7 @@ class HistoryScheduleActivity
 
     private fun requestData() {
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(this, Observer {
-            personScheduleViewModel.getOrderList(OrderStatusTypeEnum.ORDER_TYPE_COMPLETE,recyclerviewHistory.currentPage+1)
+            personScheduleViewModel.getOrderList(recyclerviewHistory.currentPage+1)
         })
     }
 }

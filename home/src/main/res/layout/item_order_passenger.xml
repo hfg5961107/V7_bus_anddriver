@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/size_16dp"
+    android:paddingRight="@dimen/size_16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/passengerHeaderIv"
+                android:layout_width="@dimen/size_16dp"
+                android:layout_height="@dimen/size_16dp"
+                android:src="@drawable/com_icon_passenger"/>
+            <TextView
+                android:id="@+id/passengerNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="王先生 1人"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp"
+                android:layout_marginLeft="@dimen/size_8dp"/>
+            <TextView
+                android:id="@+id/passengerStatusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" / 待上车"
+                android:textSize="@dimen/size_14sp"
+                android:textColor="@color/black_desc"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/passengerPhoneIv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/com_icon_dial"
+            android:paddingLeft="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/passengerStartSiteLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/size_16dp"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/size_16dp"
+            android:layout_height="@dimen/size_16dp"
+            android:src="@drawable/com_icon_start"/>
+
+        <TextView
+            android:id="@+id/passengerStartSiteTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="成都市金牛区泉水北路泉水人家一期"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_14sp"
+            android:layout_marginLeft="@dimen/size_8dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/passengerEndSiteLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/size_16dp"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/size_16dp"
+            android:layout_height="@dimen/size_16dp"
+            android:src="@drawable/com_icon_end"/>
+
+        <TextView
+            android:id="@+id/passengerEndSiteTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="珠江国际写字楼"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_14sp"
+            android:layout_marginLeft="@dimen/size_8dp"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:src="@color/color_line"/>
+</LinearLayout>

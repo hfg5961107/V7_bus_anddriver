@@ -10,16 +10,25 @@ import com.rvakva.travel.devkit.model.IModel
  * @CreateDate:     2020/5/18 下午6:06
  */
 
-enum class OrderStatusTypeEnum(val value: Int) {
-    ORDER_TYPE_NEW(Config.ORDER_TYPE_NEW),
-    ORDER_TYPE_ING(Config.ORDER_TYPE_ING),
-    ORDER_TYPE_COMPLETE(Config.ORDER_TYPE_COMPLETE),
-    ORDER_TYPE_CANCEL(Config.ORDER_TYPE_CANCEL)
+enum class ScheduleStatusTypeEnum(val value: Int) {
+    SCHEDULE_TYPE_NEW(Config.SCHEDULE_TYPE_NEW),
+    SCHEDULE_TYPE_ING(Config.SCHEDULE_TYPE_ING),
+    SCHEDULE_TYPE_COMPLETE(Config.SCHEDULE_TYPE_COMPLETE),
+    SCHEDULE_TYPE_CANCEL(Config.SCHEDULE_TYPE_CANCEL)
 }
 
 class ScheduleDataModel(
 
+    /**
+     * 班次关联id
+     */
     val id: Long = 0,
+
+    /**
+     * 班次id
+     */
+    val  schedulingId : Long = 0,
+
     /**
      * 排班状态（1：新单，5：订单已支付，10：已指派，15：行程中，30：已完成）
      */
@@ -57,9 +66,45 @@ class ScheduleDataModel(
      * 线路类型
      * 1 站点-站点
      * 2 站点-送人
-     * 3 送人-送人
-     * 4 送人-站点
+     * 3 接人-送人
+     * 4 接人-站点
      */
-    val lineType: Int = 0
+    val lineType: Int = 0,
+
+    /**
+     * 车牌号
+     */
+    val licenseNo : String?,
+
+    /**
+     * 车辆座位数
+     */
+    val vehicleSeat: Int = 0,
+
+    /**
+     * 完成时间
+     */
+    val  finishTime : Long = 0,
+
+    /**
+     * 线路单价
+     */
+    val lineFee : Double = 0.0,
+    /**
+     * 乘客信息
+     */
+    val order: MutableList<PassengerModel>,
+    /**
+     * 班次编号
+     */
+    val schedulingNo : String?,
+    /**
+     * 本单收入
+     */
+    val realTotalFee: Double = 0.0,
+    /**
+     * 站点信息
+     */
+    val station : MutableList<StationModel>
 
 ) : IModel

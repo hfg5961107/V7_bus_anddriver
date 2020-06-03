@@ -22,4 +22,6 @@
 
     <color name="color_blue">#0288FF</color>
     <color name="color_black">#061D37</color>
+    <color name="color_yellow">#FF7823</color>
+    <color name="color_007AFF">#20007AFF</color>
 </resources>

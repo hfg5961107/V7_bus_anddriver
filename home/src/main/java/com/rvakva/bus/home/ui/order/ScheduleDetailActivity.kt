@@ -2,11 +2,14 @@ package com.rvakva.bus.home.ui.order
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.rvakva.bus.home.R
+import com.rvakva.bus.home.ui.adapter.OrderPassengerAdapter
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.base.KtxActivity
+import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.ApiConstant
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_schedule_detail.*
@@ -24,6 +27,9 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail){
 
     var scheduleId: Long = -1
 
+    lateinit var adapter : OrderPassengerAdapter
+
+
     override fun initTitle() {
         detailMtb.let {
             it.leftTv.setOnClickListener { finish() }
@@ -36,10 +42,33 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail){
             ToastBar.show(ApiConstant.COMMON_ERROR)
             finish()
         }
+
+        adapter = OrderPassengerAdapter(this)
+        val layoutManager = object : LinearLayoutManager(this){
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        recyclerviewPassenger.adapter = adapter
+        recyclerviewPassenger.layoutManager = layoutManager;
+
     }
 
     override fun initObserver() {
-
+        orderOperationViewModel.scheduleDetailLiveData.observe(
+            this,
+            RequestResultObserver(
+                successBlock = {
+                    it.data?.let {
+                        adapter.setData(it.order,it.lineType)
+                    } ?: ToastBar.show("查询失败")
+                },
+                failBlock = {
+                    ToastBar.show("订单信息错误")
+                    finish()
+                }
+            )
+        )
     }
 
     override fun initData(isFirstInit: Boolean) {
@@ -51,4 +80,6 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail){
     private fun requestScheduleData(){
         orderOperationViewModel.qureyScheduleById(scheduleId)
     }
+
+
 }

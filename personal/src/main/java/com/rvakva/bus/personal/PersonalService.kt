@@ -28,13 +28,13 @@ interface PersonalService {
         @Query("driverId") driverId: Long,
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("status") status: Int
+        @Query("status") status: String
     ): EmResult<List<ScheduleDataModel>>?
 
     /**
      * 钱包明细查询
      */
-    @GET("api/v1/driver/order")
+    @GET("api/v1/driver/flowing")
     suspend fun getBillList(
         @Query("page") page: Int,
         @Query("size") size: Int

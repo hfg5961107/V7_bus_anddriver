@@ -70,10 +70,10 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
         }
 
         pcHistoryScheduleLl.setOnClickListener {
-//            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
-            requireActivity().run {
-                jumpTo<NavigationActivity>()
-            }
+            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
+//            requireActivity().run {
+//                jumpTo<NavigationActivity>()
+//            }
         }
     }
 

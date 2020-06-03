@@ -12,10 +12,10 @@ object Config{
 
     const val CHANNEL_APP_ALI = "CHANNEL_APP_ALI"
     const val CHANNEL_APP_WECHAT = "CHANNEL_APP_WECHAT"
-    const val ORDER_TYPE_NEW = 10
-    const val ORDER_TYPE_ING = 25
-    const val ORDER_TYPE_COMPLETE = 30
-    const val ORDER_TYPE_CANCEL = 100004
+    const val SCHEDULE_TYPE_NEW = 10
+    const val SCHEDULE_TYPE_ING = 40
+    const val SCHEDULE_TYPE_COMPLETE = 45
+    const val SCHEDULE_TYPE_CANCEL = 60
 
     var status: Int = 0
 
@@ -49,7 +49,7 @@ object Config{
     const val USER_SYSTEM_SETTING = "/personal/system/set"
     const val USER_IDENTITY = "/user/identity/"
 
-    const val HOME_SCHEDULE_DETAIL = "home/schedule/detail"
+    const val HOME_SCHEDULE_DETAIL = "/home/schedule/detail"
 
     const val APP_SPLASH = "/app/splash/"
 }
