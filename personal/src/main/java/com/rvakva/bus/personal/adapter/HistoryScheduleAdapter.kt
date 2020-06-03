@@ -13,7 +13,7 @@ import com.sherloki.simpleadapter.adapter.SimpleMultipleProAdapter
  * @Author:         胡峰
  * @CreateDate:     2020/6/1 下午2:14
  */
-class HistoryScheduleAdapter()
+class HistoryScheduleAdapter
     : SimpleMultipleProAdapter<ScheduleDataModel>() {
 
     override fun addItemProvider() {

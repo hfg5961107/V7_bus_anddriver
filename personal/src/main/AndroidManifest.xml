@@ -8,6 +8,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.HistoryScheduleActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.BillListActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 </manifest>

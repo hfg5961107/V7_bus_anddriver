@@ -14,6 +14,9 @@ import retrofit2.http.*
  */
 interface HomeService {
 
+    /**
+     *
+     */
     @POST("api/v1/common/captcha/send/sms")
     @FormUrlEncoded
     suspend fun sendSms(
@@ -25,6 +28,9 @@ interface HomeService {
     ): BaseResult?
 
 
+    /**
+     * 上下班
+     */
     @PUT("api/v1/driver/info/changeStatus")
     @FormUrlEncoded
     suspend fun changeStatus(
@@ -42,6 +48,15 @@ interface HomeService {
         @Query("status") status: Int
     ): EmResult<List<ScheduleDataModel>>?
 
+    /**
+     * 查询mqtt配置
+     */
     @GET("api/v1/common/mqtt_config")
     suspend fun getMqttConfig(): EmResult<MqttConfigModel>?
+
+    /**
+     * 根据班次id查询班次详情
+     */
+    @GET("api/v1/driver/order")
+    suspend fun queryScheduleById(@Query("scheduleId") scheduleId: Long) : EmResult<MutableList<ScheduleDataModel>>?
 }

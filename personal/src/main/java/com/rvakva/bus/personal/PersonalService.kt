@@ -1,6 +1,7 @@
 package com.rvakva.bus.personal
 
 import com.rvakva.bus.common.model.ScheduleDataModel
+import com.rvakva.bus.personal.model.BillModel
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 import retrofit2.http.*
 
@@ -12,11 +13,12 @@ import retrofit2.http.*
  */
 interface PersonalService {
 
+    /**
+     * 提现
+     */
     @POST("api/v1/driver/info/cashOut")
     @FormUrlEncoded
     suspend fun cashOut(@Field("fee") fee: String): EmResult<String>?
-
-
 
     /**
      * 班次查询
@@ -28,4 +30,13 @@ interface PersonalService {
         @Query("size") size: Int,
         @Query("status") status: Int
     ): EmResult<List<ScheduleDataModel>>?
+
+    /**
+     * 钱包明细查询
+     */
+    @GET("api/v1/driver/order")
+    suspend fun getBillList(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): EmResult<List<BillModel>>?
 }

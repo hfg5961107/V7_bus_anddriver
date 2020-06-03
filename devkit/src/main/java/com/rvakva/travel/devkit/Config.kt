@@ -41,16 +41,15 @@ object Config{
     const val USER_ID_KEY = "USER_ID_KEY"
     const val USER_APP_KEY_KEY = "USER_APP_KEY_KEY"
     const val USER_NEED_VOICE_NOTIFY_KEY = "USER_NEED_VOICE_NOTIFY_KEY"
-    const val ORDER_ID_KEY = "ORDER_ID_KEY"
+    const val SCHEDULE_ID_KEY = "SCHEDULE_ID_KEY"
 
     //path
-    const val USER_HISTORY_SCHEDULE = "/user/history/schedule"
+    const val USER_HISTORY_SCHEDULE = "/personal/history/schedule"
     const val USER_WALLET = "/personal/wallet/"
-    const val USER_ORDER_DETAIL = "/user/order/detail"
     const val USER_SYSTEM_SETTING = "/personal/system/set"
-    const val USER_ORDER_SETTING = "/user/order/setting"
-    const val USER_CENTER = "/user/center/"
     const val USER_IDENTITY = "/user/identity/"
+
+    const val HOME_SCHEDULE_DETAIL = "home/schedule/detail"
 
     const val APP_SPLASH = "/app/splash/"
 }

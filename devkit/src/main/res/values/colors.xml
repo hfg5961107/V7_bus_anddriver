@@ -20,4 +20,6 @@
     <color name="ff60c23f">#60C23F</color>
     <color name="cccccc">#CCCCCC</color>
 
+    <color name="color_blue">#0288FF</color>
+    <color name="color_black">#061D37</color>
 </resources>

@@ -43,7 +43,7 @@
             android:drawableStart="@drawable/home_icon_time"
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:text="2020-05-15  检票 14:00  出发 14:10"
+            android:text="2020-05-15 · 检票 14:00 · 出发 14:10"
             android:textColor="@color/black_sub"
             android:textSize="@dimen/size_14sp" />
 

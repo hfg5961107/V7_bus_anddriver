@@ -87,6 +87,5 @@ class HistoryScheduleActivity
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(this, Observer {
             personScheduleViewModel.getOrderList(OrderStatusTypeEnum.ORDER_TYPE_COMPLETE,recyclerviewHistory.currentPage+1)
         })
-
     }
 }

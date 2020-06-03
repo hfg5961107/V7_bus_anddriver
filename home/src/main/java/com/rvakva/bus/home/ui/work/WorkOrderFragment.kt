@@ -6,7 +6,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rvakva.bus.common.X
-import com.rvakva.bus.common.XViewModel
 import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
@@ -19,15 +18,10 @@ import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxFragment
-import com.rvakva.travel.devkit.expend.handleExceptionDesc
-import com.rvakva.travel.devkit.expend.initialize
-import com.rvakva.travel.devkit.expend.onDataErrorAndException
-import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
+import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
-import kotlinx.android.synthetic.main.activity_main_indicator.*
-import kotlinx.android.synthetic.main.fragment_work.*
 import kotlinx.android.synthetic.main.fragment_work_order.*
 
 /**
@@ -218,8 +212,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                                 R.id.homeOrderItemNew,
                                 R.id.homeOrderItemNew,
                                 R.id.homeOrderItemNew -> {
-//                                    jumpToOrderDetail(data)
-                                    ToastBar.show("点击了列表")
+                                    jumpToOrderDetail(data)
                                 }
                             }
                         }
@@ -272,13 +265,11 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
         )
     }
 
-//    var dialog: DenyDialog? = null
-//
-//    private fun jumpToOrderDetail(orderData: OrderDataModel) {
-//        jumpByARouter(Config.USER_ORDER_DETAIL) {
-//            withLong(Config.ORDER_ID_KEY, orderData.id)
-//        }
-//    }
+    private fun jumpToOrderDetail(dataModel: ScheduleDataModel) {
+        jumpByARouter(Config.HOME_SCHEDULE_DETAIL) {
+            withLong(Config.SCHEDULE_ID_KEY, dataModel.id)
+        }
+    }
 
     override fun initData(isFirstInit: Boolean) {
         if (isFirstInit) {
