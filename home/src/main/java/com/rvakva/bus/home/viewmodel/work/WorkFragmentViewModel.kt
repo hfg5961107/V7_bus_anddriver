@@ -51,8 +51,8 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     fun cancelJob() = job?.cancel()
 
-    fun countDownTimer(orderStatusTypeEnum: ScheduleStatusTypeEnum) {
-        if (orderStatusTypeEnum == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW) {
+    fun countDownTimer(scheduleStatusTypeEnum: ScheduleStatusTypeEnum) {
+        if (scheduleStatusTypeEnum == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW) {
             cancelJob()
             job = launchRepeat(delayTimeMillis = 1_000) { count ->
                 countDownOrderListLiveData.postValue(0)
@@ -95,18 +95,18 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 //    }
 
     fun getOrderList(
-        orderStatusTypeEnum: ScheduleStatusTypeEnum? = null,
+        scheduleStatusTypeEnum: ScheduleStatusTypeEnum? = null,
         page:Int
     ) {
         launchRequest(block = {
-            when (orderStatusTypeEnum) {
+            when (scheduleStatusTypeEnum) {
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
                         .getOrderList(
                             Ktx.getInstance().userDataSource.userId,
                             page,
                             10,
-                            orderStatusTypeEnum.value
+                            scheduleStatusTypeEnum.value
                         )
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW ->
                     ApiManager.getInstance().createService(HomeService::class.java)
@@ -114,7 +114,7 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
                             Ktx.getInstance().userDataSource.userId,
                             page,
                             10,
-                            orderStatusTypeEnum.value
+                            scheduleStatusTypeEnum.value
                         )
 
                 else -> {
@@ -123,7 +123,7 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
                             Ktx.getInstance().userDataSource.userId,
                             page,
                             10,
-                            orderStatusTypeEnum!!.value
+                            scheduleStatusTypeEnum!!.value
                         )
                 }
             }

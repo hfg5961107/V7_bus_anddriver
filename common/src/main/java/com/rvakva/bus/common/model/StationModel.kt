@@ -26,7 +26,7 @@ class StationModel(
      */
     val longitude: Double = 0.0,
     /**
-     * 站点类型
+     * 站点类型  1是起点 2是终点
      */
     val type : Int = 0,
     /**

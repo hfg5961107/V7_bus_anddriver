@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/top_cor4_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/size_16dp"
+    android:paddingEnd="@dimen/size_16dp"
+    android:paddingBottom="@dimen/size_16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_54dp">
+        <ImageView
+            android:id="@+id/checkTicketsCloseIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/common_icon_close"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请确认乘客上车情况"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginBottom="@dimen/size_16dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecyclerViewTicket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkTicketsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:background="@drawable/cor4_com_btn_blue_bg"
+        android:layout_marginTop="16dp"
+        android:text="验票完成"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16sp"/>
+
+</LinearLayout>

@@ -30,7 +30,7 @@ class ScheduleDataModel(
     val  schedulingId : Long = 0,
 
     /**
-     * 排班状态（1：新单，5：订单已支付，10：已指派，15：行程中，30：已完成）
+     * 排班状态（10：已指派，40：行程中，45：已完成，60：已取消）
      */
     val status: Int = 0,
     /**

@@ -37,7 +37,7 @@
                         android:id="@+id/detailCarNumberSeatTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="川A 33566 / 7座"
+                        android:text="--"
                         android:textColor="@color/black_sub"
                         android:textSize="@dimen/size_12sp"
                         />
@@ -45,10 +45,11 @@
                         android:id="@+id/detailRestSeatTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="余座 2"
+                        android:text="--"
                         android:textSize="@dimen/size_12sp"
                         android:gravity="right"
-                        android:textColor="@color/black_sub"/>
+                        android:textColor="@color/black_sub"
+                        android:visibility="gone"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/detailStartSiteLl"
@@ -69,7 +70,7 @@
                         android:id="@+id/detailStartSiteTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="成都市金牛区泉水北路泉水人家一期"
+                        android:text="--"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14sp"
                         android:layout_marginLeft="@dimen/size_8dp"/>
@@ -93,7 +94,7 @@
                         android:id="@+id/detailEndSiteTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="珠江国际写字楼"
+                        android:text="--"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14sp"
                         android:layout_marginLeft="@dimen/size_8dp"/>
@@ -107,7 +108,7 @@
                     android:layout_marginLeft="@dimen/size_16dp"
                     android:layout_marginTop="@dimen/size_16dp"
                     android:layout_marginRight="@dimen/size_16dp"
-                    android:text="2020-05-15 · 检票 14:00 · 出发 14:10"
+                    android:text="--"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:layout_marginBottom="@dimen/size_16dp"/>
@@ -143,14 +144,15 @@
                         android:id="@+id/detailCheckTicketTv"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:text="重新检票"
+                        android:text="检票"
                         android:background="@drawable/cor_left_blue_bg"
                         android:paddingLeft="16dp"
                         android:paddingRight="10dp"
                         android:textColor="@color/white"
                         android:textSize="@dimen/size_12sp"
                         android:gravity="center_vertical"
-                        android:drawableRight="@drawable/com_ticket_arraw"/>
+                        android:drawableRight="@drawable/com_ticket_arraw"
+                        android:visibility="gone"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerviewPassenger"
@@ -198,7 +200,7 @@
                         android:id="@+id/detailOrderNoTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5621564984561561"
+                        android:text="--"
                         android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
                         android:layout_centerVertical="true"
@@ -214,7 +216,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_44dp"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp">
+                    android:paddingRight="@dimen/size_16dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -226,7 +229,7 @@
                         android:id="@+id/detailCancelTimeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2020-05-17 15:33"
+                        android:text="--"
                         android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
                         android:layout_centerVertical="true"
@@ -242,7 +245,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_44dp"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp">
+                    android:paddingRight="@dimen/size_16dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -254,7 +258,7 @@
                         android:id="@+id/detailCompleteTimeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2020-05-17 15:33"
+                        android:text="--"
                         android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
                         android:layout_centerVertical="true"
@@ -270,7 +274,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_44dp"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp">
+                    android:paddingRight="@dimen/size_16dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -282,7 +287,7 @@
                         android:id="@+id/detailIncomeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥ 100"
+                        android:text="--"
                         android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
                         android:layout_centerVertical="true"
@@ -305,7 +310,7 @@
             android:layout_marginBottom="@dimen/size_16dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/cor4_com_btn_blue_bg"
-            android:text="请开始检票"
+            android:text=""
             android:textSize="@dimen/size_16sp"
             android:textColor="@color/white"/>
     </RelativeLayout>

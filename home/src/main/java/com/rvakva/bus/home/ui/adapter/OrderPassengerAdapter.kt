@@ -8,8 +8,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.home.R
+import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.expend.glideInto
+import com.rvakva.travel.devkit.expend.glideWithRoundInto
+import kotlinx.android.synthetic.main.fragment_person_center.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -44,6 +49,34 @@ class OrderPassengerAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val order = data[position]
+
+        order.customerAvatar?.let {
+            if (it.contains("http") || it.contains("https")){
+                holder.passengerHeaderIv.glideWithRoundInto( it, 10)
+            }else{
+                holder.passengerHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it, 10)
+            }
+        } ?: holder.passengerHeaderIv.setImageResource(R.drawable.com_icon_passenger)
+
+        holder.passengerNameTv.text = "${order.customerName} ${order.passengerNum}人"
+
+        showStatus(holder.passengerStatusTv,order)
+
+        if (order.status < OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value) {
+            holder.passengerPhoneIv.visibility = View.VISIBLE
+        } else {
+            holder.passengerPhoneIv.visibility = View.GONE
+        }
+
+        order.orderAddress?.forEach{
+            if (it.type == 1){
+                holder.passengerStartSiteTv.text = it.address
+            }else if (it.type == 2){
+                holder.passengerEndSiteTv.text = it.address
+            }
+        }
+
         when (type) {
             1 -> {
 //              站点-站点
@@ -64,6 +97,39 @@ class OrderPassengerAdapter(private val context: Context) :
 //                接人-站点
                 holder.passengerStartSiteLl.visibility = View.VISIBLE
                 holder.passengerEndSiteLl.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showStatus(textView: TextView, passengerModel: PassengerModel) = run {
+        when (passengerModel.status) {
+            OrderStatusTypeEnum.ORDER_STATUS_NO_START.value -> {
+                textView.text = " / 待上车"
+                textView.setTextColor(context.resources.getColor(R.color.black_desc))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_PICKUP.value -> {
+                textView.text = " / 正在接人"
+                textView.setTextColor(context.resources.getColor(R.color.color_yellow))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_WAITING.value -> {
+                textView.text = " / 等待乘客上车"
+                textView.setTextColor(context.resources.getColor(R.color.color_yellow))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_SKIP.value -> {
+                textView.text = " / 未上车"
+                textView.setTextColor(context.resources.getColor(R.color.color_red))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value -> {
+                textView.text = " / 已上车"
+                textView.setTextColor(context.resources.getColor(R.color.color_green))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_SENDING.value -> {
+                textView.text = " / 正在送人"
+                textView.setTextColor(context.resources.getColor(R.color.color_yellow))
+            }
+            OrderStatusTypeEnum.ORDER_STATUS_COMPLETE.value -> {
+                textView.text = " / 已送达"
+                textView.setTextColor(context.resources.getColor(R.color.black_desc))
             }
         }
     }

@@ -58,5 +58,17 @@ interface HomeService {
      * 根据班次id查询班次详情
      */
     @GET("api/v1/driver/order/detail/{orderDriverId}")
-    suspend fun queryScheduleById(@Path("orderDriverId") orderDriverId: Long) : EmResult<ScheduleDataModel>?
+    suspend fun queryScheduleById(@Path("orderDriverId") orderDriverId: Long): EmResult<ScheduleDataModel>?
+
+    /**
+     * 站点检票
+     */
+    @PUT("api/v1/driver/order/check")
+    @FormUrlEncoded
+    suspend fun checkTicket(
+        @Field("orderCheck") orderCheck: String
+        , @Field("orderDriverId") orderDriverId: Long
+    ): BaseResult?
+
+
 }

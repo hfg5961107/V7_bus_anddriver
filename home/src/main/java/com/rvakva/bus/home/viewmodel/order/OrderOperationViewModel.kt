@@ -8,6 +8,7 @@ import com.rvakva.travel.devkit.expend.launchRequest
 import com.rvakva.travel.devkit.expend.requestMap
 import com.rvakva.travel.devkit.livedata.RequestLiveData
 import com.rvakva.travel.devkit.retrofit.ApiManager
+import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 
 /**
@@ -18,15 +19,27 @@ import com.rvakva.travel.devkit.retrofit.result.EmResult
  */
 class OrderOperationViewModel(application: Application) : AndroidViewModel(application) {
 
-     val scheduleDetailLiveData by RequestLiveData<EmResult<ScheduleDataModel>>()
+    val scheduleDetailLiveData by RequestLiveData<EmResult<ScheduleDataModel>>()
 
-    fun qureyScheduleById(scheduleId:Long){
+    val checkLiveData by RequestLiveData<BaseResult>()
+
+    fun qureyScheduleById(scheduleId: Long) {
         launchRequest(
             block = {
                 ApiManager.getInstance().createService(HomeService::class.java)
                     .queryScheduleById(scheduleId)
                     .requestMap()
-            },requestLiveData = scheduleDetailLiveData,showToastBar = true
+            }, requestLiveData = scheduleDetailLiveData, showToastBar = true
+        )
+    }
+
+    fun checkTicket(orderCheck: String, orderDriverId: Long) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .checkTicket(orderCheck, orderDriverId)
+                    .requestMap()
+            }, requestLiveData = checkLiveData, showToastBar = true
         )
     }
 
