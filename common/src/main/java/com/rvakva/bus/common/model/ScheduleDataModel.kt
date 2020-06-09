@@ -2,6 +2,7 @@ package com.rvakva.bus.common.model
 
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.model.IModel
+import java.io.Serializable
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -107,4 +108,4 @@ class ScheduleDataModel(
      */
     val station : MutableList<StationModel>
 
-) : IModel
+) : IModel,Serializable

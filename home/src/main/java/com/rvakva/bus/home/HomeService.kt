@@ -1,6 +1,8 @@
 package com.rvakva.bus.home
 
+import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.common.model.ScheduleDataModel
+import com.rvakva.bus.home.model.CompleteModel
 import com.rvakva.travel.devkit.mqtt.MqttConfigModel
 import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
@@ -67,8 +69,37 @@ interface HomeService {
     @FormUrlEncoded
     suspend fun checkTicket(
         @Field("orderCheck") orderCheck: String
-        , @Field("orderDriverId") orderDriverId: Long
-    ): BaseResult?
+        ,@Field("orderDriverId") orderDriverId: Long
+    ): EmResult<CompleteModel>?
+
+    /**
+     * 开始行程/送人
+     */
+    @PUT("api/v1/driver/order/gotoDestination")
+    @FormUrlEncoded
+    suspend fun gotoDestination(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderId") orderId: Long?
+    ): EmResult<CompleteModel>?
 
 
+    /**
+     * 完成订单/完成班次
+     */
+    @PUT("api/v1/driver/order/finish")
+    @FormUrlEncoded
+    suspend fun finishOrder(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderId") orderId: Long?
+    ): EmResult<CompleteModel>?
+
+    /**
+     * 查询接人送人顺序
+     */
+    @GET("api/v1/driver/order/sort")
+    suspend fun qureyOrderList(
+        @Query("orderDriverId") orderDriverId: Long
+    ): EmResult<List<PassengerModel>>?
 }

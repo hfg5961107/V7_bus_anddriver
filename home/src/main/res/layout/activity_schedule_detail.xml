@@ -301,18 +301,49 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <Button
-            android:id="@+id/orderDetailOperationBtn"
+        <LinearLayout
+            android:id="@+id/orderDetailBottomLin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_44dp"
-            android:layout_marginLeft="@dimen/size_16dp"
-            android:layout_marginRight="@dimen/size_16dp"
-            android:layout_marginBottom="@dimen/size_16dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/cor4_com_btn_blue_bg"
-            android:text=""
-            android:textSize="@dimen/size_16sp"
-            android:textColor="@color/white"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/orderDetailNavigationLin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_44dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/size_12dp"
+                android:background="@drawable/cor4_com_btn_black_bg"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:gravity="center"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="继续导航"
+                    android:textSize="@dimen/size_16sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/com_way_navigation"
+                    android:drawablePadding="10dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/orderDetailOperationBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_44dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                android:background="@drawable/cor4_com_btn_blue_bg"
+                android:text=""
+                android:textSize="@dimen/size_16sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

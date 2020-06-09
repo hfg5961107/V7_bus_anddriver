@@ -2,8 +2,16 @@ package com.rvakva.bus.home.viewmodel.order
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.Marker
+import com.amap.api.maps.model.MarkerOptions
+import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.HomeService
+import com.rvakva.bus.home.R
+import com.rvakva.bus.home.model.CompleteModel
+import com.rvakva.travel.devkit.KtxViewModel
+import com.rvakva.travel.devkit.expend.initMarker
 import com.rvakva.travel.devkit.expend.launchRequest
 import com.rvakva.travel.devkit.expend.requestMap
 import com.rvakva.travel.devkit.livedata.RequestLiveData
@@ -21,7 +29,27 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
 
     val scheduleDetailLiveData by RequestLiveData<EmResult<ScheduleDataModel>>()
 
-    val checkLiveData by RequestLiveData<BaseResult>()
+    val operationLiveData by RequestLiveData<EmResult<CompleteModel>>()
+
+    val orderLiveData by RequestLiveData<EmResult<List<PassengerModel>>>()
+
+
+    var latLng: LatLng? = null
+    var locationMarker: Marker? = null
+
+    fun changeLatLng() {
+        KtxViewModel.locationLiveData.value?.let {
+            latLng = LatLng(it.latitude,it.longitude)
+        }
+    }
+
+    fun addMyLocationMarker(block: (MarkerOptions) -> Marker) {
+        locationMarker?.let {
+            it.position = latLng
+        } ?: initMarker(latLng, R.drawable.common_icon_location_blue).let {
+            locationMarker = block(it)
+        }
+    }
 
     fun qureyScheduleById(scheduleId: Long) {
         launchRequest(
@@ -33,14 +61,57 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
         )
     }
 
+    /**
+     * 站点检票
+     */
     fun checkTicket(orderCheck: String, orderDriverId: Long) {
         launchRequest(
             block = {
                 ApiManager.getInstance().createService(HomeService::class.java)
                     .checkTicket(orderCheck, orderDriverId)
                     .requestMap()
-            }, requestLiveData = checkLiveData, showToastBar = true
+            }, requestLiveData = operationLiveData, showToastBar = true
         )
     }
+
+    /**
+     * 开始行程/送人
+     */
+    fun gotoDestination(driverId: Long, orderDriverId: Long, orderId: Long?) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .gotoDestination(driverId, orderDriverId, orderId)
+                    .requestMap()
+            }, requestLiveData = operationLiveData, showToastBar = true
+        )
+    }
+
+    /**
+     * 完成订单/完成班次
+     */
+    fun finishOrder(driverId: Long, orderDriverId: Long, orderId: Long?) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .finishOrder(driverId, orderDriverId, orderId)
+                    .requestMap()
+            }, requestLiveData = operationLiveData, showToastBar = true
+        )
+    }
+
+    /**
+     * 完成订单/完成班次
+     */
+    fun qureyOrderList(orderDriverId: Long) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .qureyOrderList(orderDriverId)
+                    .requestMap()
+            }, requestLiveData = orderLiveData, showToastBar = true
+        )
+    }
+
 
 }

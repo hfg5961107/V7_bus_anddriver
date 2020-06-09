@@ -1,6 +1,7 @@
 package com.rvakva.bus.common.model
 
 import com.rvakva.travel.devkit.model.IModel
+import java.io.Serializable
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -37,4 +38,4 @@ class StationModel(
      * 订单id
      */
     val orderId : Long = 0
-) : IModel
+) : IModel, Serializable

@@ -23,7 +23,7 @@ class LocationManager {
 
     companion object {
         fun getInstance() = SingletonHolder.INSTANCE
-        private const val INTERVAL = 3 * 1_000L
+        private const val INTERVAL = 5 * 1_000L
     }
 
     private val client = AMapLocationClient(Ktx.getInstance().app)
@@ -33,6 +33,7 @@ class LocationManager {
             it.setLocationListener {
                 if (it.errorCode == 0) {
                     it.createLocation().apply {
+                        it.loge()
                         KtxViewModel.locationLiveData.postValue(this)
                     }
                 } else {

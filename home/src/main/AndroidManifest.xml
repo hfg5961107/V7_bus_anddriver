@@ -16,5 +16,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.order.ScheduleDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.order.ServiceCompleteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.order.OrderMapActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 </manifest>

@@ -12,6 +12,7 @@ import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.initialize
+import com.rvakva.travel.devkit.expend.jumpByARouter
 import com.rvakva.travel.devkit.expend.onDataErrorAndException
 import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
@@ -49,10 +50,8 @@ class HistoryScheduleActivity
                     adapter?.let {
                         it.data[position].let { data ->
                             when (view.id) {
-                                R.id.pcHistoryItem,
                                 R.id.pcHistoryItem -> {
-//                                    jumpToOrderDetail(data)
-                                    ToastBar.show("点击了列表")
+                                    jumpToOrderDetail(data)
                                 }
                             }
                         }
@@ -61,6 +60,12 @@ class HistoryScheduleActivity
             },
             emptyString = "暂无历史订单"
         )
+    }
+
+    private fun jumpToOrderDetail(dataModel: ScheduleDataModel) {
+        jumpByARouter(Config.HOME_SCHEDULE_DETAIL) {
+            withLong(Config.SCHEDULE_ID_KEY, dataModel.id)
+        }
     }
 
     override fun initObserver() {

@@ -1,26 +1,27 @@
 package com.rvakva.bus.home.ui.order
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.gson.Gson
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.dialog.CheckTicketsDialog
 import com.rvakva.bus.home.ui.adapter.OrderPassengerAdapter
+import com.rvakva.bus.home.ui.work.WorkActivity
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.formatDate
+import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.ApiConstant
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_schedule_detail.*
-import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -29,7 +30,8 @@ import kotlinx.android.synthetic.main.fragment_login.*
  * @CreateDate:     2020/6/2 下午4:36
  */
 @Route(path = Config.HOME_SCHEDULE_DETAIL)
-class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,CheckTicketsDialog.OnDialogClickListener{
+class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
+    CheckTicketsDialog.OnDialogClickListener {
 
     private val orderOperationViewModel by viewModels<OrderOperationViewModel>()
 
@@ -37,7 +39,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
 
     lateinit var adapter: OrderPassengerAdapter
 
-    lateinit var dialog : CheckTicketsDialog
+    private var dialog: CheckTicketsDialog? = null
 
     override fun initTitle() {
         detailMtb.let {
@@ -80,19 +82,30 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
             )
         )
 
-        orderOperationViewModel.checkLiveData.observe(
+        orderOperationViewModel.operationLiveData.observe(
             this,
             RequestResultObserver(
                 successBlock = {
-                    orderOperationViewModel.qureyScheduleById(scheduleId)
-                    if (dialog != null){
-                        dialog.dismiss()
+                    if (it.data != null) {
+                        it.data?.let { model ->
+                            if (model.isFinish) {
+
+                                jumpTo<ServiceCompleteActivity> {
+                                    putExtra("serviceTime", model.totalTime)
+                                }
+                                finish()
+                            } else {
+                                orderOperationViewModel.qureyScheduleById(scheduleId)
+                                dialog?.dismiss()
+                            }
+                        }
+                    } else {
+                        orderOperationViewModel.qureyScheduleById(scheduleId)
+                        dialog?.dismiss()
                     }
                 },
                 failBlock = {
-                    if (dialog != null){
-                        dialog.dismiss()
-                    }
+                    dialog?.dismiss()
                 }
             )
         )
@@ -146,26 +159,25 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
             1 -> {
                 detailStartSiteLl.visibility = View.VISIBLE
                 detailEndSiteLl.visibility = View.VISIBLE
-                detailCheckTicketTv.visibility = View.VISIBLE
             }
             2 -> {
                 detailStartSiteLl.visibility = View.VISIBLE
                 detailEndSiteLl.visibility = View.GONE
-                detailCheckTicketTv.visibility = View.VISIBLE
             }
             3 -> {
                 detailStartSiteLl.visibility = View.GONE
                 detailEndSiteLl.visibility = View.GONE
-                detailCheckTicketTv.visibility = View.GONE
             }
             4 -> {
                 detailStartSiteLl.visibility = View.GONE
                 detailEndSiteLl.visibility = View.VISIBLE
-                detailCheckTicketTv.visibility = View.GONE
             }
         }
 
+        detailMtb.let { it.rightTv.visibility = View.GONE }
+
         when (model.status) {
+            //行程未开始
             ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value -> {
                 detailMtb.let { it.centerText.text = "等待行程开始" }
                 detailIncomeRl.visibility = View.VISIBLE
@@ -173,8 +185,64 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
                 detailCancelTimeRl.visibility = View.GONE
 
                 detailRestSeatTv.visibility = View.VISIBLE
-                detailCheckTicketTv.visibility = View.VISIBLE
+
+                orderDetailBottomLin.visibility = View.VISIBLE
+
+                orderDetailNavigationLin.visibility = View.GONE
+
+                if (model.lineType == 1 || model.lineType == 2) {
+                    detailCheckTicketTv.visibility = View.VISIBLE
+
+                    if (!checkOver(model)) {
+                        orderDetailOperationBtn.text = "请完成检票"
+                        orderDetailOperationBtn.background =
+                            resources.getDrawable(R.drawable.cor4_com_btn_ccc_bg)
+
+                        detailCheckTicketTv.text = "检票"
+
+                    } else {
+                        orderDetailOperationBtn.text = "开始行程"
+                        orderDetailOperationBtn.background =
+                            resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+
+                        //站点的开始行程
+                        orderDetailOperationBtn.setOnClickListener {
+                            orderOperationViewModel.gotoDestination(
+                                Ktx.getInstance().userDataSource.userId,
+                                model.id,
+                                null
+                            )
+                        }
+
+                        detailCheckTicketTv.text = "重新检票"
+                    }
+                } else {
+                    detailCheckTicketTv.visibility = View.GONE
+
+                    detailMtb.let {
+                        it.rightTv.visibility = View.VISIBLE
+                        it.rightTv.text = "查看规划"
+                        it.rightTv.setOnClickListener {
+                            jumpTo<OrderMapActivity> {
+                                putExtra("type", 1)
+                                putExtra("orderDriverId", model.id)
+                            }
+                        }
+                    }
+
+                    orderDetailOperationBtn.text = "开始行程规划"
+                    orderDetailOperationBtn.background =
+                        resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+
+                    orderDetailOperationBtn.setOnClickListener {
+                        jumpTo<OrderMapActivity> {
+                            putExtra("type", 2)
+                            putExtra("orderDriverId", model.id)
+                        }
+                    }
+                }
             }
+            //行程中
             ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING.value -> {
                 detailMtb.let { it.centerText.text = "行程中" }
                 detailIncomeRl.visibility = View.VISIBLE
@@ -183,7 +251,34 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
 
                 detailRestSeatTv.visibility = View.VISIBLE
                 detailCheckTicketTv.visibility = View.GONE
+
+                orderDetailBottomLin.visibility = View.VISIBLE
+
+                if (model.lineType == 1 || model.lineType == 4) {
+                    orderDetailOperationBtn.text = "到达目的地"
+                    orderDetailOperationBtn.background =
+                        resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+
+                    orderDetailNavigationLin.visibility = View.VISIBLE
+
+                    //站点的完成班次
+                    orderDetailOperationBtn.setOnClickListener {
+                        orderOperationViewModel.finishOrder(
+                            Ktx.getInstance().userDataSource.userId,
+                            model.id,
+                            null
+                        )
+                    }
+
+                } else {
+                    orderDetailOperationBtn.text = "开始送人"
+                    orderDetailOperationBtn.background =
+                        resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+
+                    orderDetailNavigationLin.visibility = View.VISIBLE
+                }
             }
+            //行程完成
             ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE.value -> {
                 detailMtb.let { it.centerText.text = "已完成" }
                 detailIncomeRl.visibility = View.VISIBLE
@@ -192,7 +287,10 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
 
                 detailRestSeatTv.visibility = View.GONE
                 detailCheckTicketTv.visibility = View.GONE
+
+                orderDetailBottomLin.visibility = View.GONE
             }
+            //行程取消
             ScheduleStatusTypeEnum.SCHEDULE_TYPE_CANCEL.value -> {
                 detailMtb.let { it.centerText.text = "已取消" }
                 detailIncomeRl.visibility = View.GONE
@@ -201,47 +299,35 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail) ,C
 
                 detailRestSeatTv.visibility = View.GONE
                 detailCheckTicketTv.visibility = View.GONE
+
+                orderDetailBottomLin.visibility = View.GONE
             }
         }
-        showOperationBtn(model)
 
         detailCheckTicketTv.setOnClickListener {
             model.order?.let { it ->
                 dialog = CheckTicketsDialog.newInstance(it)
-                dialog.show(supportFragmentManager)
+                dialog?.show(supportFragmentManager)
             }
         }
     }
 
-    private fun showOperationBtn(model: ScheduleDataModel) {
-        if ((model.lineType == 1 || model.lineType == 2) && model.status == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value) {
-            var isCheckOver = true
-            model.order?.forEach {
-                if (it.loadType == 1) {
-                    isCheckOver = false
-                }
-            }
-            if (!isCheckOver) {
-                orderDetailOperationBtn.text = "请完成检票"
-                orderDetailOperationBtn.background =
-                    resources.getDrawable(R.drawable.cor4_com_btn_ccc_bg)
 
-                detailCheckTicketTv.text = "检票"
-
-
-            } else {
-                orderDetailOperationBtn.text = "开始行程"
-                orderDetailOperationBtn.background =
-                    resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
-
-                detailCheckTicketTv.text = "重新检票"
+    /**
+     * 是否全部检票/全部上车或者跳过
+     */
+    private fun checkOver(model: ScheduleDataModel): Boolean = run {
+        model.order?.forEach {
+            if (it.loadType == 1) {
+                return false
             }
         }
+        return true
     }
 
     var orderDriverId: Long = 0
 
     override fun onDialogClick(data: String) {
-        orderOperationViewModel.checkTicket(data,orderDriverId)
+        orderOperationViewModel.checkTicket(data, orderDriverId)
     }
 }
