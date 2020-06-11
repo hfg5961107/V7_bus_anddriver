@@ -18,8 +18,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.order.ServiceCompleteActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.order.OrderMapActivity"
+        <activity android:name=".ui.order.OrderSortActivity"
             android:screenOrientation="portrait"/>
-
+        <activity android:name=".ui.order.OrderRunActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

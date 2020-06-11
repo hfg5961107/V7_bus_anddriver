@@ -6,6 +6,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.rvakva.bus.common.model.OrderStatusTypeEnum
+import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.home.R
@@ -112,9 +114,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
     }
 
     override fun initData(isFirstInit: Boolean) {
-        if (isFirstInit) {
-            requestScheduleData()
-        }
+
     }
 
     private fun requestScheduleData() {
@@ -174,8 +174,16 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
             }
         }
 
-        detailMtb.let { it.rightTv.visibility = View.GONE }
-
+        detailMtb.let {
+            it.rightTv.visibility = View.VISIBLE
+            it.rightTv.text = "查看规划"
+            it.rightTv.setOnClickListener {
+                jumpTo<OrderSortActivity> {
+                    putExtra("type", 1)
+                    putExtra("orderDriverId", model.id)
+                }
+            }
+        }
         when (model.status) {
             //行程未开始
             ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value -> {
@@ -192,6 +200,8 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
                 if (model.lineType == 1 || model.lineType == 2) {
                     detailCheckTicketTv.visibility = View.VISIBLE
+
+                    detailMtb.let { it.rightTv.visibility = View.GONE }
 
                     if (!checkOver(model)) {
                         orderDetailOperationBtn.text = "请完成检票"
@@ -219,24 +229,12 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                 } else {
                     detailCheckTicketTv.visibility = View.GONE
 
-                    detailMtb.let {
-                        it.rightTv.visibility = View.VISIBLE
-                        it.rightTv.text = "查看规划"
-                        it.rightTv.setOnClickListener {
-                            jumpTo<OrderMapActivity> {
-                                putExtra("type", 1)
-                                putExtra("orderDriverId", model.id)
-                            }
-                        }
-                    }
-
-                    orderDetailOperationBtn.text = "开始行程规划"
+                    orderDetailOperationBtn.text = "开始行程"
                     orderDetailOperationBtn.background =
                         resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
 
                     orderDetailOperationBtn.setOnClickListener {
-                        jumpTo<OrderMapActivity> {
-                            putExtra("type", 2)
+                        jumpTo<OrderRunActivity> {
                             putExtra("orderDriverId", model.id)
                         }
                     }
@@ -254,28 +252,98 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
                 orderDetailBottomLin.visibility = View.VISIBLE
 
-                if (model.lineType == 1 || model.lineType == 4) {
-                    orderDetailOperationBtn.text = "到达目的地"
-                    orderDetailOperationBtn.background =
-                        resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+                when (model.lineType) {
+                    1 -> {
+                        orderDetailOperationBtn.text = "到达目的地"
+                        orderDetailOperationBtn.background =
+                            resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
 
-                    orderDetailNavigationLin.visibility = View.VISIBLE
+                        orderDetailNavigationLin.visibility = View.VISIBLE
 
-                    //站点的完成班次
-                    orderDetailOperationBtn.setOnClickListener {
-                        orderOperationViewModel.finishOrder(
-                            Ktx.getInstance().userDataSource.userId,
-                            model.id,
-                            null
-                        )
+                        //站点的完成班次
+                        orderDetailOperationBtn.setOnClickListener {
+                            orderOperationViewModel.finishOrder(
+                                Ktx.getInstance().userDataSource.userId,
+                                model.id,
+                                null
+                            )
+                        }
+                    }
+                    2 -> {
+                        if (checkSending(model.order)){
+                            orderDetailOperationBtn.text = "继续行程"
+                        }else{
+                            orderDetailOperationBtn.text = "开始送人"
+                        }
+                        orderDetailOperationBtn.background =
+                            resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+                        orderDetailOperationBtn.setOnClickListener {
+                            jumpTo<OrderRunActivity> {
+                                putExtra("orderDriverId", model.id)
+                            }
+                        }
+                    }
+                    3 -> {
+                        if (!checkStatus(model.order)){
+                            orderDetailOperationBtn.text = "继续接人"
+
+                            orderDetailOperationBtn.setOnClickListener {
+                                jumpTo<OrderRunActivity> {
+                                    putExtra("orderDriverId", model.id)
+                                }
+                            }
+
+                        }else{
+                            if (checkSending(model.order)){
+                                orderDetailOperationBtn.text = "继续行程"
+                            }else{
+                                orderDetailOperationBtn.text = "开始送人"
+                            }
+                            orderDetailOperationBtn.background =
+                                resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+                            orderDetailOperationBtn.setOnClickListener {
+                                jumpTo<OrderRunActivity> {
+                                    putExtra("orderDriverId", model.id)
+                                }
+                            }
+                        }
+                    }
+                    4 -> {
+                        if (!checkStatus(model.order)){
+                            orderDetailOperationBtn.text = "继续接人"
+
+                            orderDetailOperationBtn.setOnClickListener {
+                                jumpTo<OrderRunActivity> {
+                                    putExtra("orderDriverId", model.id)
+                                }
+                            }
+
+                        }else{
+
+                            if (checkSending(model.order)){
+                                orderDetailOperationBtn.text = "达到目的地"
+
+                                orderDetailOperationBtn.setOnClickListener {
+                                    orderOperationViewModel.finishOrder(
+                                        Ktx.getInstance().userDataSource.userId,
+                                        model.id,
+                                        null
+                                    )
+                                }
+                            }else{
+                                orderDetailOperationBtn.text = "开始跨城出行"
+
+                                orderDetailOperationBtn.setOnClickListener {
+                                    orderOperationViewModel.gotoDestination(
+                                        Ktx.getInstance().userDataSource.userId,
+                                        model.id,
+                                        null
+                                    )
+                                }
+                            }
+                        }
                     }
 
-                } else {
-                    orderDetailOperationBtn.text = "开始送人"
-                    orderDetailOperationBtn.background =
-                        resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
-
-                    orderDetailNavigationLin.visibility = View.VISIBLE
                 }
             }
             //行程完成
@@ -312,6 +380,30 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
         }
     }
 
+    /**
+     * 判断接人中还是送人中  ture 下车中 false上车中
+     */
+    private fun checkStatus(list: List<PassengerModel>): Boolean {
+        for (i in list.indices) {
+            if (list[i].status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
+                return false
+            }
+        }
+        return true
+    }
+
+    /**
+     * 判断是刚送人还是已经送了至少一个人了
+     */
+    private fun checkSending(list: List<PassengerModel>): Boolean {
+        for (i in list.indices) {
+            if (list[i].status == OrderStatusTypeEnum.ORDER_STATUS_SENDING.value
+                || list[i].status == OrderStatusTypeEnum.ORDER_STATUS_COMPLETE.value) {
+                return true
+            }
+        }
+        return false
+    }
 
     /**
      * 是否全部检票/全部上车或者跳过
@@ -329,5 +421,11 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
     override fun onDialogClick(data: String) {
         orderOperationViewModel.checkTicket(data, orderDriverId)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        requestScheduleData()
     }
 }

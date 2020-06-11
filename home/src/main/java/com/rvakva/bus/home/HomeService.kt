@@ -101,5 +101,54 @@ interface HomeService {
     @GET("api/v1/driver/order/sort")
     suspend fun qureyOrderList(
         @Query("orderDriverId") orderDriverId: Long
-    ): EmResult<List<PassengerModel>>?
+    ): EmResult<MutableList<PassengerModel>>?
+
+    /**
+     * 修改订单排序
+     */
+    @PUT("api/v1/driver/order/sort")
+    @FormUrlEncoded
+    suspend fun changeOrderList(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderSort") orderSort: String
+    ): EmResult<CompleteModel>?
+
+    /**
+     * 接人/前往预约地
+     */
+    @PUT("api/v1/driver/order/gotoBookPlace")
+    @FormUrlEncoded
+    suspend fun gotoBookPlace(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderId") orderId: Long?
+    ): EmResult<CompleteModel>?
+
+    /**
+     * 到达预约地
+     */
+    @PUT("api/v1/driver/order/arriveBookPlace")
+    @FormUrlEncoded
+    suspend fun arriveBookPlace(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderId") orderId: Long?
+    ): EmResult<CompleteModel>?
+
+
+    /**
+     * 乘客上车或者跳过
+     */
+    @PUT("api/v1/driver/order/takeOverCheck")
+    @FormUrlEncoded
+    suspend fun takeOverCheck(
+        @Field("driverId") driverId: Long
+        ,@Field("orderDriverId") orderDriverId: Long
+        ,@Field("orderId") orderId: Long
+        ,@Field("loadType") loadType: Int
+    ): EmResult<CompleteModel>?
+
+
+
 }

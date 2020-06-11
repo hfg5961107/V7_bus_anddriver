@@ -33,7 +33,6 @@ class LocationManager {
             it.setLocationListener {
                 if (it.errorCode == 0) {
                     it.createLocation().apply {
-                        it.loge()
                         KtxViewModel.locationLiveData.postValue(this)
                     }
                 } else {

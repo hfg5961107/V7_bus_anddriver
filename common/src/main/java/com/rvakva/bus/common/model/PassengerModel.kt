@@ -11,8 +11,9 @@ import java.io.Serializable
  * @CreateDate:     2020/6/3 下午4:17
  */
 enum class OrderStatusTypeEnum(val value: Int) {
-//    15：待上车，20：正在接人，25：等待乘客上车，30：未上车，35：已上车，40：正在送人，45：已送达
-    ORDER_STATUS_NO_START(15),
+//   10:待开始 15：待上车，20：正在接人，25：等待乘客上车，30：未上车，35：已上车，40：正在送人，45：已送达
+    ORDER_STATUS_WAIT_START(10),
+    ORDER_STATUS_START(15),
     ORDER_STATUS_PICKUP(20),
     ORDER_STATUS_WAITING(25),
     ORDER_STATUS_SKIP(30),
@@ -21,63 +22,67 @@ enum class OrderStatusTypeEnum(val value: Int) {
     ORDER_STATUS_COMPLETE(45),
 }
 
-class PassengerModel(
-
+class PassengerModel : IModel, Serializable{
     /**
      * 订单id
      */
-    val orderId : Long = 0,
+    var orderId : Long = 0
     /**
      * 订单号
      */
-    val orderNo : String?,
+    var orderNo : String = ""
     /**
-     * 订单状态 15：待上车，20：正在接人，25：等待乘客上车，30：未上车，35：已上车，40：正在送人，45：已送达
+     * 订单状态 10:待开始 15：待上车，20：正在接人，25：等待乘客上车，30：未上车，35：已上车，40：正在送人，45：已送达
      */
-    val status : Int = 0,
+    var status : Int = 0
     /**
      * 乘客id
      */
-    val customerId : Long = 0,
+    var customerId : Long = 0
     /**
      * 乘客姓名
      */
-    val customerName : String?,
+    var customerName : String = ""
     /**
      * 乘客电话
      */
-    val customerPhone : String?,
+    var customerPhone : String = ""
     /**
      * 乘客头像
      */
-    val customerAvatar : String?,
+    var customerAvatar : String = ""
     /**
      * 订单线路id
      */
-    val orderLineId : Long = 0,
+    var orderLineId : Long = 0
     /**
      * 订单乘车人数
      */
-    val passengerNum : Int = 0,
+    var passengerNum : Int = 0
     /**
      * 订单关联班次id
      */
-    val orderDriverId : Long = 0,
+    var orderDriverId : Long = 0
     /**
      * 1待上车 2未上车 3已上车
      */
-    var loadType : Int = 0,
+    var loadType : Int = 0
     /**
      *  排班顺序、接人顺序
      */
-    val shiftNo : Int = 0,
+    var shiftNo : Int = 0
     /**
      * 排序
      */
-    val sort : Int = 0,
+    var sort : Int = 0
     /**
      * 订单乘客上下车点集合
      */
-    val orderAddress : MutableList<StationModel>?
+    var orderAddress : MutableList<StationModel>? = null
 
-) : IModel, Serializable
+    /**
+     * 类型 1 图片 0订单
+     */
+    var type : Int = 0
+
+}

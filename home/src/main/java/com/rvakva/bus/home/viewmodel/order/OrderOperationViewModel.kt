@@ -2,9 +2,13 @@ package com.rvakva.bus.home.viewmodel.order
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MediatorLiveData
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MarkerOptions
+import com.amap.api.services.core.LatLonPoint
+import com.amap.api.services.route.*
+import com.amap.api.services.route.RouteSearch.*
 import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.HomeService
@@ -19,6 +23,7 @@ import com.rvakva.travel.devkit.retrofit.ApiManager
 import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 
+
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
  * @Description:
@@ -31,8 +36,9 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
 
     val operationLiveData by RequestLiveData<EmResult<CompleteModel>>()
 
-    val orderLiveData by RequestLiveData<EmResult<List<PassengerModel>>>()
+    val orderLiveData by RequestLiveData<EmResult<MutableList<PassengerModel>>>()
 
+    val changeSortLiveData by RequestLiveData<BaseResult>()
 
     var latLng: LatLng? = null
     var locationMarker: Marker? = null
@@ -43,6 +49,13 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
+    val multipleLivedata =
+        MediatorLiveData<LatLng?>().apply {
+            addSource(KtxViewModel.locationLiveData) {
+                postValue(latLng)
+            }
+        }
+
     fun addMyLocationMarker(block: (MarkerOptions) -> Marker) {
         locationMarker?.let {
             it.position = latLng
@@ -51,6 +64,9 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
+    /**
+     * 查询班次
+     */
     fun qureyScheduleById(scheduleId: Long) {
         launchRequest(
             block = {
@@ -101,7 +117,7 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
     }
 
     /**
-     * 完成订单/完成班次
+     * 查询接人送人顺序
      */
     fun qureyOrderList(orderDriverId: Long) {
         launchRequest(
@@ -112,6 +128,61 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
             }, requestLiveData = orderLiveData, showToastBar = true
         )
     }
+
+    /**
+     * 修改订单排序
+     */
+    fun changeOrderList(driverId: Long, orderDriverId: Long, orderSort: String) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .changeOrderList(driverId,orderDriverId,orderSort)
+                    .requestMap()
+            }, requestLiveData = changeSortLiveData, showToastBar = true
+        )
+    }
+
+    /**
+     * 接人/前往预约地
+     */
+    fun gotoBookPlace(driverId: Long, orderDriverId: Long, orderId: Long?) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .gotoBookPlace(driverId, orderDriverId, orderId)
+                    .requestMap()
+            }, requestLiveData = operationLiveData, showToastBar = true
+        )
+    }
+
+    /**
+     * 到达预约地
+     */
+    fun arriveBookPlace(driverId: Long, orderDriverId: Long, orderId: Long?) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .arriveBookPlace(driverId, orderDriverId, orderId)
+                    .requestMap()
+            }, requestLiveData = operationLiveData, showToastBar = true
+        )
+    }
+
+    /**
+     * 到达预约地
+     */
+    fun takeOverCheck(driverId: Long, orderDriverId: Long, orderId: Long,loadType: Int) {
+        launchRequest(
+            block = {
+                ApiManager.getInstance().createService(HomeService::class.java)
+                    .takeOverCheck(driverId, orderDriverId, orderId,loadType)
+                    .requestMap()
+            }, requestLiveData = operationLiveData, showToastBar = true
+        )
+    }
+
+
+
 
 
 }
