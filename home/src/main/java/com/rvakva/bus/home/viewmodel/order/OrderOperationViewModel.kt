@@ -169,7 +169,7 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
     }
 
     /**
-     * 到达预约地
+     * 乘客上车信息
      */
     fun takeOverCheck(driverId: Long, orderDriverId: Long, orderId: Long,loadType: Int) {
         launchRequest(

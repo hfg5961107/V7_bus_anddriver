@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.rvakva.bus.home.R
-import com.rvakva.bus.home.ui.login.LoginActivity
-import com.rvakva.bus.home.ui.order.NavigationActivity
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxFragment
@@ -71,9 +69,6 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
         pcHistoryScheduleLl.setOnClickListener {
             jumpByARouter(Config.USER_HISTORY_SCHEDULE)
-//            requireActivity().run {
-//                jumpTo<NavigationActivity>()
-//            }
         }
     }
 

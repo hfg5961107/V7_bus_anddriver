@@ -260,6 +260,14 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
                         orderDetailNavigationLin.visibility = View.VISIBLE
 
+                        orderDetailNavigationLin.setOnClickListener {
+                            jumpTo<NavigationActivity>{
+                                putExtra("schedule",model)
+                                //2 站点
+                                putExtra("type",2)
+                            }
+                        }
+
                         //站点的完成班次
                         orderDetailOperationBtn.setOnClickListener {
                             orderOperationViewModel.finishOrder(
@@ -343,7 +351,6 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                             }
                         }
                     }
-
                 }
             }
             //行程完成

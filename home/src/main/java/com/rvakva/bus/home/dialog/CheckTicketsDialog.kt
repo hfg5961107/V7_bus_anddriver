@@ -17,6 +17,8 @@ import com.rvakva.bus.home.model.CheckModel
 import com.rvakva.bus.home.ui.adapter.CheckTicketsAdapter
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.expend.dpToPx
+import com.rvakva.travel.devkit.expend.loge
+import com.rvakva.travel.devkit.widget.ToastBar
 import com.sherloki.commonwidget.BaseDialogFragment
 import kotlinx.android.synthetic.main.dialog_check_tickets.*
 
@@ -67,15 +69,23 @@ class CheckTicketsDialog private constructor() : BaseDialogFragment() {
 
             checkTicketsBtn.setOnClickListener {
                 var datas : MutableList<CheckModel> =  mutableListOf()
+                var isComplate = true
                 listdata.forEach {
-                    var model  = CheckModel()
-                    model.orderId = it.orderId
-                    model.loadType = it.loadType
-                    datas.add(model)
+                    if (it.loadType != 1){
+                        var model  = CheckModel()
+                        model.orderId = it.orderId
+                        model.loadType = it.loadType
+                        datas.add(model)
+                    }else{
+                        isComplate = false
+                    }
                 }
-                onDialogClickListener?.onDialogClick(Gson().toJson(datas))
-
-
+                Gson().toJson(datas).loge("checkData")
+                if (isComplate){
+                    onDialogClickListener?.onDialogClick(Gson().toJson(datas))
+                }else{
+                    ToastBar.show("请全部检票后再提交")
+                }
             }
         }
     }
@@ -88,8 +98,6 @@ class CheckTicketsDialog private constructor() : BaseDialogFragment() {
         onDialogClickListener = context as? OnDialogClickListener
         super.onAttach(context)
     }
-
-
 
      var onDialogClickListener: OnDialogClickListener? = null
 }

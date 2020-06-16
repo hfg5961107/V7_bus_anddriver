@@ -12,6 +12,7 @@ import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.expend.callPhone
 import com.rvakva.travel.devkit.expend.glideWithRoundInto
 
 /**
@@ -63,6 +64,13 @@ class OrderPassengerAdapter(private val context: Context) :
 
         if (order.status < OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value) {
             holder.passengerPhoneIv.visibility = View.VISIBLE
+
+            holder.passengerPhoneIv.setOnClickListener {
+                if (!order.customerPhone.isNullOrBlank()) {
+                    context.callPhone(order.customerPhone)
+                }
+            }
+
         } else {
             holder.passengerPhoneIv.visibility = View.GONE
         }

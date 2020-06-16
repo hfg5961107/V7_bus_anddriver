@@ -144,6 +144,7 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
         } else {
             orderRunMtb.centerText.text = "开始送第${index + 1}位"
         }
+
         var passengerModel = model.order[index]
 
         passengerModel.customerAvatar?.let {
@@ -157,7 +158,7 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
         orderNameTv.text = "${passengerModel.customerName} ${passengerModel.passengerNum}人"
 
         orderPhoneIv.setOnClickListener {
-            if (passengerModel.customerPhone.isNullOrBlank()) {
+            if (!passengerModel.customerPhone.isNullOrBlank()) {
                 callPhone(passengerModel.customerPhone.toString())
             }
         }
@@ -192,7 +193,11 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
             naviSiteLin.visibility = View.VISIBLE
 
             orderNavigationLin.setOnClickListener {
-
+                jumpTo<NavigationActivity>{
+                    putExtra("order",passengerModel)
+                    //1 接人或者送人
+                    putExtra("type",1)
+                }
             }
 
             arriveSiteBtn.setOnClickListener {
@@ -241,7 +246,11 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
             arriveSiteBtn.text = "已到达乘客下车点"
 
             orderNavigationLin.setOnClickListener {
-
+                jumpTo<NavigationActivity>{
+                    putExtra("order",passengerModel)
+                    //1 接人或者送人
+                    putExtra("type",1)
+                }
             }
 
             arriveSiteBtn.setOnClickListener {
@@ -308,10 +317,10 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
     }
 
     override fun initData(isFirstInit: Boolean) {
-        if (isFirstInit) {
-            orderOperationViewModel.qureyScheduleById(orderDriverId)
-        }
+
     }
+
+
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -426,10 +435,15 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
         var dis = 0f
         var time = 0f
 
-        for (step in result.getPaths().get(0).getSteps()) {
+        for (step in result.paths[0].steps) {
             dis += step.distance
             time += step.duration
         }
 //        showLeft(dis.toInt(), time.toInt())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        orderOperationViewModel.qureyScheduleById(orderDriverId)
     }
 }

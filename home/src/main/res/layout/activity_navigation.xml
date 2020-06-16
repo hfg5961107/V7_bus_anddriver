@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <com.amap.api.navi.AMapNaviView
-        android:id="@+id/navi_view"
+        android:id="@+id/naviView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
@@ -14,26 +14,80 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
+        android:orientation="vertical"
+        android:background="@drawable/top_cor4_white"
+        android:paddingLeft="@dimen/size_16dp"
+        android:paddingRight="@dimen/size_16dp">
+        <LinearLayout
+            android:id="@+id/naviPassengerLin"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="成都市-珠江国际中心写字楼"
-            android:textSize="@dimen/size_14sp"
-            android:drawableLeft="@drawable/home_icon_route"
-            android:drawablePadding="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/size_12dp"
-            android:background="@drawable/cor4_white"
-            android:textColor="@color/black_sub"/>
+            android:layout_marginTop="@dimen/size_16dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/naviHeaderIv"
+                    android:layout_width="@dimen/size_16dp"
+                    android:layout_height="@dimen/size_16dp"
+                    android:src="@drawable/com_icon_passenger"/>
+                <TextView
+                    android:id="@+id/naviNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_14sp"
+                    android:layout_marginLeft="@dimen/size_8dp"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/naviPhoneIv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/com_icon_dial"
+                android:paddingLeft="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/size_12dp">
+
+            <ImageView
+                android:id="@+id/naviSiteIv"
+                android:layout_width="@dimen/size_16dp"
+                android:layout_height="@dimen/size_16dp"
+                android:src="@drawable/com_icon_start"/>
+
+            <TextView
+                android:id="@+id/naviSiteTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp"
+                android:layout_marginLeft="@dimen/size_8dp"/>
+        </LinearLayout>
 
         <Button
+            android:id="@+id/naviOperationBtn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_44dp"
-            android:background="@color/black"
-            android:text="状态按钮"
+            android:background="@drawable/cor4_com_btn_blue_bg"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/size_16sp"
-            android:stateListAnimator="@drawable/anim_state_btn"/>
+            android:stateListAnimator="@drawable/anim_state_btn"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_16dp"/>
     </LinearLayout>
 </LinearLayout>

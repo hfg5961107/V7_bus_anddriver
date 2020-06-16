@@ -50,7 +50,7 @@ class PassengerModel : IModel, Serializable{
     /**
      * 乘客头像
      */
-    var customerAvatar : String = ""
+    var customerAvatar : String? = null
     /**
      * 订单线路id
      */

@@ -13,6 +13,7 @@
         <activity android:name=".ui.work.WorkActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.order.NavigationActivity"
+            android:theme="@style/NavigationTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.order.ScheduleDetailActivity"
             android:screenOrientation="portrait"/>
