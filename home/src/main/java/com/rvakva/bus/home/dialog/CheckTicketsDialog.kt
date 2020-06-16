@@ -80,7 +80,6 @@ class CheckTicketsDialog private constructor() : BaseDialogFragment() {
                         isComplate = false
                     }
                 }
-                Gson().toJson(datas).loge("checkData")
                 if (isComplate){
                     onDialogClickListener?.onDialogClick(Gson().toJson(datas))
                 }else{

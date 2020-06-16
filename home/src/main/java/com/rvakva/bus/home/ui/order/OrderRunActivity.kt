@@ -44,6 +44,8 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
 
     val orderOperationViewModel by viewModels<OrderOperationViewModel>()
 
+    lateinit var passengerModel : PassengerModel
+
     override val mapView: MapView
         get() = orderRunMv
 
@@ -100,6 +102,40 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
                 }
             }
         })
+
+        orderOperationViewModel.gotoBookLiveData.observe(
+            this,
+            RequestResultObserver(
+                successBlock = {
+                    jumpTo<NavigationActivity>{
+                        putExtra("order",passengerModel)
+                        //1 接人或者送人
+                        putExtra("type",1)
+                    }
+                }
+            )
+        )
+        orderOperationViewModel.gotoDestinationLiveData.observe(
+            this,
+            RequestResultObserver(
+                successBlock = {
+                    jumpTo<NavigationActivity>{
+                        putExtra("order",passengerModel)
+                        //1 接人或者送人
+                        putExtra("type",1)
+                    }
+                }
+            )
+        )
+        orderOperationViewModel.takeOverLiveData.observe(
+            this,
+            RequestResultObserver(
+                successBlock = {
+                    finish()
+                }
+            )
+        )
+
     }
 
     /**
@@ -145,7 +181,12 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
             orderRunMtb.centerText.text = "开始送第${index + 1}位"
         }
 
-        var passengerModel = model.order[index]
+        if (index != -1){
+            passengerModel = model.order[index]
+        }else{
+            //接完人或者送完人结束这个页面
+            finish()
+        }
 
         passengerModel.customerAvatar?.let {
             if (it.contains("http") || it.contains("https")) {
@@ -170,6 +211,12 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
         }
 
         val stationModel = getSite(type, passengerModel.orderAddress)
+
+        //站点执行完成，直接退出界面
+        if (stationModel == null){
+            finish()
+            return
+        }
 
         orderSiteTv.text = stationModel?.address
 
@@ -210,6 +257,8 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
 
         } else if (passengerModel.status == OrderStatusTypeEnum.ORDER_STATUS_WAITING.value) {
             loadTypeLin.visibility = View.VISIBLE
+
+            orderRunMtb.centerText.text = "等待乘客上车"
 
             loadTypeHasBtn.setOnClickListener {
                 orderOperationViewModel.takeOverCheck(
@@ -319,8 +368,6 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
     override fun initData(isFirstInit: Boolean) {
 
     }
-
-
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

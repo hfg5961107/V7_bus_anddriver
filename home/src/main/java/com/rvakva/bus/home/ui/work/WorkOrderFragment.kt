@@ -185,13 +185,10 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
     }
 
     private val workFragmentViewModel by viewModels<WorkFragmentViewModel>()
-//    private val mainActivitySharedViewModel by activityViewModels<MainActivitySharedViewModel>()
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         orderStatusType = arguments?.getSerializable(ORDER_TYPE) as? ScheduleStatusTypeEnum
             ?: ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING
-
-//        mainActivitySharedViewModel.fragmentFilterType[orderStatusType] = null
 
         mainMrv.initialize(
             adapter = OrderAdapter(orderStatusType),
@@ -216,42 +213,6 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                         }
                     }
                 }
-//                addChildClickViewIds(
-//                    R.id.fragmentMainOrderItemContentTvTakeDistance,
-//                    R.id.fragmentMainOrderItemContentTvSendDistance,
-//                    R.id.fragmentMainOrderItemPoolTvAction,
-//                    R.id.fragmentMainOrderItemAssignLlAction,
-//                    R.id.fragmentMainOrderItemAssignTvDeny
-//                )
-//                setOnItemChildClickBlock<OrderDataModel> { adapter, view, position ->
-//                    adapter?.let {
-//                        it.data[position].let { data ->
-//                            when (view.id) {
-//                                R.id.fragmentMainOrderItemPoolTvAction, R.id.fragmentMainOrderItemAssignLlAction -> workFragmentViewModel.grabOrder(
-//                                    data.id
-//                                )
-//                                R.id.fragmentMainOrderItemContentTvTakeDistance -> {
-//                                    if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ING) {
-//                                        context.callPhone(data.orderAddressVoList?.getOrNull(0)?.phone)
-//                                    }
-//                                }
-//                                R.id.fragmentMainOrderItemContentTvSendDistance -> {
-//                                    if (orderStatusType == OrderStatusTypeEnum.ORDER_TYPE_ING) {
-//                                        context.callPhone(data.orderAddressVoList?.getOrNull(1)?.phone)
-//                                    }
-//                                }
-//                                R.id.fragmentMainOrderItemAssignTvDeny -> {
-//                                    DenyDialog.newInstance(data.id,denyList).let {
-//                                        it.show(parentFragmentManager)
-//                                        dialog = it
-//                                    }
-//                                }
-//                                else -> {
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
             },
             emptyString =
             when (orderStatusType) {
@@ -292,7 +253,6 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                 mainMrv.currentPage + 1
             )
         })
-
     }
 
     private fun requestWithAction(refreshEnable: Boolean = true) {
@@ -315,5 +275,11 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
                     putSerializable(ORDER_TYPE, orderStatusType)
                 }
             }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        requestData()
     }
 }

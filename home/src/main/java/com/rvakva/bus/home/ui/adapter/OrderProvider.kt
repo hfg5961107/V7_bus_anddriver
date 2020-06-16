@@ -46,7 +46,7 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
 //    }
 
     override fun convert(helper: BaseViewHolder, item: ScheduleDataModel) {
-        helper.setText(R.id.homeOrderCarNoTv, "${item.licenseNo} / ${item.vehicleSeat}座")
+        helper.setText(R.id.homeOrderCarNoTv, "${item.licenseNo!!.substring(0,2)} ${item.licenseNo!!.substring(2,item.licenseNo!!.length)} / ${item.vehicleSeat}座")
 
         helper.setText(R.id.homeOrderTypeTv, createType(item))
 

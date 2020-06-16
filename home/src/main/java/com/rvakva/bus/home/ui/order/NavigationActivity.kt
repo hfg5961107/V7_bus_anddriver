@@ -48,10 +48,6 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
      * 导航模式  默认1
      */
     private val naviMode = 1
-//
-//    var passengerModel: PassengerModel? = null
-//
-//    var scheduleDataModel: ScheduleDataModel? = null
 
     override fun initTitle() {
 

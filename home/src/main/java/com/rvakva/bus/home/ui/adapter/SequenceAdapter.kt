@@ -126,11 +126,7 @@ class SequenceAdapter(private val context: Context)
                 }
             }else if (model.status >= OrderStatusTypeEnum.ORDER_STATUS_WAIT_START.value && model.status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value){
                 holder.tvStatus.visibility = View.GONE;
-                if (position == minPos){
-                    holder.seqImg.visibility = View.VISIBLE;
-                }else{
-                    holder.seqImg.visibility = View.GONE;
-                }
+                holder.seqImg.visibility = View.GONE;
                 holder.linSeqNum.background.alpha = 255;
             }
         }else{
@@ -148,19 +144,14 @@ class SequenceAdapter(private val context: Context)
                 }else{
                     if (model.loadType == 2) {
                         holder.tv_get.text = "跳过";
-                    }else if (model.loadType == 2){
+                    }else if (model.loadType == 3){
                         holder.tv_get.text = "已下车";
                     }
                 }
-            }else if (model.status >= OrderStatusTypeEnum.ORDER_STATUS_WAIT_START.value && model.status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value){
+            }else if (model.status == OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value || model.status == OrderStatusTypeEnum.ORDER_STATUS_SENDING.value){
                 holder.tvStatus.visibility = View.GONE;
                 holder.seqImg.visibility = View.GONE;
                 holder.linSeqNum.background.alpha = 255;
-                if (position == minPos){
-                    holder.seqImg.visibility = View.VISIBLE;
-                }else{
-                    holder.seqImg.visibility = View.GONE;
-                }
             }
         }
     }

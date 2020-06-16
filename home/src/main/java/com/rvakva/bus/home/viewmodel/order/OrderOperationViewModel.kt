@@ -43,6 +43,13 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
     var latLng: LatLng? = null
     var locationMarker: Marker? = null
 
+    val gotoDestinationLiveData by RequestLiveData<EmResult<CompleteModel>>()
+
+    val gotoBookLiveData by RequestLiveData<EmResult<CompleteModel>>()
+
+    val takeOverLiveData by RequestLiveData<EmResult<CompleteModel>>()
+
+
     fun changeLatLng() {
         KtxViewModel.locationLiveData.value?.let {
             latLng = LatLng(it.latitude,it.longitude)
@@ -99,7 +106,7 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
                 ApiManager.getInstance().createService(HomeService::class.java)
                     .gotoDestination(driverId, orderDriverId, orderId)
                     .requestMap()
-            }, requestLiveData = operationLiveData, showToastBar = true
+            }, requestLiveData = gotoDestinationLiveData, showToastBar = true
         )
     }
 
@@ -151,7 +158,7 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
                 ApiManager.getInstance().createService(HomeService::class.java)
                     .gotoBookPlace(driverId, orderDriverId, orderId)
                     .requestMap()
-            }, requestLiveData = operationLiveData, showToastBar = true
+            }, requestLiveData = gotoBookLiveData, showToastBar = true
         )
     }
 
@@ -177,7 +184,7 @@ class OrderOperationViewModel(application: Application) : AndroidViewModel(appli
                 ApiManager.getInstance().createService(HomeService::class.java)
                     .takeOverCheck(driverId, orderDriverId, orderId,loadType)
                     .requestMap()
-            }, requestLiveData = operationLiveData, showToastBar = true
+            }, requestLiveData = takeOverLiveData, showToastBar = true
         )
     }
 

@@ -21,7 +21,7 @@ import com.rvakva.travel.devkit.expend.glideWithRoundInto
  * @Author:         胡峰
  * @CreateDate:     2020/6/5 下午3:23
  */
-class CheckTicketsAdapter (private val context: Context,val data: MutableList<PassengerModel>) :
+class CheckTicketsAdapter(private val context: Context, val data: MutableList<PassengerModel>) :
     RecyclerView.Adapter<CheckTicketsAdapter.MyViewHolder>() {
 
 
@@ -43,11 +43,9 @@ class CheckTicketsAdapter (private val context: Context,val data: MutableList<Pa
 
         holder.itemPassengerNameTv.text = "${order.customerName} ${order.passengerNum}人"
 
-        if (order.status < OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value) {
-            holder.itemPassengerPhoneTv.visibility = View.VISIBLE
-        } else {
-            holder.itemPassengerPhoneTv.visibility = View.GONE
-        }
+        holder.itemPassengerPhoneTv.visibility = View.VISIBLE
+
+        holder.itemPassengerPhoneTv.text = "/ ${order.customerPhone}"
 
         holder.itemHasCarRl.setOnClickListener {
             order.loadType = 3
@@ -61,24 +59,30 @@ class CheckTicketsAdapter (private val context: Context,val data: MutableList<Pa
 
         when (order.loadType) {
             1 -> {
-                holder.itemHasCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
-                holder.itemNoCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
+                holder.itemHasCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
+                holder.itemNoCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
                 holder.itemHasCarIv.visibility = View.GONE
                 holder.itemNoCarIv.visibility = View.GONE
                 holder.itemHasCarTv.setTextColor(context.resources.getColor(R.color.black_desc))
                 holder.itemNoCarTv.setTextColor(context.resources.getColor(R.color.black_desc))
             }
             2 -> {
-                holder.itemHasCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
-                holder.itemNoCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_blue_line_white_bg)
+                holder.itemHasCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
+                holder.itemNoCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_blue_line_white_bg)
                 holder.itemHasCarIv.visibility = View.GONE
                 holder.itemNoCarIv.visibility = View.VISIBLE
                 holder.itemHasCarTv.setTextColor(context.resources.getColor(R.color.black_desc))
                 holder.itemNoCarTv.setTextColor(context.resources.getColor(R.color.color_blue))
             }
             3 -> {
-                holder.itemHasCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_blue_line_white_bg)
-                holder.itemNoCarRl.background = context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
+                holder.itemHasCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_blue_line_white_bg)
+                holder.itemNoCarRl.background =
+                    context.resources.getDrawable(R.drawable.cor4_dotted_line_white_bg)
                 holder.itemHasCarIv.visibility = View.VISIBLE
                 holder.itemNoCarIv.visibility = View.GONE
                 holder.itemHasCarTv.setTextColor(context.resources.getColor(R.color.color_blue))
