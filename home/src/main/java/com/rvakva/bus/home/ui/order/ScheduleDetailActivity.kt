@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.rvakva.bus.common.model.OrderStatusTypeEnum
@@ -271,11 +272,28 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                             orderDetailOperationBtn.text = "开始送人"
 
                             orderDetailOperationBtn.setOnClickListener {
-                                orderOperationViewModel.gotoDestination(
-                                    Ktx.getInstance().userDataSource.userId,
-                                    model.id,
-                                    model.order[checkIndex(model.order)].orderId
-                                )
+
+                                if (checkAllUpCarStatus(model.order)){
+                                    //全部没上车，结束班次
+                                    AlertDialog.Builder(this)
+                                        .setMessage("所有乘客均未上车，本班次将直接完成，确定吗？")
+                                        .setPositiveButton("确定") { dialogInterface, i ->
+                                            orderOperationViewModel.finishOrder(
+                                                Ktx.getInstance().userDataSource.userId,
+                                                model.id,
+                                                null
+                                            )
+                                        }
+                                        .setNeutralButton("取消", null)
+                                        .create()
+                                        .show()
+                                }else{
+                                    orderOperationViewModel.gotoDestination(
+                                        Ktx.getInstance().userDataSource.userId,
+                                        model.id,
+                                        model.order[checkIndex(model.order)].orderId
+                                    )
+                                }
                             }
                         }
 
@@ -368,9 +386,26 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                             }
                             orderDetailOperationBtn.background =
                                 resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
+
                             orderDetailOperationBtn.setOnClickListener {
-                                jumpTo<OrderRunActivity> {
-                                    putExtra("orderDriverId", model.id)
+                                if (checkAllUpCarStatus(model.order)){
+                                    //全部没上车，结束班次
+                                    AlertDialog.Builder(this)
+                                        .setMessage("所有乘客均未上车，本班次将直接完成，确定吗？")
+                                        .setPositiveButton("确定") { dialogInterface, i ->
+                                            orderOperationViewModel.finishOrder(
+                                                Ktx.getInstance().userDataSource.userId,
+                                                model.id,
+                                                null
+                                            )
+                                        }
+                                        .setNeutralButton("取消", null)
+                                        .create()
+                                        .show()
+                                }else{
+                                    jumpTo<OrderRunActivity> {
+                                        putExtra("orderDriverId", model.id)
+                                    }
                                 }
                             }
                         }
@@ -489,7 +524,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
     /**
      * 判断上车 或者下车下标
      */
-    fun checkIndex(list: List<PassengerModel>): Int {
+    private fun checkIndex(list: List<PassengerModel>): Int {
         for (i in list.indices) {
             if (list[i].status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
                 return i
@@ -502,6 +537,19 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
         }
         return -1
     }
+
+    /**
+     * 检查所有乘客是否都未上车
+     */
+    fun checkAllUpCarStatus(list: List<PassengerModel>) : Boolean {
+        for (i in list.indices) {
+            if (list[i].status != OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
+                return false
+            }
+        }
+        return true
+    }
+
 
     var orderDriverId: Long = 0
 

@@ -102,16 +102,16 @@ class SequenceAdapter(private val context: Context)
             return@setOnTouchListener false
         }
 
-        holder.linSeqNum.visibility = View.VISIBLE;
-        holder.tvSeqNum.text = "${model.shiftNo}";
+        holder.linSeqNum.visibility = View.VISIBLE
+        holder.tvSeqNum.text = "${model.shiftNo}"
 
         if (!checkStatus(data)){
             if (model.status >= OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
-                holder.seqImg.visibility = View.GONE;
-                holder.tvStatus.visibility = View.GONE;
-                holder.linSeqNum.background.alpha = 128;
+                holder.seqImg.visibility = View.GONE
+                holder.tvStatus.visibility = View.GONE
+                holder.linSeqNum.background.alpha = 128
 
-                holder.tv_get.visibility = View.VISIBLE;
+                holder.tv_get.visibility = View.VISIBLE
 
                 if (model.status == OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
                     if (model.type == 1){
@@ -119,10 +119,10 @@ class SequenceAdapter(private val context: Context)
                         holder.tv_get.visibility = View.GONE;
                         holder.seqImg.visibility = View.VISIBLE;
                     }else{
-                        holder.tv_get.text = "跳过";
+                        holder.tv_get.text = "跳过"
                     }
                 }else if (model.status == OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value){
-                    holder.tv_get.text = "已上车";
+                    holder.tv_get.text = "已上车"
                 }
             }else if (model.status >= OrderStatusTypeEnum.ORDER_STATUS_WAIT_START.value && model.status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value){
                 holder.tvStatus.visibility = View.GONE;
