@@ -107,7 +107,7 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
                 override fun createFragment(position: Int) = fragmentList[position]
             }
             it.offscreenPageLimit = 1
-            mainMi.bind(mutableListOf("新排班", "行程中"), it)
+            mainMi.bind(mutableListOf("新班次", "行程中"), it)
         }
 
         mainVp.registerOnPageChangeCallback(object : OnPageChangeCallback(){

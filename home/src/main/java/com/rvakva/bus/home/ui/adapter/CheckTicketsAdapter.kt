@@ -9,11 +9,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.home.R
-import com.rvakva.travel.devkit.Config
-import com.rvakva.travel.devkit.expend.glideWithRoundInto
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -23,7 +20,6 @@ import com.rvakva.travel.devkit.expend.glideWithRoundInto
  */
 class CheckTicketsAdapter(private val context: Context, val data: MutableList<PassengerModel>) :
     RecyclerView.Adapter<CheckTicketsAdapter.MyViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
         MyViewHolder(

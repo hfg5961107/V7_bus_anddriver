@@ -38,9 +38,8 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
             pcServicePhoneTv.text = it.driverServicePhone
             it.headPortrait?.let {
-                pcHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it,10)
+                pcHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
             } ?: pcHeaderIv.setImageResource(R.drawable.home_personal_profile_photo)
-
         })
     }
 

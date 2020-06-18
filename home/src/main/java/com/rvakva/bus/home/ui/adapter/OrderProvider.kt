@@ -1,11 +1,16 @@
 package com.rvakva.bus.home.ui.adapter
 
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.RelativeSizeSpan
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.expend.formatDate
+
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -25,26 +30,6 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
         }
     }
 
-
-//    fun resetView(helper: BaseViewHolder, vararg ids: Int) {
-//        for (id in ids) {
-//            helper.getView<View>(id).let {
-//                if (it is TextView) {
-//                    it.let {
-//                        it.setImageResource()
-//                        (it.layoutParams as? RelativeLayout.LayoutParams)?.let { layoutParams ->
-//                            it.layoutParams = layoutParams.apply {
-//                                removeRule(RelativeLayout.CENTER_IN_PARENT)
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    it.visibility = View.GONE
-//                }
-//            }
-//        }
-//    }
-
     override fun convert(helper: BaseViewHolder, item: ScheduleDataModel) {
         helper.setText(R.id.homeOrderCarNoTv, "${item.licenseNo!!.substring(0,2)} ${item.licenseNo!!.substring(2,item.licenseNo!!.length)} / ${item.vehicleSeat}座")
 
@@ -52,7 +37,9 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
 
         helper.setText(R.id.homeOrderAddressTv, "${item.startStationName} - ${item.endStationName}")
 
-        helper.setText(R.id.homeOrderTimeTv,"${formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD)} · 检票${item.startLineTime} · 出发${item.endLineTime}")
+        helper.setText(R.id.homeOrderTimeOneTv,formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD))
+        helper.setText(R.id.homeOrderTimeOneTv,"检票${item.startLineTime}")
+        helper.setText(R.id.homeOrderTimeOneTv,"出发${item.endLineTime}")
 
         helper.setText(R.id.homeOrderPassengerTv,"乘客 ${item.passengerAllNum}   余座 ${item.remainingSeat}")
 

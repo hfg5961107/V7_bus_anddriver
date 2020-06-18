@@ -40,7 +40,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
     var scheduleId: Long = -1
 
-    lateinit var scheduleModel : ScheduleDataModel
+    lateinit var scheduleModel: ScheduleDataModel
 
     lateinit var adapter: OrderPassengerAdapter
 
@@ -118,25 +118,25 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
             this,
             RequestResultObserver(
                 successBlock = {
-                    if (scheduleModel.lineType == 1){
+                    if (scheduleModel.lineType == 1) {
                         jumpTo<NavigationActivity> {
                             putExtra("schedule", scheduleModel)
                             //2 站点
                             putExtra("type", 2)
                         }
-                    }else if (scheduleModel.lineType == 2){
+                    } else if (scheduleModel.lineType == 2) {
                         orderDetailOperationBtn.setOnClickListener {
                             jumpTo<OrderRunActivity> {
                                 putExtra("orderDriverId", scheduleModel.id)
                             }
                         }
-                    }else if (scheduleModel.lineType == 3){
+                    } else if (scheduleModel.lineType == 3) {
                         orderDetailOperationBtn.setOnClickListener {
                             jumpTo<OrderRunActivity> {
                                 putExtra("orderDriverId", scheduleModel.id)
                             }
                         }
-                    }else if (scheduleModel.lineType == 4){
+                    } else if (scheduleModel.lineType == 4) {
                         jumpTo<NavigationActivity> {
                             putExtra("schedule", scheduleModel)
                             //2 站点
@@ -167,27 +167,34 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
 
         scheduleModel = model
 
-        detailCarNumberSeatTv.text = "${model.licenseNo!!.substring(0,2)} ${model.licenseNo!!.substring(2,model.licenseNo!!.length)} / ${model.vehicleSeat}座"
+        detailCarNumberSeatTv.text =
+            "${model.licenseNo!!.substring(0, 2)} ${model.licenseNo!!.substring(
+                2,
+                model.licenseNo!!.length
+            )} / ${model.vehicleSeat}座"
         detailRestSeatTv.text = "余座 ${model.remainingSeat}"
 
         model.station?.forEach {
             if (it.type == 1) {
-                detailStartSiteTv.text = it.address
+                detailStartSiteTv.text = it.name
             } else if (it.type == 2) {
-                detailEndSiteTv.text = it.address
+                detailEndSiteTv.text = it.name
             }
         }
-        detailBeginTimeTv.text = "${formatDate(
-            model.schedulingTime * 1000,
-            Config.PATTERN_YYYY_MM_DD
-        )} · 检票${model.startLineTime} · 出发${model.endLineTime}"
+
+        detailBeginTimeOneTv.text =
+            formatDate(model.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD)
+        detailBeginTimeTwoTv.text = "检票${model.startLineTime}"
+        detailBeginTimeThreeTv.text = "出发${model.endLineTime}"
 
         model.schedulingNo?.let {
             detailOrderNoTv.text = it
         }
 
-        detailCancelTimeTv.text = formatDate(model.finishTime * 1000, Config.PATTERN_YYYY_MM_DD)
-        detailCompleteTimeTv.text = formatDate(model.finishTime * 1000, Config.PATTERN_YYYY_MM_DD)
+        detailCancelTimeTv.text =
+            formatDate(model.finishTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
+        detailCompleteTimeTv.text =
+            formatDate(model.finishTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
 
         detailIncomeTv.text = "¥ ${model.realTotalFee}"
 
@@ -214,7 +221,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
             }
         }
 
-        if (model.status == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value || model.status == ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING.value){
+        if (model.status == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value || model.status == ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING.value) {
             detailMtb.let {
                 it.rightTv.visibility = View.VISIBLE
                 it.rightTv.text = "查看规划"
@@ -225,7 +232,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                     }
                 }
             }
-        }else{
+        } else {
             //行程完成和行程取消不能显示排序
             detailMtb.let {
                 it.rightTv.visibility = View.GONE
@@ -258,7 +265,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                         detailCheckTicketTv.text = "检票"
 
                     } else {
-                        if (model.lineType == 1){
+                        if (model.lineType == 1) {
                             orderDetailOperationBtn.text = "开始行程"
                             //站点的开始行程
                             orderDetailOperationBtn.setOnClickListener {
@@ -268,12 +275,12 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                                     null
                                 )
                             }
-                        }else if (model.lineType == 2){
+                        } else if (model.lineType == 2) {
                             orderDetailOperationBtn.text = "开始送人"
 
                             orderDetailOperationBtn.setOnClickListener {
 
-                                if (checkAllUpCarStatus(model.order)){
+                                if (checkAllUpCarStatus(model.order)) {
                                     //全部没上车，结束班次
                                     AlertDialog.Builder(this)
                                         .setMessage("所有乘客均未上车，本班次将直接完成，确定吗？")
@@ -287,12 +294,17 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                                         .setNeutralButton("取消", null)
                                         .create()
                                         .show()
-                                }else{
-                                    orderOperationViewModel.gotoDestination(
-                                        Ktx.getInstance().userDataSource.userId,
-                                        model.id,
-                                        model.order[checkIndex(model.order)].orderId
-                                    )
+                                } else {
+                                    orderDetailOperationBtn.setOnClickListener {
+                                        jumpTo<OrderRunActivity> {
+                                            putExtra("orderDriverId", model.id)
+                                        }
+                                    }
+//                                    orderOperationViewModel.gotoDestination(
+//                                        Ktx.getInstance().userDataSource.userId,
+//                                        model.id,
+//                                        model.order[checkIndex(model.order)].orderId
+//                                    )
                                 }
                             }
                         }
@@ -334,6 +346,8 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                         orderDetailOperationBtn.background =
                             resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
 
+                        detailMtb.let { it.rightTv.visibility = View.GONE }
+
                         orderDetailNavigationLin.visibility = View.VISIBLE
 
                         orderDetailNavigationLin.setOnClickListener {
@@ -362,6 +376,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                         orderDetailOperationBtn.background =
                             resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
 
+
                         orderDetailOperationBtn.setOnClickListener {
                             jumpTo<OrderRunActivity> {
                                 putExtra("orderDriverId", model.id)
@@ -388,7 +403,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                                 resources.getDrawable(R.drawable.cor4_com_btn_blue_bg)
 
                             orderDetailOperationBtn.setOnClickListener {
-                                if (checkAllUpCarStatus(model.order)){
+                                if (checkAllUpCarStatus(model.order)) {
                                     //全部没上车，结束班次
                                     AlertDialog.Builder(this)
                                         .setMessage("所有乘客均未上车，本班次将直接完成，确定吗？")
@@ -402,7 +417,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                                         .setNeutralButton("取消", null)
                                         .create()
                                         .show()
-                                }else{
+                                } else {
                                     jumpTo<OrderRunActivity> {
                                         putExtra("orderDriverId", model.id)
                                     }
@@ -421,7 +436,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                             }
 
                         } else {
-
+                            detailMtb.let { it.rightTv.visibility = View.GONE }
                             if (checkSending(model.order)) {
                                 orderDetailOperationBtn.text = "达到目的地"
 
@@ -482,7 +497,6 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
     }
 
 
-
     /**
      * 判断接人中还是送人中  ture 下车中 false上车中
      */
@@ -541,7 +555,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
     /**
      * 检查所有乘客是否都未上车
      */
-    fun checkAllUpCarStatus(list: List<PassengerModel>) : Boolean {
+    fun checkAllUpCarStatus(list: List<PassengerModel>): Boolean {
         for (i in list.indices) {
             if (list[i].status != OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
                 return false

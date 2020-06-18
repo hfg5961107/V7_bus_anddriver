@@ -119,7 +119,7 @@ class SequenceAdapter(private val context: Context)
                         holder.tv_get.visibility = View.GONE;
                         holder.seqImg.visibility = View.VISIBLE;
                     }else{
-                        holder.tv_get.text = "跳过"
+                        holder.tv_get.text = "未上车"
                     }
                 }else if (model.status == OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value){
                     holder.tv_get.text = "已上车"
@@ -143,7 +143,7 @@ class SequenceAdapter(private val context: Context)
                     holder.seqImg.visibility = View.VISIBLE;
                 }else{
                     if (model.loadType == 2) {
-                        holder.tv_get.text = "跳过";
+                        holder.tv_get.text = "未上车";
                     }else if (model.loadType == 3){
                         holder.tv_get.text = "已下车";
                     }

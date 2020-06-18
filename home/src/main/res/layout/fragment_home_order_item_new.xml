@@ -39,30 +39,76 @@
                 android:gravity="center_vertical"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/homeOrderAddressTv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/home_icon_route"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:text="珠江国际写字楼 - 南湖公园"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_14sp"
-            android:layout_marginRight="@dimen/size_16dp"/>
+            android:orientation="horizontal"
+            android:gravity="top">
 
-        <TextView
-            android:id="@+id/homeOrderTimeTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:drawableStart="@drawable/home_icon_time"
-            android:drawablePadding="@dimen/dp_10"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home_icon_route"/>
+            <TextView
+                android:id="@+id/homeOrderAddressTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="珠江国际写字楼 - 南湖公园珠"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:includeFontPadding="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:text="2020-05-15 · 检票 14:00 · 出发 14:10"
-            android:textColor="@color/black_sub"
-            android:textSize="@dimen/size_14sp"
-            android:layout_marginRight="@dimen/size_16dp"/>
+            android:layout_marginTop="@dimen/dp_10">
+            
+            <TextView
+                android:id="@+id/homeOrderTimeOneTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_sub"
+                android:textSize="@dimen/size_14sp" 
+                android:text="2020-05-15"
+                android:drawableLeft="@drawable/home_icon_time"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:src="@drawable/oval_666_bg"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="@dimen/size_1dp"/>
+            <TextView
+                android:id="@+id/homeOrderTimeTwoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_sub"
+                android:textSize="@dimen/size_14sp"
+                android:text="检票 14:00"
+                android:layout_marginLeft="8dp"/>
+            <ImageView
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:src="@drawable/oval_666_bg"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="@dimen/size_1dp"/>
+            <TextView
+                android:id="@+id/homeOrderTimeThreeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_sub"
+                android:textSize="@dimen/size_14sp"
+                android:text="出发 14:10"
+                android:layout_marginLeft="8dp"/>
+        </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"

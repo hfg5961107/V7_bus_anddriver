@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.rvakva.travel.devkit.transform.GlideCircleTransform
 import com.rvakva.travel.devkit.transform.GlideRoundTransform
 
 /**
@@ -27,5 +28,13 @@ fun ImageView.glideWithRoundInto(
 ) {
     glideInto(url) {
         apply(RequestOptions().transform(CenterCrop(), GlideRoundTransform(dp)))
+    }
+}
+
+fun ImageView.glideWithOvalInto(
+    url: String
+) {
+    glideInto(url) {
+        apply(RequestOptions().transform(CenterCrop(), GlideCircleTransform()))
     }
 }

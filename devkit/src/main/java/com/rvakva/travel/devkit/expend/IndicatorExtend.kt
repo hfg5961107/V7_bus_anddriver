@@ -45,7 +45,7 @@ fun MagicIndicator.bind(
                             text = titleList[index]
                             textSize = 16F
                             if (!isAdjustMode) {
-                                val padding = 8.dpToPx<Int>()
+                                val padding = 20.dpToPx<Int>()
                                 setPadding(padding, 0, padding, 0)
                             }
                             normalColor = R.color.black_sub.getColor()

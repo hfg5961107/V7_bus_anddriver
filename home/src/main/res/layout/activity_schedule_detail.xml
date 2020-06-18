@@ -73,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textColor="@color/black"
+                        android:textStyle="bold"
                         android:textSize="@dimen/size_14sp"
                         android:layout_marginLeft="@dimen/size_8dp"/>
                 </LinearLayout>
@@ -83,7 +84,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/size_16dp"
                     android:paddingRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_16dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -96,25 +97,64 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="--"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14sp"
                         android:layout_marginLeft="@dimen/size_8dp"/>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/detailBeginTimeTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/common_icon_time"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/size_16dp"
                     android:layout_marginTop="@dimen/size_16dp"
                     android:layout_marginRight="@dimen/size_16dp"
-                    android:text="--"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/size_16dp"/>
+                    android:layout_marginBottom="@dimen/size_16dp">
 
-
+                    <TextView
+                        android:id="@+id/detailBeginTimeOneTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp"
+                        android:text="2020-05-15"
+                        android:drawableLeft="@drawable/home_icon_time"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"/>
+                    <ImageView
+                        android:layout_width="3dp"
+                        android:layout_height="3dp"
+                        android:src="@drawable/oval_666_bg"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="@dimen/size_1dp"/>
+                    <TextView
+                        android:id="@+id/detailBeginTimeTwoTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp"
+                        android:text="检票 14:00"
+                        android:layout_marginLeft="8dp"
+                        android:includeFontPadding="false"/>
+                    <ImageView
+                        android:layout_width="3dp"
+                        android:layout_height="3dp"
+                        android:src="@drawable/oval_666_bg"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="@dimen/size_1dp"/>
+                    <TextView
+                        android:id="@+id/detailBeginTimeThreeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp"
+                        android:text="出发 14:10"
+                        android:layout_marginLeft="8dp"
+                        android:includeFontPadding="false"/>
+                </LinearLayout>
 
 
 
@@ -155,6 +195,7 @@
                         android:drawableRight="@drawable/com_ticket_arraw"
                         android:visibility="gone"/>
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerviewPassenger"
                     android:layout_width="match_parent"

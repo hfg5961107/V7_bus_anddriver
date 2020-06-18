@@ -54,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size_8dp"
                         android:text="王先生 1人"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14sp" />
                 </LinearLayout>
@@ -84,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size_8dp"
+                    android:textStyle="bold"
                     android:text="成都市金牛区泉水北路泉水人家一期"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14sp" />

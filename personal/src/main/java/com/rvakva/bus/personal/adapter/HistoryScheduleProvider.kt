@@ -33,7 +33,11 @@ class HistoryScheduleProvider : BaseItemProvider<ScheduleDataModel>() {
 
         helper.setText(R.id.pcHistoryAddressTv, "${item.startStationName} - ${item.endStationName}")
 
-        helper.setText(R.id.pcHistoryBeginTimeTv,"${formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD)} · 检票${item.startLineTime} · 出发${item.endLineTime}")
+//        helper.setText(R.id.pcHistoryBeginTimeTv,"${formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD)} · 检票${item.startLineTime} · 出发${item.endLineTime}")
+
+        helper.setText(R.id.pcHistoryTimeOneTv,formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD))
+        helper.setText(R.id.pcHistoryTimeTwoTv,"检票${item.startLineTime}")
+        helper.setText(R.id.pcHistoryTimeThreeTv,"出发${item.endLineTime}")
 
         if (item.status == Config.SCHEDULE_TYPE_COMPLETE){
             helper.setText(R.id.pcHistoryTimeTv,"完成时间： ${formatDate(item.finishTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)}")

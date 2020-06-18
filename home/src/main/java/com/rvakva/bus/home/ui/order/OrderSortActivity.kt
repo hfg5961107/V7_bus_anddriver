@@ -128,6 +128,7 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
         adapter.setOnItemMoveListener(object : SequenceAdapter.OnItemMoveListener {
             override fun onMove() {
                 var listData = mutableListOf<PassengerModel>()
+
                 adapter.data.forEach {
                     if (it.type != 1) {
                         listData.add(it)
@@ -184,8 +185,19 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
      * 添加maker 规划路径 设置缩放
      */
     fun routeSearchByLatLng(type: Boolean, list: MutableList<PassengerModel>) {
+
+        var index = checkIndex(list);
+
+        val showDataList: MutableList<PassengerModel> = mutableListOf()
+
+        for(i in list.indices){
+            if (i>=index){
+                showDataList.add(list[i])
+            }
+        }
+
         val latLngs: MutableList<LatLng> = ArrayList()
-        for (passenger in list) {
+        for (passenger in showDataList) {
             var latLng = LatLng(
                 getSite(type, passenger.orderAddress)!!.latitude,
                 getSite(type, passenger.orderAddress)!!.longitude
@@ -240,6 +252,23 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
             }
         }
         return true
+    }
+
+    /**
+     * 判断上车 或者下车下标
+     */
+    fun checkIndex(list: List<PassengerModel>): Int {
+        for (i in list.indices) {
+            if (list[i].status < OrderStatusTypeEnum.ORDER_STATUS_SKIP.value) {
+                return i
+            }
+        }
+        for (i in list.indices) {
+            if (list[i].status > OrderStatusTypeEnum.ORDER_STATUS_SKIP.value && list[i].status < OrderStatusTypeEnum.ORDER_STATUS_COMPLETE.value) {
+                return i
+            }
+        }
+        return -1
     }
 
     override fun initData(isFirstInit: Boolean) {

@@ -24,10 +24,7 @@ import com.rvakva.bus.home.R
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
-import com.rvakva.travel.devkit.expend.callPhone
-import com.rvakva.travel.devkit.expend.dpToPx
-import com.rvakva.travel.devkit.expend.glideWithRoundInto
-import com.rvakva.travel.devkit.expend.jumpTo
+import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import kotlinx.android.synthetic.main.activity_order_run.*
 
@@ -188,13 +185,13 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
             finish()
         }
 
-        passengerModel.customerAvatar?.let {
-            if (it.contains("http") || it.contains("https")) {
-                orderHeaderIv.glideWithRoundInto(it, 10)
-            } else {
-                orderHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it, 10)
-            }
-        } ?: orderHeaderIv.setImageResource(R.drawable.com_icon_passenger)
+//        passengerModel.customerAvatar?.let {
+//            if (it.contains("http") || it.contains("https")) {
+//                orderHeaderIv.glideWithOvalInto(it)
+//            } else {
+//                orderHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
+//            }
+//        } ?: orderHeaderIv.setImageResource(R.drawable.com_icon_passenger)
 
         orderNameTv.text = "${passengerModel.customerName} ${passengerModel.passengerNum}人"
 
@@ -218,7 +215,7 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
             return
         }
 
-        orderSiteTv.text = stationModel?.address
+        orderSiteTv.text = stationModel?.name
 
         gotoSiteBtn.visibility = View.GONE
         naviSiteLin.visibility = View.GONE

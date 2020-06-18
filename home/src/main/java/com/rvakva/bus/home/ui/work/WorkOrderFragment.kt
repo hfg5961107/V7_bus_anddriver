@@ -217,7 +217,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             emptyString =
             when (orderStatusType) {
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW -> "休息中，开启工作后可接单"
-                ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING -> "暂无进行中订单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING -> "暂无行程中班次"
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE -> "暂无已完成订单"
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_CANCEL -> "暂无已取消订单"
             }

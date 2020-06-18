@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="王先生 1人"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="@dimen/size_14sp" />
 
         <TextView

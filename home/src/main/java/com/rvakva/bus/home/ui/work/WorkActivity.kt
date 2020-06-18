@@ -91,10 +91,6 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
             replaceResuoce(1)
             switchFragment(workFragment).commit()
         }
-//        workBottomOrderLl.setOnClickListener {
-//            replaceResuoce(2)
-//            switchFragment(orderFragment).commit()
-//        }
         workBottomPersonLl.setOnClickListener {
             replaceResuoce(3)
             switchFragment(personFragment).commit()
@@ -128,33 +124,16 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                 workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench_selected)
                 workBottomTaiTv.setTextColor(resources.getColor(R.color.blue))
 
-                workBottomOrderIcon.setImageResource(R.drawable.home_icon_home_order)
-                workBottomOrderTv.setTextColor(resources.getColor(R.color.black))
-
                 workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal)
                 workBottomPersonTv.setTextColor(resources.getColor(R.color.black))
             }
-//            2 -> {
-//                workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench)
-//                workBottomTaiTv.setTextColor(resources.getColor(R.color.black))
-//
-//                workBottomOrderIcon.setImageResource(R.drawable.home_icon_home_order_selected)
-//                workBottomOrderTv.setTextColor(resources.getColor(R.color.blue))
-//
-//                workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal)
-//                workBottomPersonTv.setTextColor(resources.getColor(R.color.black))
-//            }
             3 -> {
                 workBottomTaiIcon.setImageResource(R.drawable.home_icon_home_workbench)
                 workBottomTaiTv.setTextColor(resources.getColor(R.color.black))
-
-                workBottomOrderIcon.setImageResource(R.drawable.home_icon_home_order)
-                workBottomOrderTv.setTextColor(resources.getColor(R.color.black))
 
                 workBottomPersonIcon.setImageResource(R.drawable.home_icon_home_personal_selected)
                 workBottomPersonTv.setTextColor(resources.getColor(R.color.blue))
             }
         }
     }
-
 }

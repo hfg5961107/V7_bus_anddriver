@@ -14,6 +14,11 @@ class StationModel(
      * id
      */
     val id: Long = 0,
+
+    /**
+     * 真实的详细地址
+     */
+    val name : String?,
     /**
      * 地址
      */

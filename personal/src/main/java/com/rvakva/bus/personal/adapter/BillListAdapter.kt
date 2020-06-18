@@ -17,5 +17,5 @@ class BillListAdapter : SimpleMultipleProAdapter<BillModel>() {
     }
 
     override fun getItemType(data: List<BillModel>, position: Int) =
-        data[position].type
+        0
 }

@@ -13,7 +13,7 @@ import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.home.R
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.expend.callPhone
-import com.rvakva.travel.devkit.expend.glideWithRoundInto
+import com.rvakva.travel.devkit.expend.glideWithOvalInto
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -50,19 +50,19 @@ class OrderPassengerAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val order = data[position]
 
-        order.customerAvatar?.let {
-            if (it.contains("http") || it.contains("https")) {
-                holder.passengerHeaderIv.glideWithRoundInto(it, 10)
-            } else {
-                holder.passengerHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it, 10)
-            }
-        } ?: holder.passengerHeaderIv.setImageResource(R.drawable.com_icon_passenger)
+//        order.customerAvatar?.let {
+//            if (it.contains("http") || it.contains("https")) {
+//                holder.passengerHeaderIv.glideWithOvalInto(it)
+//            } else {
+//                holder.passengerHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
+//            }
+//        } ?: holder.passengerHeaderIv.setImageResource(R.drawable.com_icon_passenger)
 
         holder.passengerNameTv.text = "${order.customerName} ${order.passengerNum}人"
 
         showStatus(holder.passengerStatusTv, order)
 
-        if (order.status < OrderStatusTypeEnum.ORDER_STATUS_HAS_CAR.value) {
+        if (order.status < OrderStatusTypeEnum.ORDER_STATUS_COMPLETE.value) {
             holder.passengerPhoneIv.visibility = View.VISIBLE
 
             holder.passengerPhoneIv.setOnClickListener {
@@ -70,16 +70,15 @@ class OrderPassengerAdapter(private val context: Context) :
                     context.callPhone(order.customerPhone)
                 }
             }
-
         } else {
             holder.passengerPhoneIv.visibility = View.GONE
         }
 
         order.orderAddress?.forEach {
             if (it.type == 1) {
-                holder.passengerStartSiteTv.text = it.address
+                holder.passengerStartSiteTv.text = it.name
             } else if (it.type == 2) {
-                holder.passengerEndSiteTv.text = it.address
+                holder.passengerEndSiteTv.text = it.name
             }
         }
 

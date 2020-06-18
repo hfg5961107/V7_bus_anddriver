@@ -18,69 +18,61 @@
         android:layout_height="46dp"
         android:orientation="horizontal"
         android:background="@color/white">
-        <LinearLayout
-            android:id="@+id/workBottomTaiLl"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:id="@+id/workBottomTaiIcon"
+            android:gravity="right">
+            <LinearLayout
+                android:id="@+id/workBottomTaiLl"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home_icon_home_workbench"/>
-            <TextView
-                android:id="@+id/workBottomTaiTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="工作台"
-                android:textSize="@dimen/size_10sp"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/size_2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/workBottomOrderLl"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingRight="@dimen/size_60dp"
+                android:paddingLeft="@dimen/size_60dp">
+                <ImageView
+                    android:id="@+id/workBottomTaiIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_icon_home_workbench"/>
+                <TextView
+                    android:id="@+id/workBottomTaiTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作台"
+                    android:textSize="@dimen/size_10sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/size_2dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone">
-            <ImageView
-                android:id="@+id/workBottomOrderIcon"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/workBottomPersonLl"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home_icon_home_order"/>
-            <TextView
-                android:id="@+id/workBottomOrderTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单"
-                android:textSize="@dimen/size_10sp"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/size_2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/workBottomPersonLl"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:id="@+id/workBottomPersonIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home_icon_home_personal"/>
-            <TextView
-                android:id="@+id/workBottomPersonTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的"
-                android:textSize="@dimen/size_10sp"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/size_2dp"/>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingRight="@dimen/size_60dp"
+                android:paddingLeft="@dimen/size_60dp">
+                <ImageView
+                    android:id="@+id/workBottomPersonIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_icon_home_personal"/>
+                <TextView
+                    android:id="@+id/workBottomPersonTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的"
+                    android:textSize="@dimen/size_10sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/size_2dp"/>
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

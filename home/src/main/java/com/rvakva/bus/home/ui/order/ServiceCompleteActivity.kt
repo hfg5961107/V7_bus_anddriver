@@ -16,6 +16,7 @@ class ServiceCompleteActivity : KtxActivity(R.layout.activity_service_complete) 
 
     override fun initTitle() {
         completeMtb.let {
+            it.centerText.text = ""
             it.leftTv.setOnClickListener {
                 finish()
             }

@@ -19,10 +19,7 @@ import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxActivity
-import com.rvakva.travel.devkit.expend.callPhone
-import com.rvakva.travel.devkit.expend.glideWithRoundInto
-import com.rvakva.travel.devkit.expend.jumpTo
-import com.rvakva.travel.devkit.expend.loge
+import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_navigation.*
@@ -109,19 +106,17 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                     naviSiteIv.setImageResource(R.drawable.com_icon_start)
                 }
 
-                stationModel?.address.loge()
-
                 mEndLatlng = NaviLatLng(stationModel!!.latitude, stationModel!!.longitude)
-                naviSiteTv.text = stationModel?.address
+                naviSiteTv.text = stationModel?.name
 
                 naviPassengerLin.visibility = View.VISIBLE
-                model.customerAvatar?.let {
-                    if (it.contains("http") || it.contains("https")) {
-                        naviHeaderIv.glideWithRoundInto(it, 10)
-                    } else {
-                        naviHeaderIv.glideWithRoundInto(Config.IMAGE_SERVER + it, 10)
-                    }
-                } ?: naviHeaderIv.setImageResource(R.drawable.com_icon_passenger)
+//                model.customerAvatar?.let {
+//                    if (it.contains("http") || it.contains("https")) {
+//                        naviHeaderIv.glideWithOvalInto(it)
+//                    } else {
+//                        naviHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
+//                    }
+//                } ?: naviHeaderIv.setImageResource(R.drawable.com_icon_passenger)
                 naviNameTv.text = model.customerName
                 naviPhoneIv.setOnClickListener {
                     if (!model.customerPhone.isNullOrBlank()) {
@@ -137,8 +132,8 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                     if (it.type == 2) {
                         mEndLatlng = NaviLatLng(it.latitude, it.longitude)
                         naviPassengerLin.visibility = View.GONE
-                        naviSiteIv.setImageResource(R.drawable.com_icon_end)
-                        naviSiteTv.text = it.address
+                        naviSiteIv.setImageResource(R.drawable.common_icon_location)
+                        naviSiteTv.text = it.name
 
                         naviOperationBtn.text = "到达目的地"
                         naviOperationBtn.setOnClickListener {
