@@ -36,7 +36,7 @@ class HistoryScheduleActivity
             it.leftTv.setOnClickListener {
                 finish()
             }
-            it.centerText.text = "历史订单"
+            it.centerText.text = "历史班次"
         }
     }
 
@@ -58,7 +58,7 @@ class HistoryScheduleActivity
                     }
                 }
             },
-            emptyString = "暂无历史订单"
+            emptyString = "暂无历史班次"
         )
     }
 
