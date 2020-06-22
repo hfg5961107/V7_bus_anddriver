@@ -1,5 +1,7 @@
 package com.rvakva.bus.home.ui.order
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -121,6 +123,11 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
                         //1 接人或者送人
                         putExtra("type",1)
                     }
+//                    jumpToForResult<NavigationActivity>(this,{
+//                        putExtra("order",passengerModel)
+//                        //1 接人或者送人
+//                        putExtra("type",1)
+//                    },0x99)
                 }
             )
         )
@@ -489,5 +496,14 @@ class OrderRunActivity : MapActivity(R.layout.activity_order_run) {
     override fun onResume() {
         super.onResume()
         orderOperationViewModel.qureyScheduleById(orderDriverId)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK){
+            if (requestCode == 0x99){
+                finish()
+            }
+        }
     }
 }

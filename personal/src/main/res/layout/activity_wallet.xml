@@ -45,7 +45,8 @@
         android:paddingBottom="@dimen/size_24dp"
         android:text="请保持至少xxx元余额，否则将无法接单"
         android:textColor="@color/black_desc"
-        android:textSize="@dimen/size_14sp" />
+        android:textSize="@dimen/size_14sp"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/walletTvCharge"
         android:layout_width="match_parent"

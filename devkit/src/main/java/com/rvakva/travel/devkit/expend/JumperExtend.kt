@@ -3,6 +3,8 @@ package com.rvakva.travel.devkit.expend
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
 
@@ -26,4 +28,9 @@ fun Context.jumpToHome() = Intent(Intent.ACTION_MAIN).let {
 
 inline fun <reified T : Activity> Context.jumpTo(block: Intent.() -> Intent = { this }) {
     startActivity(Intent(this, T::class.java).block())
+}
+
+
+inline fun <reified T : Activity> Context.jumpToForResult(activity: Activity,block: Intent.() -> Intent = { this },code : Int) {
+    startActivityForResult(activity,Intent(this, T::class.java).block(),code, Bundle())
 }

@@ -348,14 +348,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:paddingTop="@dimen/size_16dp">
 
             <LinearLayout
                 android:id="@+id/orderDetailNavigationLin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_44dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/size_12dp"
+                android:layout_marginTop="@dimen/size_12dp"
                 android:background="@drawable/cor4_com_btn_black_bg"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginRight="@dimen/size_16dp"
@@ -382,6 +383,7 @@
                 android:layout_marginBottom="@dimen/size_16dp"
                 android:background="@drawable/cor4_com_btn_blue_bg"
                 android:text=""
+                android:layout_marginTop="@dimen/size_12dp"
                 android:textSize="@dimen/size_16sp"
                 android:textColor="@color/white"/>
         </LinearLayout>

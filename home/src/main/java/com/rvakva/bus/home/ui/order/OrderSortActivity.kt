@@ -140,7 +140,7 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
                 for (i in listData.indices) {
                     var model = SortModel()
                     model.orderId = listData[i].orderId
-                    model.sort = i
+                    model.sort = i + 1
                     sorts.add(model)
                 }
             }
@@ -190,8 +190,8 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
 
         val showDataList: MutableList<PassengerModel> = mutableListOf()
 
-        for(i in list.indices){
-            if (i>=index){
+        for (i in list.indices) {
+            if (i >= index) {
                 showDataList.add(list[i])
             }
         }
@@ -430,7 +430,7 @@ class OrderSortActivity : MapActivity(R.layout.activity_order_sort) {
         var dis = 0f
         var time = 0f
 
-        for (step in result.getPaths().get(0).getSteps()) {
+        for (step in result.paths[0].steps) {
             dis += step.distance
             time += step.duration
         }
