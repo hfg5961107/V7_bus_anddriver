@@ -17,16 +17,15 @@ import retrofit2.http.*
 interface HomeService {
 
     /**
-     *
+     *发送短信
      */
-    @POST("api/v1/common/captcha/send/sms")
+    @POST("api/v1/common/captcha/send/sms/heavy")
     @FormUrlEncoded
     suspend fun sendSms(
         @Field("phone") phone: String,
         @Field("random") random: String,
         @Field("type") type: String,
-        @Field("userType") userType: Int,
-        @Field("inviteCode") inviteCode: String
+        @Field("userType") userType: Int
     ): BaseResult?
 
 

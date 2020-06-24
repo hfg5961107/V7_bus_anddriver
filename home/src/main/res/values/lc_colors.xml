@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="lc_font">#222222</color>
+    <color name="lc_font_hint">#999999</color>
+    <color name="lc_blue">#0288FF</color>
+    <color name="lc_BBBBBB">#BBBBBB</color>
+
+
+</resources>

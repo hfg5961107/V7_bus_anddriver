@@ -19,11 +19,10 @@ class UserRepository {
         phone: String,
         password: String,
         randomString: String,
-        smsCode: String,
-        inviteCode: String
+        smsCode: String
     ) =
         ApiManager.getInstance().createService(CommonService::class.java)
-            .register(phone, password.toSha256(), randomString, smsCode, inviteCode)
+            .register(phone, password.toSha256(), randomString, smsCode)
             .requestMap()
             .let {
                 it.data?.let {

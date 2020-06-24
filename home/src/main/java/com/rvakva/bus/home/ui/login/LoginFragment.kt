@@ -10,18 +10,17 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.activityViewModels
+import com.rvakva.travel.devkit.expend.jumpTo
 import androidx.fragment.app.viewModels
 import com.rvakva.bus.common.extent.jumpToWebActivity
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.ui.RegisterFragment
+import com.rvakva.bus.home.ui.register.RegisterActivity
 import com.rvakva.bus.home.ui.work.WorkActivity
-import com.rvakva.bus.home.viewmodel.login.LoginActivityViewModel
 import com.rvakva.bus.home.viewmodel.login.LoginFragmentViewModel
 import com.rvakva.travel.devkit.base.KtxFragment
 import com.rvakva.travel.devkit.expend.addTextChangedListenerDsl
 import com.rvakva.travel.devkit.expend.getColor
-import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.expend.resetData
 import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -36,7 +35,7 @@ class LoginFragment private constructor() : KtxFragment(R.layout.fragment_login)
 
 //    val loginActivityViewModel by activityViewModels<LoginActivityViewModel>()
 
-    var isSee : Boolean = false
+    var isSee: Boolean = false
 
     companion object {
         @JvmStatic
@@ -71,9 +70,9 @@ class LoginFragment private constructor() : KtxFragment(R.layout.fragment_login)
     override fun initView(view: View, savedInstanceState: Bundle?) {
         loginEtPsw.addTextChangedListenerDsl {
             onTextChanged { s, start, before, count ->
-                if (s.toString().isNotEmpty()){
+                if (s.toString().isNotEmpty()) {
                     logonPasswordSee.visibility = View.VISIBLE
-                }else{
+                } else {
                     logonPasswordSee.visibility = View.GONE
                 }
                 checkPhoneAndPswAndAgreement()
@@ -82,9 +81,9 @@ class LoginFragment private constructor() : KtxFragment(R.layout.fragment_login)
 
         loginEtPhone.addTextChangedListenerDsl {
             onTextChanged { s, start, before, count ->
-                if (s.toString().isNotEmpty()){
+                if (s.toString().isNotEmpty()) {
                     logonPhoneClear.visibility = View.VISIBLE
-                }else{
+                } else {
                     logonPhoneClear.visibility = View.GONE
                 }
                 checkPhoneAndPswAndAgreement()
@@ -105,25 +104,23 @@ class LoginFragment private constructor() : KtxFragment(R.layout.fragment_login)
         }
 
         logonPasswordSee.setOnClickListener {
-            if (!isSee){
+            if (!isSee) {
                 isSee = true
                 logonPasswordSee.setImageResource(R.drawable.home_log_in_display)
                 loginEtPsw.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            }else{
+            } else {
                 isSee = false
                 logonPasswordSee.setImageResource(R.drawable.home_log_in_hide)
-                loginEtPsw.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                loginEtPsw.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
 
-//        loginTvRegister.setOnClickListener {
-//            loginActivityViewModel.loginTitleLiveData.postValue("欢迎注册")
-//
-//            parentFragmentManager.switchFragment(
-//                registerFragment, this, R.id.loginFl
-//                , FragmentTransaction.TRANSIT_FRAGMENT_OPEN, true
-//            )
-//        }
+        loginTvRegister.setOnClickListener {
+            requireActivity().run {
+                jumpTo<RegisterActivity>()
+            }
+        }
 
         loginTvAgreement.let {
             it.setOnClickListener {

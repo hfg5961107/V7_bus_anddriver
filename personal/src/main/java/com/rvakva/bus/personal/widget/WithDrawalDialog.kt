@@ -10,6 +10,7 @@ import com.rvakva.travel.devkit.expend.bindPrizeFilters
 import com.rvakva.travel.devkit.expend.dpToPx
 import com.rvakva.travel.devkit.widget.ToastBar
 import com.sherloki.commonwidget.BaseDialogFragment
+import kotlinx.android.synthetic.main.dialog_charge.*
 import kotlinx.android.synthetic.main.dialog_withdrawal.*
 
 /**
@@ -24,9 +25,9 @@ class WithDrawalDialog private constructor() : BaseDialogFragment() {
 
     companion object {
 
-        const val CLICK_BLOCK = "CLICK_BLOCK"
+        private const val CLICK_BLOCK = "CLICK_BLOCK"
 
-        fun newInstance(block: ((prise: String) -> Unit)? = null) =
+        fun newInstance(block: ((prise: String,payType:String) -> Unit)? = null) =
             WithDrawalDialog().apply {
                 arguments = bundleOf(
                     CLICK_BLOCK to block
@@ -34,37 +35,52 @@ class WithDrawalDialog private constructor() : BaseDialogFragment() {
             }
     }
 
-    override fun getViewHeight() = ViewGroup.LayoutParams.WRAP_CONTENT
 
-    override fun getViewWidth() =
+    override fun getViewWidth(): Int  =
         Resources.getSystem().displayMetrics.widthPixels - 32.dpToPx<Int>()
 
-    override fun getWindowAnimation() = 0
-
-    override fun getLayoutId() = R.layout.dialog_withdrawal
+    override fun getWindowAnimation(): Int = 0
 
     override fun initView(view: View?) {
         arguments?.let { bundle ->
 
-            withdrawalDialogTvTitle.text = "提现金额"
-            withdrawalDialogTvDesc.text = "发起提现申请"
-            withdrawalDialogTvAction.text = "确认提现"
-            withdrawalDialogEtValue.inputType = InputType.TYPE_CLASS_NUMBER
-            withdrawalDialogEtValue.bindPrizeFilters(3)
+            chargeDialogEtValue.bindPrizeFilters(3)
 
-            withdrawalDialogTvCancel.setOnClickListener { dismiss() }
-            withdrawalDialogTvAction.setOnClickListener { _ ->
-                withdrawalDialogEtValue.text.let {
+            //禁止长按阻止复制
+            chargeDialogEtValue.isLongClickable = false
+
+            chargeCancelIv.setOnClickListener { dismiss() }
+
+            chargeAlipayLl.setOnClickListener { _ ->
+                chargeDialogEtValue.text.let {
                     if (it.isNotEmpty()) {
                         dismiss()
-                        (bundle.get(CLICK_BLOCK) as? (String) -> Unit)?.invoke(
-                            it.toString()
+                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                            it.toString(),
+                            "CHANNEL_APP_ALI"
                         )
                     } else {
-                        ToastBar.show("请输入金额")
+//                        ToastBar.show("请输入金额")
+                    }
+                }
+            }
+            chargeWechatLl.setOnClickListener { _ ->
+                chargeDialogEtValue.text.let {
+                    if (it.isNotEmpty()) {
+                        dismiss()
+                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                            it.toString(),
+                            "CHANNEL_APP_WECHAT"
+                        )
+                    } else {
+//                        ToastBar.show("请输入金额")
                     }
                 }
             }
         }
     }
+
+    override fun getViewHeight(): Int = ViewGroup.LayoutParams.WRAP_CONTENT
+
+    override fun getLayoutId(): Int = R.layout.dialog_withdrawal
 }

@@ -65,8 +65,7 @@ interface CommonService {
         @Field("phone") phone: String,
         @Field("password") password: String,
         @Field("random") random: String,
-        @Field("smsCode") smsCode: String,
-        @Field("inviteCode") inviteCode: String
+        @Field("smsCode") smsCode: String
     ): EmResult<UserTokenModel>?
 
     /**

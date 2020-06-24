@@ -1,53 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="86dp"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:gravity="center">
+    android:id="@+id/myBillList"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/billTypeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收入"
             android:textColor="@color/black"
-            android:textSize="@dimen/size_16sp"/>
+            android:textSize="@dimen/size_16sp" />
+
         <TextView
             android:id="@+id/billMoneyTv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+ 200"
             android:gravity="right"
-            android:textSize="@dimen/size_16sp"
-            android:textColor="@color/color_yellow"
-            />
-    </LinearLayout>
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:text="+ 200"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/common_icon_expand" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="12dp">
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/billCarNoSeatTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="川A33566 / 7座"
             android:textColor="@color/black_sub"
-            android:textSize="@dimen/size_14sp"/>
+            android:textSize="@dimen/size_14sp" />
+
         <TextView
             android:id="@+id/billTimeTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2020-05-29 20:22"
             android:gravity="right"
-            android:textSize="@dimen/size_14sp"
+            android:text="2020-05-29 20:22"
             android:textColor="@color/black_sub"
-            />
+            android:textSize="@dimen/size_14sp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="16dp"
+        android:background="#EBEBEB" />
 
 </LinearLayout>
