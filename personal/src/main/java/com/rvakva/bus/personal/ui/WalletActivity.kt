@@ -39,6 +39,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
 
     private fun createDialog( block: (String,String) -> Unit) {
         ChargeDialog.newInstance(block).show(supportFragmentManager)
+
     }
 
     override fun initView(savedInstanceState: Bundle?) {

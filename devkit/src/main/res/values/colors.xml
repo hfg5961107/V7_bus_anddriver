@@ -19,6 +19,10 @@
     <color name="ff5a5a">#FF5A5A</color>
     <color name="ff60c23f">#60C23F</color>
     <color name="cccccc">#CCCCCC</color>
+    <color name="sy_f2f2f2">#F2F2F2</color>
+    <color name="sy_ebebeb">#EBEBEB</color>
+    <color name="sy_orange">#FF873C</color>
+
 
     <color name="color_blue">#0288FF</color>
     <color name="color_black">#061D37</color>
@@ -26,5 +30,6 @@
     <color name="color_007AFF">#20007AFF</color>
     <color name="color_red">#FF3F23</color>
     <color name="color_green">#03AC1F</color>
+
 
 </resources>
