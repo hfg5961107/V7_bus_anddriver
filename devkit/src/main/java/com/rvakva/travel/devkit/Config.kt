@@ -47,6 +47,7 @@ object Config{
     const val USER_HISTORY_SCHEDULE = "/personal/history/schedule"
     const val USER_WALLET = "/personal/wallet/"
     const val USER_SYSTEM_SETTING = "/personal/system/set"
+    const val USER_INCOME_DETAILS = "/personal/income"
     const val USER_IDENTITY = "/user/identity/"
 
     const val HOME_SCHEDULE_DETAIL = "/home/schedule/detail"
