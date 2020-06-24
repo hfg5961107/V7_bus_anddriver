@@ -68,11 +68,11 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
         }
         //业务流水
         pcBusinessList.setOnClickListener {
-
+            jumpByARouter(Config.USER_BUSINESS_LIST)
         }
         //账户认证
         pcAccountApprove.setOnClickListener {
-
+            // TODO: 2020/6/24  账户认证
         }
         //系统设置
         pcSysSetLl.setOnClickListener {

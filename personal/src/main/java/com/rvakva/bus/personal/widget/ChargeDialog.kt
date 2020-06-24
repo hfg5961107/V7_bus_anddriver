@@ -52,7 +52,7 @@ class ChargeDialog private constructor() : BaseDialogFragment()  {
                 chargeDialogEtValue.text.let {
                     if (it.isNotEmpty()) {
                         dismiss()
-                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                        (bundle.get(CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
                             it.toString(),
                             "CHANNEL_APP_ALI"
                         )
@@ -65,7 +65,7 @@ class ChargeDialog private constructor() : BaseDialogFragment()  {
                 chargeDialogEtValue.text.let {
                     if (it.isNotEmpty()) {
                         dismiss()
-                        (bundle.get(WithDrawalDialog.CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
+                        (bundle.get(CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
                             it.toString(),
                             "CHANNEL_APP_WECHAT"
                         )
