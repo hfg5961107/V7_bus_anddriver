@@ -95,14 +95,14 @@ class MyEmptyView : IBaseEmptyView {
         var textContent = ""
         when (emptyViewCode) {
             Config.SCHEDULE_TYPE_NEW -> {
-//                if (Config.status == 1) {
-                    textContent = ""
-                    myEmptyViewTvError.text = "暂无新订单"
-                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
+//                if (false) {
+//                    textContent = ""
+//                    myEmptyViewTvError.text = "暂无新订单"
+//                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
 //                } else {
-//                    textContent = "开始工作"
-//                    myEmptyViewTvError.text = "休息中，开启工作后可接单"
-//                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
+                    textContent = "前往查看"
+                    myEmptyViewTvError.text = "账户正在审核"
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_rest_illustration)
 //                }
             }
             Config.SCHEDULE_TYPE_COMPLETE, Config.SCHEDULE_TYPE_ING, Config.SCHEDULE_TYPE_CANCEL -> {
