@@ -23,7 +23,7 @@
         android:paddingStart="@dimen/size_16dp"
         android:paddingTop="@dimen/size_32dp"
         android:text="账户余额(元)"
-        android:textColor="@color/black_sub"
+        android:textColor="@color/black"
         android:textSize="@dimen/size_14sp" />
 
     <TextView
@@ -31,11 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/size_16dp"
-        android:paddingTop="@dimen/size_8dp"
+        android:paddingTop="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_16dp"
         android:text="读取中..."
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_24sp"
+        android:textColor="@color/color_blue"
+        android:textSize="32sp"
         android:textStyle="bold" />
     <TextView
         android:id="@+id/walletTvDesc"
@@ -43,10 +43,10 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/size_16dp"
         android:paddingBottom="@dimen/size_24dp"
-        android:text="请保持至少xxx元余额，否则将无法接单"
-        android:textColor="@color/black_desc"
-        android:textSize="@dimen/size_14sp"
-        android:visibility="gone"/>
+        android:text="如后台未设置提成规则，收入将不会进入账户余额"
+        android:textColor="@color/black_sub"
+        android:textSize="@dimen/size_14sp"/>
+
     <TextView
         android:id="@+id/walletTvCharge"
         android:layout_width="match_parent"
@@ -56,42 +56,32 @@
         android:background="@drawable/cor6_blue"
         android:elevation="@dimen/size_4dp"
         android:gravity="center"
-        android:text="充值"
+        android:text="余额充值"
         android:textColor="@color/white"
         android:textSize="@dimen/size_16sp" />
-
-    <TextView
-        android:id="@+id/walletTvDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/size_16dp"
-        android:paddingTop="@dimen/size_32dp"
-        android:paddingBottom="@dimen/size_20dp"
-        android:text="账单明细"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_16sp"
-        android:drawableRight="@drawable/com_icon_arrow"
-        android:layout_marginRight="16dp"/>
 
     <View
         style="@style/LineHorizontal"
         android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginEnd="@dimen/size_16dp"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/walletTvWithdraw"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:paddingStart="@dimen/size_16dp"-->
-<!--        android:paddingTop="@dimen/size_20dp"-->
-<!--        android:paddingBottom="@dimen/size_20dp"-->
-<!--        android:text="余额充值"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="@dimen/size_16sp" />-->
+    <TextView
+        android:id="@+id/walletTvClose"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_44dp"
+        android:layout_marginStart="@dimen/size_16dp"
+        android:layout_marginEnd="@dimen/size_16dp"
+        android:background="@drawable/personal_btn_wallet_close"
+        android:layout_marginTop="12dp"
+        android:elevation="@dimen/size_4dp"
+        android:gravity="center"
+        android:text="申请结算"
+        android:textColor="@color/color_blue"
+        android:textSize="@dimen/size_16sp" />
 
-<!--    <View-->
-<!--        style="@style/LineHorizontal"-->
-<!--        android:layout_marginStart="@dimen/size_16dp" -->
-<!--        android:layout_marginEnd="@dimen/size_16dp"/>-->
+    <View
+        style="@style/LineHorizontal"
+        android:layout_marginStart="@dimen/size_16dp"
+        android:layout_marginEnd="@dimen/size_16dp"/>
 
 </LinearLayout>

@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
- * @Description:
+ * @Description:  已弃用
  * @Author:         胡峰
  * @CreateDate:     2020/5/12 下午5:28
  */

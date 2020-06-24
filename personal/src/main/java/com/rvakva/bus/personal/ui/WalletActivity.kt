@@ -31,8 +31,13 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
     override fun initTitle() {
         walletMtb.let {
             it.centerText.text = "我的钱包"
+            it.rightTv.text="明细"
             it.leftTv.setOnClickListener {
                 onBackPressed()
+            }
+            //明细
+            it.rightTv.setOnClickListener {
+                jumpTo<BillListActivity>()
             }
         }
     }
@@ -44,20 +49,17 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
 
     override fun initView(savedInstanceState: Bundle?) {
 
+        //充值
         walletTvCharge.setOnClickListener {
             createDialog(){ it,payType ->
                 payViewModel.charge(it,payType)
             }
         }
-        walletTvDetail.setOnClickListener {
-            jumpTo<BillListActivity>()
-        }
 
-//        walletTvWithdraw.setOnClickListener {
-//            createDialog(WalletType.CASH_OUT) {
-//                walletActivityViewModel.cashOut(it)
-//            }
-//        }
+        //申请结算
+        walletTvClose.setOnClickListener {
+
+        }
     }
 
     override fun initData(isFirstInit: Boolean) {

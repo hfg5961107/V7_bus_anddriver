@@ -1,189 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" 
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_44dp"
-        android:text="个人中心"
-        android:textSize="17sp"
-        android:textColor="@color/black"
+        android:background="@color/white"
         android:gravity="center"
-        android:textStyle="bold"
-        android:background="@color/white"/>
+        android:text="个人中心"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
         android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_12dp"
-        android:gravity="center_vertical">
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <RelativeLayout
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/oval_line_white_bg"
             android:layout_marginLeft="@dimen/size_24dp"
             android:layout_marginTop="@dimen/size_24dp"
-            android:layout_marginBottom="@dimen/size_24dp">
+            android:layout_marginBottom="@dimen/size_24dp"
+            android:background="@drawable/oval_line_white_bg">
+
             <ImageView
                 android:id="@+id/pcHeaderIv"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/home_personal_profile_photo"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:src="@drawable/home_personal_profile_photo" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/size_16dp">
+
             <TextView
                 android:id="@+id/pcDriverNameTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/size_16sp"/>
+                android:textSize="@dimen/size_16sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/pcDriverPhoneTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_4dp"
                 android:text="--"
                 android:textColor="@color/black_desc"
-                android:layout_marginTop="@dimen/size_4dp"
-                android:textSize="@dimen/size_14sp"/>
+                android:textSize="@dimen/size_14sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_16dp"
-        android:background="@color/white">
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/pcHistoryScheduleLl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/com_personage_shift"/>
+                android:src="@drawable/com_personage_shift" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:text="历史班次"
-                android:textSize="@dimen/size_14sp"
                 android:textColor="@color/black"
-                android:layout_marginLeft="4dp"/>
+                android:textSize="@dimen/size_14sp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/common_icon_expand"
-                android:layout_marginRight="@dimen/size_16dp"/>
+                android:layout_marginRight="@dimen/size_16dp"
+                android:src="@drawable/common_icon_expand" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1px"
-            android:src="@color/color_line"
             android:layout_marginLeft="@dimen/size_16dp"
-            android:layout_marginRight="@dimen/size_16dp"/>
-        <LinearLayout
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
+        <RelativeLayout
             android:id="@+id/pcWalletLl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/home_personage_wallet"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_personage_wallet" />
+
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
                 android:text="我的钱包"
-                android:textSize="@dimen/size_14sp"
                 android:textColor="@color/black"
-                android:layout_marginLeft="4dp"/>
+                android:textSize="@dimen/size_14sp" />
+
+            <TextView
+                android:id="@+id/myTextMony"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                tools:text="¥205.00"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/size_32dp"
+                android:textColor="@color/color_yellow"
+                android:textSize="@dimen/size_14sp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/common_icon_expand"
-                android:layout_marginRight="@dimen/size_16dp"/>
-        </LinearLayout>
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/common_icon_expand" />
+        </RelativeLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1px"
-            android:src="@color/color_line"
             android:layout_marginLeft="@dimen/size_16dp"
-            android:layout_marginRight="@dimen/size_16dp"/>
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
+        <RelativeLayout
+            android:id="@+id/pcBusinessList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_my_businesslist" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:text="业务流水"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/common_icon_expand" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1px"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
+        <RelativeLayout
+            android:id="@+id/pcAccountApprove"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_my_account" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:text="账户认证"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp" />
+
+            <TextView
+                android:id="@+id/myTextApproveState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:text="待认证"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/size_32dp"
+                android:textColor="@color/black_desc"
+                android:textSize="@dimen/size_14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/common_icon_expand" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1px"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
         <LinearLayout
             android:id="@+id/pcSysSetLl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/home_personage_set"/>
+                android:src="@drawable/home_personage_set" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:text="系统设置"
-                android:textSize="@dimen/size_14sp"
                 android:textColor="@color/black"
-                android:layout_marginLeft="4dp"/>
+                android:textSize="@dimen/size_14sp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/common_icon_expand"
-                android:layout_marginRight="@dimen/size_16dp"/>
+                android:layout_marginRight="@dimen/size_16dp"
+                android:src="@drawable/common_icon_expand" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1px"
-            android:src="@color/color_line"
             android:layout_marginLeft="@dimen/size_16dp"
-            android:layout_marginRight="@dimen/size_16dp"/>
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
         <LinearLayout
             android:id="@+id/pcServicePhoneLl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/home_personage_service"/>
+                android:src="@drawable/home_personage_service" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:text="联系客服"
-                android:textSize="@dimen/size_14sp"
                 android:textColor="@color/black"
-                android:layout_marginLeft="4dp"/>
+                android:textSize="@dimen/size_14sp" />
+
             <TextView
                 android:id="@+id/pcServicePhoneTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
                 android:text=""
-                android:textColor="@color/black_desc"
-                android:layout_marginRight="@dimen/size_16dp"/>
+                android:textColor="@color/black_desc" />
         </LinearLayout>
     </LinearLayout>
 

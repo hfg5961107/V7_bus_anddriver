@@ -5,6 +5,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import androidx.activity.viewModels
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.model.FinanceModel
@@ -12,15 +13,9 @@ import com.rvakva.bus.personal.viewmodel.IncomeDetailsViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.formatDate
-import com.rvakva.travel.devkit.expend.numberFormat
-import com.rvakva.travel.devkit.expend.onDataErrorAndException
-import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.exception.SpecialApiException
-import kotlinx.android.synthetic.main.activity_bill_list.*
 import kotlinx.android.synthetic.main.activity_income_details.*
-import kotlinx.android.synthetic.main.activity_wallet.*
-
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -28,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_wallet.*
  * @Author:         孙艺
  * @CreateDate:     2020/6/24 上午10:38
  */
-//@Route(path = Config.USER_INCOME_DETAILS)
+@Route(path = Config.USER_INCOME_DETAILS)
 class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
     // 是否是收入类型  默认收入详情 外部传入
     private var isIncomeType: Boolean = true
@@ -77,6 +72,11 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
                 }
             )
         )
+        var textSpan: SpannableString = SpannableString("90元");
+        textSpan.setSpan( AbsoluteSizeSpan(24), 0, textSpan.length - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        textSpan.setSpan( AbsoluteSizeSpan(16), textSpan.length - 1, textSpan.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        incomeLabel.text = textSpan;
+
     }
 
     override fun initData(isFirstInit: Boolean) {
@@ -118,9 +118,13 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
                 realFee = model.realFee.toString() + "元"
             }
             var textSpan: SpannableString = SpannableString(realFee);
-            textSpan.setSpan( AbsoluteSizeSpan(16), textSpan.length - 2, textSpan.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            textSpan.setSpan(
+                AbsoluteSizeSpan(16),
+                textSpan.length - 2,
+                textSpan.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            );
             incomeLabel.text = textSpan;
         }
     }
-
 }

@@ -44,16 +44,16 @@ interface PersonalService {
     /**
      * 流水详情
      */
-    @GET("api/v1/driver/finance")
+    @GET("api/v1/driver/finance/{orderId}")
     suspend fun getFlowingDetails(
-        @Query("orderId") orderId: Int
+        @Path("orderId") orderId: Int
     ): EmResult<FinanceModel>?
 
     /**
      * 收入详情
      */
-    @GET("api/v1/driver")
+    @GET("api/v1/driver/{orderId}")
     suspend fun getIncomeDetails(
-        @Query("orderId") orderId: Int
+        @Path("orderId") orderId: Int
     ): EmResult<FinanceModel>?
 }
