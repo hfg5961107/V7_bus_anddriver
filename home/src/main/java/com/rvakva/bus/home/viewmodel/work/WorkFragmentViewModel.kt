@@ -63,7 +63,7 @@ class WorkFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     suspend fun changeUserAuditStatus(userAuditEnum: UserAuditEnum) {
         userInfo?.let {
-            it.auditStatus = userAuditEnum.status
+            it.applyStatus = userAuditEnum.status
             Ktx.getInstance().userDataSource.insertUserInfo(it)
         }
     }

@@ -1,11 +1,13 @@
 package com.rvakva.bus.common
 
 import com.rvakva.bus.common.model.AppInfoModel
+import com.rvakva.bus.common.model.QiNiuModel
 import com.rvakva.bus.common.model.UserTokenModel
 import com.rvakva.travel.devkit.model.UserConfigModel
 import com.rvakva.travel.devkit.model.UserInfoModel
 import com.rvakva.travel.devkit.model.UserStatisticsModel
 import com.rvakva.travel.devkit.retrofit.result.EmResult
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -79,4 +81,13 @@ interface CommonService {
      */
     @GET("api/v1/driver/info/app")
     suspend fun getAppInfo(@Query("appVersionCode") appVersionCode: Int): EmResult<AppInfoModel>?
+
+    @GET("api/v1/common/qny/token")
+    suspend fun getQnyToken(): EmResult<String>?
+
+    @POST
+    suspend fun uploadPic(
+        @Url url: String?,
+        @Body body: MultipartBody
+    ): QiNiuModel?
 }
