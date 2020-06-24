@@ -1,6 +1,5 @@
 package com.rvakva.bus.personal.adapter
 
-import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.model.BillModel
 import com.sherloki.simpleadapter.adapter.SimpleMultipleProAdapter
 
@@ -16,6 +15,6 @@ class BillListAdapter : SimpleMultipleProAdapter<BillModel>() {
         addItemProvider(BillListProvider())
     }
 
-    override fun getItemType(data: List<BillModel>, position: Int) =
-        0
+    override fun getItemType(data: List<BillModel>, position: Int) = 0
+
 }

@@ -41,6 +41,10 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
                 pcHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
             } ?: pcHeaderIv.setImageResource(R.drawable.home_personal_profile_photo)
         })
+
+        Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
+            myTextMony.text="¥${it?.balance}"
+        })
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -54,20 +58,31 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     }
 
     private fun setOnClick() {
+        //历史班次
+        pcHistoryScheduleLl.setOnClickListener {
+            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
+        }
+        //我的钱包
         pcWalletLl.setOnClickListener {
             jumpByARouter(Config.USER_WALLET)
         }
+        //业务流水
+        pcBusinessList.setOnClickListener {
+
+        }
+        //账户认证
+        pcAccountApprove.setOnClickListener {
+
+        }
+        //系统设置
         pcSysSetLl.setOnClickListener {
             jumpByARouter(Config.USER_SYSTEM_SETTING)
         }
+        //联系客服
         pcServicePhoneLl.setOnClickListener {
             if (!pcServicePhoneTv.text.isNullOrBlank()) {
                 context?.callPhone(pcServicePhoneTv.text.toString())
             }
-        }
-
-        pcHistoryScheduleLl.setOnClickListener {
-            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
         }
     }
 

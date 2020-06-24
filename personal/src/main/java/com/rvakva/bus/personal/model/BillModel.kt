@@ -9,6 +9,8 @@ import com.rvakva.travel.devkit.model.IModel
  * @CreateDate:     2020/6/2 下午3:16
  */
 class BillModel(
+
+    val id:Int=0,
     /**
      * 流水类型 2-收入 3-充值 4-提现
      */

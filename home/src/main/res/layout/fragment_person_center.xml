@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <TextView
@@ -138,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="48dp"
                 android:layout_centerVertical="true"
-                android:text="¥205.00"
+                tools:text="¥205.00"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/size_32dp"
                 android:textColor="@color/color_yellow"
@@ -171,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/home_personage_wallet" />
+                android:src="@drawable/home_my_businesslist" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,6 +181,56 @@
                 android:layout_centerVertical="true"
                 android:text="业务流水"
                 android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/common_icon_expand" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1px"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:src="@color/color_line" />
+
+        <RelativeLayout
+            android:id="@+id/pcAccountApprove"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_my_account" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:text="账户认证"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14sp" />
+
+            <TextView
+                android:id="@+id/myTextApproveState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:text="待认证"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/size_32dp"
+                android:textColor="@color/black_desc"
                 android:textSize="@dimen/size_14sp" />
 
             <ImageView

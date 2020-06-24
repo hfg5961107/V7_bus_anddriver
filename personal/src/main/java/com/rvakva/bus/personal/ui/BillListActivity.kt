@@ -2,13 +2,14 @@ package com.rvakva.bus.personal.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.adapter.BillListAdapter
+import com.rvakva.bus.personal.model.BillModel
 import com.rvakva.bus.personal.viewmodel.BillActivityViewModel
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.base.KtxActivity
-import com.rvakva.travel.devkit.expend.initialize
-import com.rvakva.travel.devkit.expend.onDataErrorAndException
-import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
+import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import kotlinx.android.synthetic.main.activity_bill_list.*
 
@@ -22,12 +23,13 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
 
     val billActivityViewModel by viewModels<BillActivityViewModel>()
 
+
     override fun initTitle() {
         billListMtb.let {
             it.leftTv.setOnClickListener {
                 finish()
             }
-            it.centerText.text = "钱包明细"
+            it.centerText.text = "余额明细"
         }
     }
 
@@ -36,7 +38,23 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
             adapter = BillListAdapter(),
             onEmptyClickBlock = ::requestData,
             onRefreshBlock = ::requestData,
-            emptyString = "暂无明细列表"
+            initializeBlock = {
+                setOnItemClickBlock<BillModel> { adapter, view, position ->
+                    adapter?.let {
+                        it.data[position].let { data ->
+                            when (view.id) {
+                                R.id.myBillList -> {
+                                    //跳转收入详情
+//                                    jumpByARouter(Config.HOME_SCHEDULE_DETAIL) {
+//                                        withInt(Config.SCHEDULE_ID_KEY, data.id)
+//                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            emptyString = "暂无余额明细"
         )
     }
 

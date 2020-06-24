@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/f3f4f5"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/f3f4f5"
+    android:orientation="vertical">
 
     <com.rvakva.travel.devkit.widget.MyTitleBar
         android:id="@+id/billListMtb"
@@ -13,15 +13,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/white">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="@dimen/permission_sp_16"
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <com.rvakva.travel.devkit.widget.MyRecyclerView
             android:id="@+id/recyclerviewBill"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="@dimen/size_16dp"
-            android:paddingEnd="@dimen/size_16dp"/>
+            android:paddingEnd="@dimen/size_16dp" />
     </LinearLayout>
 
 </LinearLayout>
