@@ -2,6 +2,7 @@ package com.rvakva.bus.personal
 
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.model.BillModel
+import com.rvakva.bus.personal.model.FinanceModel
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 import retrofit2.http.*
 
@@ -59,4 +60,19 @@ interface PersonalService {
         @Query("size") size: Int
     ): EmResult<List<BillModel>>?
 
+    /**
+     * 流水详情
+     */
+    @GET("api/v1/driver/finance/{orderId}")
+    suspend fun getFlowingDetails(
+        @Path("orderId") orderId: Int
+    ): EmResult<FinanceModel>?
+
+    /**
+     * 收入详情
+     */
+    @GET("api/v1/driver/{orderId}")
+    suspend fun getIncomeDetails(
+        @Path("orderId") orderId: Int
+    ): EmResult<FinanceModel>?
 }

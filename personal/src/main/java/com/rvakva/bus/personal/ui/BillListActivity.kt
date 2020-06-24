@@ -45,9 +45,9 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
                             when (view.id) {
                                 R.id.myBillList -> {
                                     //跳转收入详情
-//                                    jumpByARouter(Config.HOME_SCHEDULE_DETAIL) {
-//                                        withInt(Config.SCHEDULE_ID_KEY, data.id)
-//                                    }
+                                    jumpByARouter(Config.USER_INCOME_DETAILS) {
+                                        withInt("orderId", data.id)
+                                    }
                                 }
                             }
                         }
