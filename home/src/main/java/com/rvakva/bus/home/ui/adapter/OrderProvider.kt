@@ -1,9 +1,5 @@
 package com.rvakva.bus.home.ui.adapter
 
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.AbsoluteSizeSpan
-import android.text.style.RelativeSizeSpan
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.bus.common.model.ScheduleDataModel

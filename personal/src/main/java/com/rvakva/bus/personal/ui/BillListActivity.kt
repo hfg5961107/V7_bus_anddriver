@@ -46,7 +46,8 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
                                 R.id.myBillList -> {
                                     //跳转收入详情
                                     jumpByARouter(Config.USER_INCOME_DETAILS) {
-                                        withInt("orderId", data.id)
+                                        withInt("orderId", data.orderId)
+                                        withBoolean("isIncomeType",true)
                                     }
                                 }
                             }

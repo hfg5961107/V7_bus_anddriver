@@ -142,7 +142,7 @@ class RegisterActivity : KtxActivity(R.layout.aty_register) {
      */
     private fun checkInpont() {
         registerTextRegister.isEnabled =
-            registerEtPhone.text.length == 11 && registerEtPwd.text.length >= 6 && registerEtCode.text.length == 6
+            registerEtPhone.text.length == 11 && registerEtPwd.text.length >= 6 && registerEtCode.text.length == 4
 
         registerTextGetCode.isEnabled=registerEtPhone.text.length == 11
     }

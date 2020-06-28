@@ -72,11 +72,6 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
                 }
             )
         )
-        var textSpan: SpannableString = SpannableString("90元");
-        textSpan.setSpan( AbsoluteSizeSpan(24), 0, textSpan.length - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-        textSpan.setSpan( AbsoluteSizeSpan(16), textSpan.length - 1, textSpan.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        incomeLabel.text = textSpan;
-
     }
 
     override fun initData(isFirstInit: Boolean) {
@@ -99,10 +94,11 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             orderNumLabel.text = model.orderNo
 
             completeLabel.text = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
-            carInfoLabel.text = model.licenseNo + " / " + model.vehicleSeat
+            shuttleLabel.text = formatDate(model.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
+            carInfoLabel.text = model.licenseNo + " / " + model.vehicleSeat+"座"
             buyTicketLabel.text = model.passengerNum.toString() + "人"
 
-            passengersLabel.text = model.passengerName
+            passengersLabel.text = model.customerName
             startAddressLabel.text = model.startStationName
             endAddressLabel.text = model.endStationName
 
@@ -113,18 +109,12 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             if (isIncomeType) {
                 realPayLabel.text = model.realFee.toString()
                 commissionRatioLabel.text = model.proportion.toString()
-                realFee = model.driverIncome.toString() + "元"
+                realFee = model.driverIncome.toString()
             } else {
-                realFee = model.realFee.toString() + "元"
+                realFee = model.realFee.toString()
             }
-            var textSpan: SpannableString = SpannableString(realFee);
-            textSpan.setSpan(
-                AbsoluteSizeSpan(16),
-                textSpan.length - 2,
-                textSpan.length,
-                Spannable.SPAN_INCLUSIVE_INCLUSIVE
-            );
-            incomeLabel.text = textSpan;
+
+            incomeLabel.text = realFee;
         }
     }
 }
