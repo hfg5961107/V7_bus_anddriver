@@ -1,6 +1,5 @@
 package com.rvakva.bus.home.ui.order
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -14,7 +13,6 @@ import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.dialog.CheckTicketsDialog
 import com.rvakva.bus.home.ui.adapter.OrderPassengerAdapter
-import com.rvakva.bus.home.ui.work.WorkActivity
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx

@@ -2,6 +2,7 @@ package com.rvakva.bus.personal
 
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.model.BillModel
+import com.rvakva.bus.personal.model.BusinessListModel
 import com.rvakva.bus.personal.model.FinanceModel
 import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
@@ -58,21 +59,22 @@ interface PersonalService {
     /**
      * 司机申请结算
      */
-    @POST("/api/v1/driver/settlement")
+    @POST("api/v1/driver/settlement")
     suspend fun applyClose (
         @Query("driverId") driverId: Long,
         @Query("fee") fee: String
     ): EmResult<String>?
 
     /**
-     * 钱包明细查询
-     * 时间参数和Model还没有处理
+     * 业务流水列表
      */
-    @GET("/api/v1/driver/finance")
+    @GET("api/v1/driver/finance")
     suspend fun getFinance(
         @Query("page") page: Int,
-        @Query("size") size: Int
-    ): EmResult<List<BillModel>>?
+        @Query("size") size: Int,
+        @Query("startTime") startTime: Long,
+        @Query("endTime") endTime: Long
+    ): EmResult<BusinessListModel>?
 
     /**
      * 流水详情

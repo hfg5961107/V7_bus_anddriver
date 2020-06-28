@@ -28,7 +28,7 @@ class FinanceModel (
     /**
      * 排班时间
      */
-    var schedulingTime: String = "",
+    var schedulingTime: Long = 0,
     /**
      * 完成时间
      */
@@ -50,7 +50,7 @@ class FinanceModel (
     /**
      * 乘客联系人
      */
-    val passengerName: String = "",
+    val customerName: String = "",
     /**
      * 上车地点
      */
