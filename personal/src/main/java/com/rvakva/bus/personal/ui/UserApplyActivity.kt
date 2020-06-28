@@ -1,5 +1,6 @@
 package com.rvakva.bus.personal.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -14,10 +15,7 @@ import com.rvakva.bus.personal.viewmodel.UserApplyActivityViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
-import com.rvakva.travel.devkit.expend.addTextChangedListenerDsl
-import com.rvakva.travel.devkit.expend.glideInto
-import com.rvakva.travel.devkit.expend.loge
-import com.rvakva.travel.devkit.expend.requestPermission
+import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.model.UserAuditEnum
 import com.yanzhenjie.permission.runtime.Permission
 import com.zhihu.matisse.Matisse
@@ -259,7 +257,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                 it.loge("hufeng")
                 if (requestCode == photoFrontRequestCode) {
                     userApplyActivityViewModel.idCardFrontPath = it
-                    userApplyIdCardIv.glideInto(it)
+                    userApplyIdCardIv.glideWithRoundInto(it,4)
                 } else if (requestCode == photoBackRequestCode) {
                     userApplyActivityViewModel.idCardBackPath = it
                     userApplyIdCardBackIv.glideInto(it)
