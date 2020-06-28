@@ -6,10 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.rvakva.travel.devkit.datasource.AppKeyDataSource
 import com.rvakva.travel.devkit.datasource.UserDataSource
 import com.rvakva.travel.devkit.retrofit.ApiManager
-import com.rvakva.travel.devkit.x.XActivityLifeCycleCallback
-import com.rvakva.travel.devkit.x.XActivityManager
-import com.rvakva.travel.devkit.x.XDataBase
-import com.rvakva.travel.devkit.x.XMMKV
+import com.rvakva.travel.devkit.x.*
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 
@@ -68,6 +65,9 @@ class Ktx private constructor(){
             //注册ActManager
             it.registerActivityLifecycleCallbacks(XActivityLifeCycleCallback())
             weChatApi = WXAPIFactory.createWXAPI(application, Config.WECHAT_ID, false)
+
+            //注册APP生命周期管理
+            ProcessLifecycleOwner.get().lifecycle.addObserver(XAppLifeCycleObserver())
         }
     }
 

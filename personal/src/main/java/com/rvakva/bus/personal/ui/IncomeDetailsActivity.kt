@@ -33,7 +33,7 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
     private val incomeActivityViewModel by viewModels<IncomeDetailsViewModel>()
 
     override fun initTitle() {
-        orderId = intent.getIntExtra("orderId",0)
+        orderId = intent.getIntExtra("orderId", 0)
         isIncomeType = intent.getBooleanExtra("isIncomeType", true)
 
         hisScheduleMtb?.let {
@@ -91,11 +91,15 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
 
     private fun showData(model: FinanceModel?) {
         if (model != null) {
-            orderNumLabel.text = model.orderNo
+            val createTime = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD)
+            val completeTime = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
 
-            completeLabel.text = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
-            shuttleLabel.text = formatDate(model.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
+//            completeLabel.text = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
+//            shuttleLabel.text = formatDate(model.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
             carInfoLabel.text = model.licenseNo + " / " + model.vehicleSeat+"座"
+            orderNumLabel.text = model.orderNo
+            shuttleLabel.text = createTime + " " + model.startLineTime + " - " + model.endLineTime
+            completeLabel.text = completeTime
             buyTicketLabel.text = model.passengerNum.toString() + "人"
 
             passengersLabel.text = model.customerName

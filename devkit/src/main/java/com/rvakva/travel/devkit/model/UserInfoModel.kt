@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName
  * @CreateDate:     2020/4/27 下午4:07
  */
 enum class UserAuditEnum(val status: Int) {
-    PROGRESSING(1), SUCCESS(2), FAIL(3), NON_IDENTITY(4)
+    NON_IDENTITY(1),PROGRESSING(2), SUCCESS(3), FAIL(4)
 }
 
 @Entity(tableName = "userInfo")
@@ -24,9 +24,18 @@ class UserInfoModel(
     @ColumnInfo(name = "name") var name: String? = null,
     @ColumnInfo(name = "phone") var phone: String? = null,
     @ColumnInfo(name = "idCard") var idCard: String? = null,
-    @ColumnInfo(name = "idCardFront") var idCardFront: String? = null,
-    @ColumnInfo(name = "idCardBack") var idCardBack: String? = null,
-
+    /**
+     * 身份证正面
+     */
+    @ColumnInfo(name = "idCardFrontPath") var idCardFrontPath: String? = null,
+    /**
+     * 身份证背面
+     */
+    @ColumnInfo(name = "idCardBackPath") var idCardBackPath: String? = null,
+    /**
+     * 其他附件地址
+     */
+    @ColumnInfo(name = "attachmentPath") var attachmentPath: String? = null,
     /**
      * 余额
      */
@@ -45,8 +54,18 @@ class UserInfoModel(
     @ColumnInfo(name = "driverServicePhone") var driverServicePhone: String? = null,
 
     /**
-     * 审核状态 1-审核中 2-审核通过 3-审核拒绝 4-未认证
+     * 审核状态 1-待认证，2-认证中，3-已认证，4-认证失败
      */
-    @ColumnInfo(name = "auditStatus") var auditStatus: Int = 0,
-    @ColumnInfo(name = "auditRemark") var auditRemark: String? = null
+    @ColumnInfo(name = "auditStatus") var applyStatus: Int = 0,
+
+    /**
+     * 审核时间
+     */
+    @ColumnInfo(name = "applyTime") var applyTime: Long = 0,
+
+    /**
+     * 拒绝原因
+     */
+    @ColumnInfo(name = "auditRemark") var refusalReason: String? = null
+
 ) : IModel

@@ -73,8 +73,8 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
             workViewModel.getMqttConfig()
             workViewModel.startLocation()
         }
-//        workViewModel.getUserInfo()
-//        workViewModel.getUserConfig()
+        workViewModel.getUserInfo()
+        workViewModel.getUserConfig()
 //        workViewModel.getUserStatistics()
     }
 

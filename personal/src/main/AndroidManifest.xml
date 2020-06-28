@@ -21,8 +21,12 @@
         <activity
             android:name=".ui.BillListActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".ui.BusinessListActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.UserApplyActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

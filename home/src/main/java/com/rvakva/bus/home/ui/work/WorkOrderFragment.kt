@@ -104,10 +104,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 //        )
 //
         KtxViewModel.emptyClickLiveData.observe(viewLifecycleOwner, EventObserver {
-            if (it == ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW.value) {
-                X.getInstance().myMediaPlayer.play(MyMediaPlayerType.ONLINE)
-                workViewModel.changeStatus(1)
-            }
+            jumpByARouter(Config.USER_IDENTITY)
         })
 
 //        mainActivitySharedViewModel.filterTypeChangeLiveData.observe(
@@ -216,7 +213,7 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
             },
             emptyString =
             when (orderStatusType) {
-                ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW -> "休息中，开启工作后可接单"
+                ScheduleStatusTypeEnum.SCHEDULE_TYPE_NEW -> "暂无新班次"
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_ING -> "暂无行程中班次"
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_COMPLETE -> "暂无历史班次"
                 ScheduleStatusTypeEnum.SCHEDULE_TYPE_CANCEL -> "暂无历史班次"

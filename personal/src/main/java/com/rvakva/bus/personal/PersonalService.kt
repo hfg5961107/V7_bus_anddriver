@@ -4,6 +4,7 @@ import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.personal.model.BillModel
 import com.rvakva.bus.personal.model.BusinessListModel
 import com.rvakva.bus.personal.model.FinanceModel
+import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 import retrofit2.http.*
 
@@ -41,6 +42,19 @@ interface PersonalService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): EmResult<List<BillModel>>?
+
+
+
+
+    @POST("api/v1/driver/info/apply")
+    @FormUrlEncoded
+    suspend fun commitDriverInfo(
+        @Field("name") name: String,
+        @Field("idCard") idCard: String,
+        @Field("idCardFrontPath") idCardFrontPath: String,
+        @Field("idCardBackPath") idCardBackPath: String,
+        @Field("attachmentPath") attachmentPath: String?
+    ): BaseResult?
 
     /**
      * 司机申请结算

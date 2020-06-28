@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TranslucentTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>
