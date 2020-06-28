@@ -64,6 +64,7 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
             RequestResultObserver(
                 successBlock = {
                     recyclerviewBill.onDataSuccessAndEmpty(it.data?.toMutableList())
+                    recyclerviewBill.setEmptyRes(R.drawable.user_icon_no_bill)
                 }, failBlock = {
                     recyclerviewBill.onDataErrorAndException(it)
                 }

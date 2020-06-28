@@ -38,7 +38,7 @@ class WalletCloseDialog private constructor() : BaseDialogFragment() {
     override fun initView(view: View?) {
         arguments?.let { bundle ->
 
-            wallerDialogEtValue.bindPrizeFilters(3)
+            wallerDialogEtValue.bindPrizeFilters(8)
 
             //禁止长按阻止复制
             wallerDialogEtValue.isLongClickable = false

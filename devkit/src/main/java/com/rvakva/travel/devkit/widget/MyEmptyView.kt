@@ -38,6 +38,7 @@ class MyEmptyView : IBaseEmptyView {
     override val clickLayoutId: Int
         get() = R.id.myEmptyViewTvError
 
+    var emptyRes : Int? = null
 
     override fun changeView(status: Int) {
         myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
@@ -108,7 +109,11 @@ class MyEmptyView : IBaseEmptyView {
                 myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_processing)
             }
             UserAuditEnum.SUCCESS.status -> {
-                myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
+                if (emptyRes != null){
+                    myEmptyViewTvError.setImageResource(topRes = emptyRes)
+                }else{
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
+                }
             }
             UserAuditEnum.FAIL.status -> {
                 textContent = "前往查看"

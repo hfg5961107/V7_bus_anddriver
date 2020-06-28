@@ -32,4 +32,6 @@ class MyRecyclerView : IBaseRecyclerView3 {
 
     override val defaultErrorText: String
         get() = ApiConstant.COMMON_ERROR
+
+    var emptyRes : Int? = null
 }

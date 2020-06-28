@@ -38,7 +38,7 @@ fun EditText.bindPrizeFilters(maxLength: Int = 10) {
             if (dest?.contains(".") == true) {
                 val index = dest.toString().indexOf(".");
                 val mlength = dest.toString().substring(index).length;
-                if (mlength == 3) {
+                if (mlength == maxLength) {
                     return "";
                 }
             }

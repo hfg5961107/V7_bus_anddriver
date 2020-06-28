@@ -7,6 +7,7 @@ import com.rvakva.bus.common.repository.QiNiuRepository
 import com.rvakva.bus.common.repository.UserRepository
 import com.rvakva.bus.personal.PersonalService
 import com.rvakva.travel.devkit.expend.launchRequest
+import com.rvakva.travel.devkit.expend.loge
 import com.rvakva.travel.devkit.expend.requestMap
 import com.rvakva.travel.devkit.livedata.RequestLiveData
 import com.rvakva.travel.devkit.model.UserInfoModel
@@ -36,12 +37,12 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
     private val userRepository = UserRepository()
 
     fun submitUserInfo(
-        userName: String,
-        idCard: String,
-        defaultFrontPath: String = "",
-        defaultBackPath: String = "",
-        defaultOtherOnePath: String = "",
-        defaultOtherTwoPath: String = ""
+            userName: String,
+            idCard: String,
+            defaultFrontPath: String = "",
+            defaultBackPath: String = "",
+            defaultOtherOnePath: String? = null,
+            defaultOtherTwoPath: String? = null
     ) {
         val uploadList = mutableListOf<String>()
 
@@ -91,49 +92,57 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
                             }
                             if (backPath == null) {
                                 backPath = it[0]
+                                it.removeAt(0)
                             }
-                            if (it.size == 3 && otherOne == null) {
+                            if (otherOne == null) {
                                 otherOne = it[0]
                                 it.removeAt(0)
                             }
-                            if (it.size == 4 && otherTwo == null) {
+                            if (otherTwo == null) {
                                 otherTwo = it[0]
+                                it.removeAt(0)
                             }
+                            "frontPath:$frontPath,\nbackPath:$backPath,\notherOne:$otherOne,\notherTwo:$otherTwo".loge()
                             commitDriverInfo(
-                                userName, idCard, frontPath, backPath,otherOne,otherTwo
+                                    userName, idCard, frontPath, backPath, otherOne, otherTwo
                             )
-                        }?.apply {
-                            userRepository.getUserInfo()
-
                         } ?: throw ApiException(
-                            ApiConstant.RESPONSE_EMPTY_ERROR,
-                            ApiConstant.ERROR_CODE_DATA_IS_EMPTY
+                                ApiConstant.RESPONSE_EMPTY_ERROR,
+                                ApiConstant.ERROR_CODE_DATA_IS_EMPTY
                         )
-                    }, requestLiveData = uploadPicLiveData, toastBoxDesc = "正在提交...")
+                    }, requestLiveData = uploadPicLiveData, showToastBox = true, toastBoxDesc = "正在提交...")
 
                 } else {
                     launchRequest(block = {
                         commitDriverInfo(
-                            userName, idCard, frontPath, backPath,otherOne,otherTwo
+                                userName, idCard, frontPath, backPath, otherOne, otherTwo
                         )
-                    }, requestLiveData = uploadPicLiveData, toastBoxDesc = "正在提交...")
+                    }, requestLiveData = uploadPicLiveData, showToastBox = true, toastBoxDesc = "正在提交...")
                 }
         }
     }
 
-    private suspend fun commitDriverInfo(
-        userName: String,
-        idCard: String,
-        frontPath: String?,
-        backPath: String?,
-        otherOne: String?,
-        otherTwo: String?
-    ) =
-        ApiManager.getInstance().createService(PersonalService::class.java)
-            .commitDriverInfo(userName, idCard, frontPath?:"", backPath?:"",otherOne?:"")
-            .requestMap()
-            .apply {
-                userRepository.getUserInfo()
-            }
+    var attachmentPat: String? = null
 
+    private suspend fun commitDriverInfo(
+            userName: String,
+            idCard: String,
+            frontPath: String?,
+            backPath: String?,
+            otherOne: String?,
+            otherTwo: String?
+    ): BaseResult {
+        if (otherOne != null && otherTwo != null) {
+            attachmentPat = "$otherOne,$otherTwo"
+        } else if (otherOne == null && otherTwo != null) {
+            attachmentPat = otherTwo
+        } else if (otherOne != null && otherTwo == null) {
+            attachmentPat = otherOne
+        } else if (otherOne == null && otherTwo == null){
+            attachmentPat = null
+        }
+        return ApiManager.getInstance().createService(PersonalService::class.java)
+                .commitDriverInfo(userName, idCard, frontPath ?: "", backPath ?: "", attachmentPat ?: "")
+                .requestMap()
+    }
 }

@@ -10,11 +10,13 @@ import com.rvakva.bus.personal.adapter.HistoryScheduleAdapter
 import com.rvakva.bus.personal.viewmodel.PersonScheduleViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.initialize
 import com.rvakva.travel.devkit.expend.jumpByARouter
 import com.rvakva.travel.devkit.expend.onDataErrorAndException
 import com.rvakva.travel.devkit.expend.onDataSuccessAndEmpty
+import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_history_schedule.*
@@ -79,6 +81,9 @@ class HistoryScheduleActivity
                 }
             )
         )
+        KtxViewModel.emptyClickLiveData.observe(this, EventObserver {
+            jumpByARouter(Config.USER_IDENTITY)
+        })
     }
 
     override fun initData(isFirstInit: Boolean) {

@@ -17,6 +17,8 @@ import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.model.UserAuditEnum
+import com.rvakva.travel.devkit.observer.request.RequestResultObserver
+import com.rvakva.travel.devkit.widget.ToastBar
 import com.yanzhenjie.permission.runtime.Permission
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -85,6 +87,9 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
             if (it.attachmentPath.isNullOrEmpty()) {
                 userApplyOtherOneIv.setImageResource(R.drawable.user_certification_other)
                 userApplyOtherTwoIv.setImageResource(R.drawable.user_certification_other)
+
+                userApplyOtherOneRl.visibility = View.GONE
+                userApplyOtherTwoRl.visibility = View.GONE
             } else {
                 if (it.attachmentPath!!.contains(",")) {
                     var other = it.attachmentPath
@@ -107,6 +112,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
             it.idCardFrontPath?.let { path ->
                 if (path.isNullOrEmpty()) {
                     userApplyIdCardIv.setImageResource(R.drawable.user_certification_id_card)
+                    userApplyIdCardRl.visibility = View.GONE
                 } else {
                     userApplyIdCardIv.glideInto(path.getImageUrl())
                     userApplyIdCardRl.visibility = View.VISIBLE
@@ -116,6 +122,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
             it.idCardBackPath?.let { path ->
                 if (path.isNullOrEmpty()) {
                     userApplyIdCardBackIv.setImageResource(R.drawable.user_certification_id_card_back)
+                    userApplyIdCardBackRl.visibility = View.GONE
                 } else {
                     userApplyIdCardBackIv.glideInto(path.getImageUrl())
                     userApplyIdCardBackRl.visibility = View.VISIBLE
@@ -132,10 +139,6 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyInfoLinOne.visibility = View.VISIBLE
                     userApplyInfoLinTwo.visibility = View.GONE
 
-                    userApplyIdCardRl.visibility = View.GONE
-                    userApplyIdCardBackRl.visibility = View.GONE
-                    userApplyOtherOneRl.visibility = View.GONE
-                    userApplyOtherTwoRl.visibility = View.GONE
                 }
                 UserAuditEnum.PROGRESSING.status -> {
                     userApplyHintTv.visibility = View.GONE
@@ -175,7 +178,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyHintTv.visibility = View.GONE
                     userApplyStatusLin.visibility = View.VISIBLE
 
-                    userApplyStatusIv.setImageResource(R.drawable.user_certification_waiting)
+                    userApplyStatusIv.setImageResource(R.drawable.user_certification_failure)
                     userApplyStatusTv.text = "认证失败"
                     userApplyStatusTv.setTextColor(resources.getColor(R.color.red))
                     userApplyNoPassRemarkTv.visibility = View.VISIBLE
@@ -184,24 +187,27 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyInfoLinOne.visibility = View.VISIBLE
                     userApplyInfoLinTwo.visibility = View.GONE
 
-                    userApplyOtherOneRl.visibility = View.VISIBLE
-                    userApplyOtherTwoRl.visibility = View.VISIBLE
                 }
+            }
+            if (it.applyStatus == UserAuditEnum.NON_IDENTITY.status || it.applyStatus == UserAuditEnum.FAIL.status){
+                userApplyIdCardIv.setOnClickListener {
+                    goPhotoSelect(photoFrontRequestCode)
+                }
+                userApplyIdCardBackIv.setOnClickListener {
+                    goPhotoSelect(photoBackRequestCode)
+                }
+                userApplyOtherOneIv.setOnClickListener {
+                    goPhotoSelect(photoOtherOneRequestCode)
+                }
+                userApplyOtherTwoIv.setOnClickListener {
+                    goPhotoSelect(photoOtherTwoRequestCode)
+                }
+                userApplyBtn.visibility = View.VISIBLE
+            }else{
+                userApplyBtn.visibility = View.GONE
             }
         })
 
-        userApplyIdCardIv.setOnClickListener {
-            goPhotoSelect(photoFrontRequestCode)
-        }
-        userApplyIdCardBackIv.setOnClickListener {
-            goPhotoSelect(photoBackRequestCode)
-        }
-        userApplyOtherOneIv.setOnClickListener {
-            goPhotoSelect(photoOtherOneRequestCode)
-        }
-        userApplyOtherTwoIv.setOnClickListener {
-            goPhotoSelect(photoOtherTwoRequestCode)
-        }
 
         userApplyBtn.setOnClickListener {
             userApplyActivityViewModel.submitUserInfo(
@@ -209,14 +215,21 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                 userApplyIdCardEt.text.toString(),
                 userApplyActivityViewModel.userInfoModel?.idCardFrontPath ?: "",
                 userApplyActivityViewModel.userInfoModel?.idCardBackPath ?: "",
-                otherOne ?: "",
-                otherTwo ?: ""
+                otherOne ?: null,
+                otherTwo ?: null
             )
         }
     }
 
     override fun initObserver() {
-
+        userApplyActivityViewModel.uploadPicLiveData.observe(
+            this, RequestResultObserver(
+                successBlock = {
+                    ToastBar.show("提交认证成功")
+                    finish()
+                }
+            )
+        )
     }
 
     override fun initData(isFirstInit: Boolean) {
@@ -254,19 +267,22 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             Matisse.obtainPathResult(data).getOrNull(0)?.let {
-                it.loge("hufeng")
                 if (requestCode == photoFrontRequestCode) {
                     userApplyActivityViewModel.idCardFrontPath = it
-                    userApplyIdCardIv.glideWithRoundInto(it,4)
+                    userApplyIdCardIv.glideInto(it)
+                    userApplyIdCardRl.visibility = View.VISIBLE
                 } else if (requestCode == photoBackRequestCode) {
                     userApplyActivityViewModel.idCardBackPath = it
                     userApplyIdCardBackIv.glideInto(it)
+                    userApplyIdCardBackRl.visibility = View.VISIBLE
                 } else if (requestCode == photoOtherOneRequestCode) {
                     userApplyActivityViewModel.otherOnePath = it
                     userApplyOtherOneIv.glideInto(it)
+                    userApplyOtherOneRl.visibility = View.VISIBLE
                 } else if (requestCode == photoOtherTwoRequestCode) {
-                    userApplyActivityViewModel.idCardFrontPath = it
+                    userApplyActivityViewModel.otherTwoPath = it
                     userApplyOtherTwoIv.glideInto(it)
+                    userApplyOtherTwoRl.visibility = View.VISIBLE
                 }
             }
         }

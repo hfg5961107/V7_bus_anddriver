@@ -4,6 +4,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.travel.devkit.retrofit.exception.ApiException
 import com.rvakva.travel.devkit.widget.MyRecyclerView
+import kotlinx.android.synthetic.main.my_empty_view.view.*
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -54,4 +55,8 @@ fun MyRecyclerView.onPageDataErrorAndException(e: Exception) {
     setErrorText(e.handleExceptionDesc())
     setEmptyAndErrorCode((e as? ApiException)?.code ?: 0)
     onPageDataError()
+}
+
+fun MyRecyclerView.setEmptyRes(res: Int?) {
+    myEmptyViewTvError.setImageResource(topRes = res)
 }

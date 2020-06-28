@@ -14,9 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="@dimen/permission_sp_16"
-        android:background="@color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="@dimen/permission_sp_16"
         android:orientation="vertical">
 
         <com.rvakva.travel.devkit.widget.MyRecyclerView
