@@ -5,6 +5,7 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.alibaba.android.arouter.launcher.ARouter
 import com.rvakva.travel.devkit.datasource.AppKeyDataSource
 import com.rvakva.travel.devkit.datasource.UserDataSource
+import com.rvakva.travel.devkit.exception.CrashHandler
 import com.rvakva.travel.devkit.retrofit.ApiManager
 import com.rvakva.travel.devkit.x.*
 import com.tencent.mm.opensdk.openapi.IWXAPI
@@ -16,13 +17,13 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * @Author:         胡峰
  * @CreateDate:     2020/4/27 下午3:18
  */
-class Ktx private constructor(){
+class Ktx private constructor() {
 
-    object SingletonHolder{
+    object SingletonHolder {
         val INSTANCE = Ktx()
     }
 
-    companion object{
+    companion object {
         fun getInstance() = SingletonHolder.INSTANCE
     }
 
@@ -44,9 +45,9 @@ class Ktx private constructor(){
     lateinit var weChatApi: IWXAPI
         private set
 
-    lateinit var app : Application
+    lateinit var app: Application
 
-    fun initialize(application: Application){
+    fun initialize(application: Application) {
         application.let {
             app = it
 
@@ -68,6 +69,8 @@ class Ktx private constructor(){
 
             //注册APP生命周期管理
             ProcessLifecycleOwner.get().lifecycle.addObserver(XAppLifeCycleObserver())
+
+            CrashHandler.getInstance().init(it)
         }
     }
 

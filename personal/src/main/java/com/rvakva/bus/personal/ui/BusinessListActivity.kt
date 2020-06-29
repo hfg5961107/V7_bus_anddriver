@@ -14,7 +14,6 @@ import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import kotlinx.android.synthetic.main.aty_business_list.*
-import kotlinx.android.synthetic.main.aty_business_list.recyclerviewBill
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -89,7 +88,7 @@ class BusinessListActivity : KtxActivity(R.layout.aty_business_list), RecyclerIt
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        recyclerviewBill.initialize(
+        recyclerviewBusiness.initialize(
             adapter = BusinessListAdapter(),
             onEmptyClickBlock = ::requestData,
             onRefreshBlock = ::requestData,
@@ -120,9 +119,10 @@ class BusinessListActivity : KtxActivity(R.layout.aty_business_list), RecyclerIt
             RequestResultObserver(
                 successBlock = {
                     businessTvMoney.text = it.data?.getAmountMoney().toString()
-                    recyclerviewBill.onDataSuccessAndEmpty(it.data?.getData()?.toMutableList())
+                    recyclerviewBusiness.onDataSuccessAndEmpty(it.data?.getData()?.toMutableList())
+                    recyclerviewBusiness.setEmptyRes(R.drawable.user_icon_no_bill)
                 }, failBlock = {
-                    recyclerviewBill.onDataErrorAndException(it)
+                    recyclerviewBusiness.onDataErrorAndException(it)
                 }
             )
         )
@@ -136,7 +136,7 @@ class BusinessListActivity : KtxActivity(R.layout.aty_business_list), RecyclerIt
 
     private fun requestData() {
         billActivityViewModel.getFinance(
-            recyclerviewBill.currentPage + 1,
+            recyclerviewBusiness.currentPage + 1,
             startTime / 1000,
             endTime / 1000
         )

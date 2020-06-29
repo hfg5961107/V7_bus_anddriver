@@ -106,7 +106,7 @@
         android:orientation="vertical">
 
         <com.rvakva.travel.devkit.widget.MyRecyclerView
-            android:id="@+id/recyclerviewBill"
+            android:id="@+id/recyclerviewBusiness"
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="match_parent"

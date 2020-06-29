@@ -1,15 +1,13 @@
 package com.rvakva.bus.personal.ui
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.rvakva.bus.common.extent.getImageUrl
+import com.rvakva.travel.devkit.expend.getImageUrl
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.viewmodel.UserApplyActivityViewModel
 import com.rvakva.travel.devkit.Config

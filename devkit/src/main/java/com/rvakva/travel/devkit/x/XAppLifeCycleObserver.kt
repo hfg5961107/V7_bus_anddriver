@@ -6,6 +6,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.R
 import com.rvakva.travel.devkit.expend.getString
+import com.rvakva.travel.devkit.mqtt.MqttManager
 import com.rvakva.travel.devkit.widget.ToastBar
 
 /**
@@ -21,12 +22,16 @@ class XAppLifeCycleObserver : LifecycleObserver {
         //APP存在于后台
         ToastBar.show("已离开${R.string.app_name.getString()},请注意信息安全")
         Config.IS_FOREGROUND = false
+
+        MqttManager.getInstance().publishStatusMessage(1,null)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStartEvent() {
         //APP存在于前台
         Config.IS_FOREGROUND = true
+
+        MqttManager.getInstance().publishStatusMessage(2,null)
     }
 
 }

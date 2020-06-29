@@ -1,13 +1,23 @@
 package com.rvakva.travel.devkit.location
 
+import androidx.lifecycle.Observer
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
+import com.google.gson.Gson
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
-import com.rvakva.travel.devkit.expend.NotificationEnum
-import com.rvakva.travel.devkit.expend.buildNotification
-import com.rvakva.travel.devkit.expend.createLocation
-import com.rvakva.travel.devkit.expend.loge
+import com.rvakva.travel.devkit.expend.*
+import com.rvakva.travel.devkit.model.DriverStatusPojo
+import com.rvakva.travel.devkit.model.LocationModel
+import com.rvakva.travel.devkit.model.UserInfoModel
+import com.rvakva.travel.devkit.mqtt.MqttManager
+import com.rvakva.travel.devkit.x.XDataBase
+import org.eclipse.paho.client.mqttv3.MqttException
+import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException
+import org.json.JSONObject
+
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -34,6 +44,7 @@ class LocationManager {
                 if (it.errorCode == 0) {
                     it.createLocation().apply {
                         KtxViewModel.locationLiveData.postValue(this)
+                        pushDataByMqtt(this)
                     }
                 } else {
                     "定位失败，错误码：${it.errorCode}".loge()
@@ -49,12 +60,12 @@ class LocationManager {
     }
 
     private fun createOption() =
-        AMapLocationClientOption().apply {
-            locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
-            isNeedAddress = true
-            interval = INTERVAL
-            isLocationCacheEnable = false
-        }
+            AMapLocationClientOption().apply {
+                locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+                isNeedAddress = true
+                interval = INTERVAL
+                isLocationCacheEnable = false
+            }
 
     fun startLocation() {
         client.startLocation()
@@ -63,5 +74,18 @@ class LocationManager {
     fun destroyClient() {
         client.stopLocation()
     }
+
+    var user : UserInfoModel? = null
+
+    fun pushDataByMqtt(loc: LocationModel) {
+        XDataBase.getInstance().userInfoModelDao().getUserInfo().observeForever(Observer {
+            user = it
+        })
+        user?.let {
+            MqttManager.getInstance().publish(loc.createLocationMessage(it))
+        }
+    }
+
+
 
 }

@@ -34,7 +34,12 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
     override fun initObserver() {
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            pcDriverNameTv.text = it.name
+            if(it.name.isNullOrEmpty()){
+                pcDriverNameTv.text = "先生/女士"
+            }else{
+                pcDriverNameTv.text = it.name
+            }
+
             pcDriverPhoneTv.text = it.phone?.let {
                 it.substring(0,3)+"****"+it.substring(7,it.length)
             }
@@ -91,6 +96,7 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
         }
     }
+    var name : String? = null
 
     private fun setOnClick() {
         //历史班次

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -14,6 +15,7 @@ import com.rvakva.bus.common.XViewModel
 import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.viewmodel.work.WorkViewModel
+import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.bind
@@ -66,6 +68,7 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                 }
             }
         })
+
     }
 
     override fun initData(isFirstInit: Boolean) {

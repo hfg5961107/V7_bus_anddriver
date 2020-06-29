@@ -6,6 +6,10 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.leaf.library.StatusBarUtil
+import com.rvakva.travel.devkit.exception.CrashHandler
+import com.rvakva.travel.devkit.exception.CrashHandlerCallBack
+import com.rvakva.travel.devkit.expend.loge
+import com.rvakva.travel.devkit.mqtt.MqttManager
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -13,7 +17,7 @@ import com.leaf.library.StatusBarUtil
  * @Author:         胡峰
  * @CreateDate:     2020/5/9 下午5:20
  */
-abstract class KtxActivity(layoutId : Int) : AppCompatActivity(layoutId) {
+abstract class KtxActivity(layoutId : Int) : AppCompatActivity(layoutId) , CrashHandlerCallBack {
 
     private var isFirstInit = true
 
@@ -25,6 +29,7 @@ abstract class KtxActivity(layoutId : Int) : AppCompatActivity(layoutId) {
         initView(savedInstanceState)
         initObserver()
         isFirstInit = true
+        CrashHandler.getInstance().setCallBack(this);
     }
 
     override fun onResume() {
@@ -54,4 +59,9 @@ abstract class KtxActivity(layoutId : Int) : AppCompatActivity(layoutId) {
 
     abstract fun initData(isFirstInit: Boolean)
 
+
+    override fun uncaughtException(thread: Thread?, throwable: Throwable?) {
+        //异常上报服务器
+        MqttManager.getInstance().publishStatusMessage(3,CrashHandler.getInstance().saveCatchInfo2File(this, throwable))
+    }
 }

@@ -1,4 +1,4 @@
-package com.easymin.yiyue.worker.wxapi
+package com.rvakva.bus.driver.wxapi
 
 import android.app.Activity
 import android.content.Intent

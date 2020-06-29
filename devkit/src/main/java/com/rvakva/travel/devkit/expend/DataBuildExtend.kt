@@ -1,7 +1,7 @@
-package com.rvakva.bus.common.extent
+package com.rvakva.travel.devkit.expend
 
-import com.rvakva.bus.common.model.LocationMessageDataModel
-import com.rvakva.bus.common.model.LocationMessageModel
+import com.rvakva.travel.devkit.model.LocationMessageDataModel
+import com.rvakva.travel.devkit.model.LocationMessageModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.model.LocationModel
 import com.rvakva.travel.devkit.model.UserInfoModel
@@ -17,7 +17,9 @@ fun LocationModel.createLocationMessage(
 ) = com.google.gson.Gson().toJson(
     LocationMessageModel(
         data = LocationMessageDataModel(
-            driver = userInfo,
+            driverId = userInfo.id,
+            driverName = userInfo.name,
+            driverPhone = userInfo.phone,
             location = this
         )
     )

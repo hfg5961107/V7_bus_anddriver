@@ -1,6 +1,4 @@
-package com.rvakva.bus.common.model
-
-import com.rvakva.travel.devkit.model.IModel
+package com.rvakva.travel.devkit.model
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -9,6 +7,6 @@ import com.rvakva.travel.devkit.model.IModel
  * @CreateDate:     2020/6/24 下午5:50
  */
 class LocationMessageModel(
-    val msg: String = "location",
+    val msg: String = "gps",
     val data: LocationMessageDataModel
-) : IModel
+)

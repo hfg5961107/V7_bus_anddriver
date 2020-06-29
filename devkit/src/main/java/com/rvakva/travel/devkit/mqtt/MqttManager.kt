@@ -1,13 +1,22 @@
 package com.rvakva.travel.devkit.mqtt
 
 import android.util.Log
+import androidx.lifecycle.Observer
+import com.google.gson.Gson
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
+import com.rvakva.travel.devkit.expend.createLocationMessage
 import com.rvakva.travel.devkit.expend.loge
 import com.rvakva.travel.devkit.expend.toAesDecrypt
+import com.rvakva.travel.devkit.model.DriverStatusPojo
+import com.rvakva.travel.devkit.model.UserInfoModel
+import com.rvakva.travel.devkit.x.XDataBase
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
+import org.json.JSONException
+import org.json.JSONObject
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -142,13 +151,13 @@ class MqttManager {
         mqttConfig = null
     }
 
-    fun publish(content: String?) {
+    fun  publish(content: String?) {
         mqttConfig?.let { config ->
             if (!content.isNullOrBlank()) {
                 try {
                     client?.let {
                         if (it.isConnected) {
-                            Log.e("hufeng/publish",content)
+                            content.loge()
                             it.publish(config.topic, MqttMessage(content.toByteArray()).apply {
                                 qos = QOS
                             })
@@ -157,7 +166,42 @@ class MqttManager {
                 } catch (e: Exception) {
                     e.fillInStackTrace()
                 }
+            }
+        }
+    }
 
+    var user : UserInfoModel? = null
+
+    fun publishStatusMessage(statusType: Int?,exceptionDetail : String?) {
+        client?.let {xClient->
+            if (xClient.isConnected) {
+                mqttConfig?.let { config ->
+                    XDataBase.getInstance().userInfoModelDao().getUserInfo().observeForever(Observer {
+                        user = it
+                    })
+                    user?.let {
+                        val driverStatusPojo = DriverStatusPojo()
+                        driverStatusPojo.appKey = Ktx.getInstance().appKeyDataSource.appKey
+                        driverStatusPojo.driverId = it.id
+                        driverStatusPojo.statusType = statusType
+                        driverStatusPojo.phone = it.phone
+                        driverStatusPojo.exceptionDetail = exceptionDetail
+                        val jsonObject = JSONObject()
+                        try {
+                            jsonObject.put("msg", "status")
+                            jsonObject.put("data", JSONObject(Gson().toJson(driverStatusPojo)))
+                            "jsonObject:$jsonObject".loge()
+                            val mqttMessage = MqttMessage(jsonObject.toString().toByteArray())
+                            xClient.publish(config.topic, mqttMessage)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        } catch (e: MqttPersistenceException) {
+                            e.printStackTrace()
+                        } catch (e: MqttException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
             }
         }
     }
