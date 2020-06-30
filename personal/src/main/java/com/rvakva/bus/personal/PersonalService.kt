@@ -63,7 +63,7 @@ interface PersonalService {
     suspend fun applyClose (
         @Query("driverId") driverId: Long,
         @Query("fee") fee: String
-    ): EmResult<String>?
+    ): BaseResult?
 
     /**
      * 业务流水列表

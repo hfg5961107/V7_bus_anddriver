@@ -14,6 +14,7 @@ import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.expend.loge
 import com.rvakva.travel.devkit.expend.numberFormat
 import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
+import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.exception.SpecialApiException
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_wallet.*
@@ -73,7 +74,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
 
     override fun initData(isFirstInit: Boolean) {
         if (isFirstInit) {
-            getUserBalance(true)
+            getUserBalance(isFirstInit)
         }
     }
 
@@ -93,32 +94,26 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
     override fun initObserver() {
         super.initObserver()
         walletActivityViewModel.userConfigLiveData.observe(
-                this, RequestEmResultObserver(
+            this, RequestEmResultObserver(
                 successBlock = {
                     it?.let {
                         walletTvBalance.text = it.balance.numberFormat()
                     }
                 }, failBlock = {
-            (it as? SpecialApiException)?.let {
-            } ?: finish()
-        }, fragmentManager = supportFragmentManager
-        )
+                    (it as? SpecialApiException)?.let {
+                    } ?: finish()
+                }, fragmentManager = supportFragmentManager
+            )
         )
 
         //结算回调处理
         billActivityViewModel.applyCloseLiveData.observe(
-                this, RequestEmResultObserver(
+            this, RequestResultObserver(
                 successBlock = {
-                    it?.let {
-                        ToastBar.show("申请结算成功")
-                    }
-                }, failBlock = {
-            it.message?.let {
-                ToastBar.show(it)
-            }
-        }, fragmentManager = supportFragmentManager
+                    ToastBar.show("结算成功")
+                    getUserBalance(false)
+                }
+            )
         )
-        )
-
     }
 }

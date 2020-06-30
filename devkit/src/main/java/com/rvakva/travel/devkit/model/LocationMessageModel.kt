@@ -8,5 +8,5 @@ package com.rvakva.travel.devkit.model
  */
 class LocationMessageModel(
     val msg: String = "gps",
-    val data: LocationMessageDataModel
+    val data: MutableList<LocationMessageDataModel>
 )

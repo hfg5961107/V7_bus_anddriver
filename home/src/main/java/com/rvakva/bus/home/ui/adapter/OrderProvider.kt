@@ -34,8 +34,8 @@ abstract class OrderProvider : BaseItemProvider<ScheduleDataModel>() {
         helper.setText(R.id.homeOrderAddressTv, "${item.startStationName} - ${item.endStationName}")
 
         helper.setText(R.id.homeOrderTimeOneTv,formatDate(item.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD))
-        helper.setText(R.id.homeOrderTimeOneTv,"检票${item.startLineTime}")
-        helper.setText(R.id.homeOrderTimeOneTv,"出发${item.endLineTime}")
+        helper.setText(R.id.homeOrderTimeTwoTv,"检票${item.startLineTime}")
+        helper.setText(R.id.homeOrderTimeThreeTv,"出发${item.endLineTime}")
 
         helper.setText(R.id.homeOrderPassengerTv,"乘客 ${item.passengerAllNum}   余座 ${item.remainingSeat}")
 

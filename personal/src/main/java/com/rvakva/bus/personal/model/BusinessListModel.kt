@@ -13,33 +13,9 @@ class BusinessListModel {
      * data : [{"created":0,"driverIncome":0,"endLineTime":"string","endStationName":"string","id":0,"licenseNo":"string","orderId":0,"orderNo":"string","passengerNum":0,"schedulingTime":0,"serialNo":"string","startLineTime":"string","startStationName":"string","vehicleSeat":0}]
      * total : 0
      */
-    private var amountMoney = 0
-    private var total = 0
-    private var data: List<DataBean?>? = null
-
-    fun getAmountMoney(): Int {
-        return amountMoney
-    }
-
-    fun setAmountMoney(amountMoney: Int) {
-        this.amountMoney = amountMoney
-    }
-
-    fun getTotal(): Int {
-        return total
-    }
-
-    fun setTotal(total: Int) {
-        this.total = total
-    }
-
-    fun getData(): List<DataBean?>? {
-        return data
-    }
-
-    fun setData(data: List<DataBean?>?) {
-        this.data = data
-    }
+     var amountMoney : Double? = null
+     var total : Int = 0
+     var flowing: List<DataBean?>? = null
 
     class DataBean {
         /**

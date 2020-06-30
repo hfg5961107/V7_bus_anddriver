@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.rvakva.bus.personal.R
+import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.expend.bindPrizeFilters
 import com.rvakva.travel.devkit.expend.dpToPx
 import com.rvakva.travel.devkit.widget.ToastBar
@@ -54,7 +55,7 @@ class ChargeDialog private constructor() : BaseDialogFragment()  {
                         dismiss()
                         (bundle.get(CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
                             it.toString(),
-                            "CHANNEL_APP_ALI"
+                            Config.CHANNEL_APP_ALI
                         )
                     } else {
 //                        ToastBar.show("请输入金额")
@@ -67,7 +68,7 @@ class ChargeDialog private constructor() : BaseDialogFragment()  {
                         dismiss()
                         (bundle.get(CLICK_BLOCK) as? (String,String) -> Unit)?.invoke(
                             it.toString(),
-                            "CHANNEL_APP_WECHAT"
+                            Config.CHANNEL_APP_WECHAT
                         )
                     } else {
 //                        ToastBar.show("请输入金额")

@@ -16,12 +16,16 @@ fun LocationModel.createLocationMessage(
     userInfo: UserInfoModel
 ) = com.google.gson.Gson().toJson(
     LocationMessageModel(
-        data = LocationMessageDataModel(
-            driverId = userInfo.id,
-            driverName = userInfo.name,
-            driverPhone = userInfo.phone,
-            location = this
-        )
+        data = (mutableListOf<LocationMessageDataModel>().let {
+           it.add(
+               LocationMessageDataModel(
+               driverId = userInfo.id,
+               driverName = userInfo.name,
+               driverPhone = userInfo.phone,
+               location = this
+           ))
+            return@let it
+        })
     )
 )
 
