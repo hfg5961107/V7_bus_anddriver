@@ -94,8 +94,6 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             val createTime = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD)
             val completeTime = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
 
-//            completeLabel.text = formatDate(model.created * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
-//            shuttleLabel.text = formatDate(model.schedulingTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
             carInfoLabel.text = model.licenseNo + " / " + model.vehicleSeat+"座"
             orderNumLabel.text = model.orderNo
             shuttleLabel.text = createTime + " " + model.startLineTime + " - " + model.endLineTime
@@ -112,7 +110,7 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             var realFee = ""
             if (isIncomeType) {
                 realPayLabel.text = model.realFee.toString()+"元"
-                commissionRatioLabel.text = model.proportion.toString()+"元"
+                commissionRatioLabel.text = model.proportion.toString()+"%"
                 realFee = model.driverIncome.toString()
             } else {
                 realFee = model.realFee.toString()

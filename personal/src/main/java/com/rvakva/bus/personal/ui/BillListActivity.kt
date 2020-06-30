@@ -44,10 +44,12 @@ class BillListActivity : KtxActivity(R.layout.activity_bill_list) {
                         it.data[position].let { data ->
                             when (view.id) {
                                 R.id.myBillList -> {
-                                    //跳转收入详情
-                                    jumpByARouter(Config.USER_INCOME_DETAILS) {
-                                        withInt("orderId", data.orderId)
-                                        withBoolean("isIncomeType",true)
+                                    if (data.type == 2){
+                                        //跳转收入详情
+                                        jumpByARouter(Config.USER_INCOME_DETAILS) {
+                                            withInt("orderId", data.orderId)
+                                            withBoolean("isIncomeType",true)
+                                        }
                                     }
                                 }
                             }

@@ -32,6 +32,7 @@
             android:textSize="@dimen/size_16sp" />
 
         <ImageView
+            android:id="@+id/billListRightIv"
             android:layout_width="8dp"
             android:layout_height="12dp"
             android:layout_centerVertical="true"
