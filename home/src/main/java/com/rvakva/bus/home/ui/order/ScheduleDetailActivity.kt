@@ -6,20 +6,27 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.rvakva.bus.common.X
+import com.rvakva.bus.common.XViewModel
 import com.rvakva.bus.common.model.OrderStatusTypeEnum
 import com.rvakva.bus.common.model.PassengerModel
 import com.rvakva.bus.common.model.ScheduleDataModel
 import com.rvakva.bus.common.model.ScheduleStatusTypeEnum
+import com.rvakva.bus.common.util.MyMediaPlayerType
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.dialog.CheckTicketsDialog
 import com.rvakva.bus.home.ui.adapter.OrderPassengerAdapter
 import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.formatDate
 import com.rvakva.travel.devkit.expend.jumpTo
+import com.rvakva.travel.devkit.expend.toJsonModel
+import com.rvakva.travel.devkit.mqtt.MqttResultModel
+import com.rvakva.travel.devkit.observer.EventObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.ApiConstant
 import com.rvakva.travel.devkit.widget.ToastBar
@@ -85,6 +92,23 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
                 }
             )
         )
+
+        KtxViewModel.mqttLiveData.observe(this, EventObserver { it ->
+            String(it.payload).toJsonModel<MqttResultModel>()?.let {
+                when (it.msg) {
+                    "Assign" -> {
+                        requestScheduleData()
+//                        workViewModel.showNotification(true, createIntent())
+//                        X.getInstance().myMediaPlayer.play(MyMediaPlayerType.NEW_ORDER)
+//                        XViewModel.newOrderLiveData.postEventValue(true)
+                    }
+
+                    else -> {
+
+                    }
+                }
+            }
+        })
 
         orderOperationViewModel.operationLiveData.observe(
             this,

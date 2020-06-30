@@ -19,7 +19,8 @@ class BusinessListProvider : BaseItemProvider<BusinessListModel.DataBean>() {
     override fun convert(helper: BaseViewHolder, item: BusinessListModel.DataBean) {
 
         helper.setText(R.id.billTypeTv, "收入")
-        helper.setText(R.id.billMoneyTv, "+ ${item.driverIncome.checkIsInt()}")
+//        helper.setText(R.id.billMoneyTv, "+ ${item.driverIncome.checkIsInt()}")
+        helper.setText(R.id.billMoneyTv, "+ ${item.realFee.checkIsInt()}")
 
         helper.setText(R.id.billCarNoSeatTv, "${item.licenseNo} / ${item.vehicleSeat}座")
 

@@ -36,6 +36,7 @@ class BusinessListModel {
          */
         var created : Long= 0
         var driverIncome : Double = 0.0
+        var realFee : Double = 0.0
         var endLineTime: String = ""
         var endStationName: String = ""
         var id :Int= 0

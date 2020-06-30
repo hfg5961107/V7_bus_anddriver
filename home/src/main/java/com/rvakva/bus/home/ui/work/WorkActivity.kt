@@ -57,11 +57,7 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                         X.getInstance().myMediaPlayer.play(MyMediaPlayerType.NEW_ORDER)
                         XViewModel.newOrderLiveData.postEventValue(true)
                     }
-//                    "cancel" -> {
-//                        it.data?.let {
-//                            XViewModel.addCancelOrderData(it.orderId)
-//                        }
-//                    }
+
                     else -> {
 
                     }
