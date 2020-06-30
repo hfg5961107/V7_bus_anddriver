@@ -106,13 +106,13 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             startAddressLabel.text = model.startStationName
             endAddressLabel.text = model.endStationName
 
-            priceLabel.text = model.orderFee.toString()
-            discountLabel.text = model.couponFee.toString()
+            priceLabel.text = model.orderFee.toString()+"元"
+            discountLabel.text = model.couponFee.toString()+"元"
 
             var realFee = ""
             if (isIncomeType) {
-                realPayLabel.text = model.realFee.toString()
-                commissionRatioLabel.text = model.proportion.toString()
+                realPayLabel.text = model.realFee.toString()+"元"
+                commissionRatioLabel.text = model.proportion.toString()+"元"
                 realFee = model.driverIncome.toString()
             } else {
                 realFee = model.realFee.toString()

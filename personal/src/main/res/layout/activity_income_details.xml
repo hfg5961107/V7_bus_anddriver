@@ -62,7 +62,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,7 +87,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +112,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -137,7 +137,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,7 +162,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
 
             </LinearLayout>
 
@@ -195,7 +195,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
 
@@ -221,7 +221,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -246,7 +246,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <View
@@ -277,7 +277,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
 
@@ -303,7 +303,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -330,7 +330,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
@@ -356,7 +356,7 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:text="123" />
+                    tools:text="--" />
             </LinearLayout>
 
             <LinearLayout
