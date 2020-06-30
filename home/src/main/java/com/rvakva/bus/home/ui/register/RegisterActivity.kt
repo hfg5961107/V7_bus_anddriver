@@ -94,6 +94,10 @@ class RegisterActivity : KtxActivity(R.layout.aty_register) {
                 Toast.makeText(this,"请输入正确格式的手机号",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (mRandom==null){
+                Toast.makeText(this,"请输入正确的验证码",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             registerActivityViewModel.register(
                 registerEtPhone.text.toString(),
