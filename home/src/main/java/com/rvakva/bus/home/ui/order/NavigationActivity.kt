@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_navigation.*
  * @CreateDate:     2020/6/1 下午5:10
  */
 class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviListener,
-        AMapNaviViewListener {
+    AMapNaviViewListener {
 
     var mAMapNavi: AMapNavi? = null
 
@@ -69,7 +69,7 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
         //1 接人或者送人  2站点
         var type = intent.getIntExtra("type", 0)
         if (type == 1) {
-            (intent.getSerializableExtra("order") as PassengerModel).let {model->
+            (intent.getSerializableExtra("order") as PassengerModel).let { model ->
 
                 var stationModel: StationModel? = null
 
@@ -81,9 +81,9 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                             naviOperationBtn.text = "已到达乘客下车点"
                             naviOperationBtn.setOnClickListener {
                                 orderOperationViewModel.finishOrder(
-                                        Ktx.getInstance().userDataSource.userId,
-                                        model.orderDriverId,
-                                        stationModel?.orderId
+                                    Ktx.getInstance().userDataSource.userId,
+                                    model.orderDriverId,
+                                    stationModel?.orderId
                                 )
                             }
                         }
@@ -97,9 +97,9 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                             naviOperationBtn.text = "已到达乘客上车点"
                             naviOperationBtn.setOnClickListener {
                                 orderOperationViewModel.arriveBookPlace(
-                                        Ktx.getInstance().userDataSource.userId,
-                                        model!!.orderDriverId,
-                                        stationModel?.orderId
+                                    Ktx.getInstance().userDataSource.userId,
+                                    model!!.orderDriverId,
+                                    stationModel?.orderId
                                 )
                             }
                         }
@@ -111,13 +111,6 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                 naviSiteTv.text = stationModel?.name
 
                 naviPassengerLin.visibility = View.VISIBLE
-//                model.customerAvatar?.let {
-//                    if (it.contains("http") || it.contains("https")) {
-//                        naviHeaderIv.glideWithOvalInto(it)
-//                    } else {
-//                        naviHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
-//                    }
-//                } ?: naviHeaderIv.setImageResource(R.drawable.com_icon_passenger)
                 naviNameTv.text = model.customerName
                 naviPhoneIv.setOnClickListener {
                     if (!model.customerPhone.isNullOrBlank()) {
@@ -126,7 +119,7 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
                 }
             }
         } else if (type == 2) {
-            (intent.getSerializableExtra("schedule") as ScheduleDataModel)?.let {model->
+            (intent.getSerializableExtra("schedule") as ScheduleDataModel)?.let { model ->
 
                 model.station.forEach {
 
@@ -138,13 +131,11 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
 
                         naviOperationBtn.text = "到达目的地"
                         naviOperationBtn.setOnClickListener {
-                            naviOperationBtn.setOnClickListener {
-                                orderOperationViewModel.finishOrder(
-                                        Ktx.getInstance().userDataSource.userId,
-                                        model!!.id,
-                                        null
-                                )
-                            }
+                            orderOperationViewModel.finishOrder(
+                                Ktx.getInstance().userDataSource.userId,
+                                model!!.id,
+                                null
+                            )
                         }
                         return
                     }
@@ -182,28 +173,28 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
 
     override fun initObserver() {
         orderOperationViewModel.operationLiveData.observe(
-                this,
-                RequestResultObserver(
-                        successBlock = {
-                            if (it.data != null) {
-                                it.data?.let { model ->
-                                    if (model.isFinish) {
-                                        jumpTo<ServiceCompleteActivity> {
-                                            putExtra("serviceTime", model.totalTime)
-                                        }
-                                        finish()
-                                    } else {
-                                        finish()
-                                    }
+            this,
+            RequestResultObserver(
+                successBlock = {
+                    if (it.data != null) {
+                        it.data?.let { model ->
+                            if (model.isFinish) {
+                                jumpTo<ServiceCompleteActivity> {
+                                    putExtra("serviceTime", model.totalTime)
                                 }
+                                finish()
                             } else {
                                 finish()
                             }
-                        },
-                        failBlock = {
-                           finish()
                         }
-                )
+                    } else {
+                        finish()
+                    }
+                },
+                failBlock = {
+                    finish()
+                }
+            )
         )
     }
 
@@ -302,9 +293,9 @@ class NavigationActivity : KtxActivity(R.layout.activity_navigation), AMapNaviLi
     }
 
     override fun updateIntervalCameraInfo(
-            p0: AMapNaviCameraInfo?,
-            p1: AMapNaviCameraInfo?,
-            p2: Int
+        p0: AMapNaviCameraInfo?,
+        p1: AMapNaviCameraInfo?,
+        p2: Int
     ) {
 
     }

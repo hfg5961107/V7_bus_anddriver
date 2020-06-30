@@ -10,6 +10,7 @@ import com.rvakva.travel.devkit.expend.launchRequest
 import com.rvakva.travel.devkit.expend.requestMap
 import com.rvakva.travel.devkit.livedata.RequestLiveData
 import com.rvakva.travel.devkit.retrofit.ApiManager
+import com.rvakva.travel.devkit.retrofit.result.BaseResult
 import com.rvakva.travel.devkit.retrofit.result.EmResult
 
 /**
@@ -22,7 +23,7 @@ class BillActivityViewModel(application: Application) : AndroidViewModel(applica
 
     val billListLiveData by RequestLiveData<EmResult<List<BillModel>>>()
 
-    val applyCloseLiveData by RequestLiveData<EmResult<String>>()
+    val applyCloseLiveData by RequestLiveData<BaseResult>()
 
     val businessListLiveData by RequestLiveData<EmResult<BusinessListModel>>()
 

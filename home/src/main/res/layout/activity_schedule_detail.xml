@@ -219,7 +219,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:text="订单信息"
+                    android:text="班次信息"
                     android:textSize="@dimen/size_12sp"
                     android:textColor="@color/black_sub"
                     android:gravity="center_vertical"

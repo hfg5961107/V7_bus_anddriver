@@ -26,7 +26,7 @@ class BillListProvider : BaseItemProvider<BillModel>() {
             3->{
                 helper.setText(R.id.billTypeTv,"充值")
                 helper.setText(R.id.billMoneyTv,"+ ${item.fee}")
-                helper.setText(R.id.billCarNoSeatTv,"${item.rechargeType}")
+                helper.setText(R.id.billCarNoSeatTv,if (item.rechargeType == Config.CHANNEL_APP_ALI){"支付宝"}else{"微信"})
                 helper.setTextColor(R.id.billCarNoSeatTv,R.color.black_sub)
             }
             4->{

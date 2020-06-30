@@ -9,7 +9,7 @@ import com.rvakva.travel.devkit.Ktx
  * @CreateDate:     2020/6/24 下午5:49
  */
 class LocationMessageDataModel(
-//    val appKey: String = Ktx.getInstance().appKeyDataSource.appKey,
+    val appKey: String = Ktx.getInstance().appKeyDataSource.appKey,
     var driverId : Long = 0,
     var driverPhone : String? = null,
     var driverName : String? = null,
