@@ -80,7 +80,7 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
         Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
             if (it.balance != null){
-                myTextMony.text="¥${it.balance}"
+                myTextMony.text="¥${it.balance.checkIsInt()}"
             }else{
                 myTextMony.text="¥0"
             }

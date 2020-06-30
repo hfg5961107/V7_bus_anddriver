@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.model.BusinessListModel
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.formatDate
 
 /**
@@ -18,7 +19,7 @@ class BusinessListProvider : BaseItemProvider<BusinessListModel.DataBean>() {
     override fun convert(helper: BaseViewHolder, item: BusinessListModel.DataBean) {
 
         helper.setText(R.id.billTypeTv, "收入")
-        helper.setText(R.id.billMoneyTv, "+ ${item.driverIncome}")
+        helper.setText(R.id.billMoneyTv, "+ ${item.driverIncome.checkIsInt()}")
 
         helper.setText(R.id.billCarNoSeatTv, "${item.licenseNo} / ${item.vehicleSeat}座")
 

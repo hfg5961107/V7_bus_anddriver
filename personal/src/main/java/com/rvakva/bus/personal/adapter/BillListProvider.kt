@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rvakva.bus.personal.R
 import com.rvakva.bus.personal.model.BillModel
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.formatDate
 
 /**
@@ -20,14 +21,14 @@ class BillListProvider : BaseItemProvider<BillModel>() {
         when (item.type) {
             2 -> {
                 helper.setText(R.id.billTypeTv, "收入")
-                helper.setText(R.id.billMoneyTv, "+ ${item.fee}")
+                helper.setText(R.id.billMoneyTv, "+ ${item.fee.checkIsInt()}")
                 helper.setText(R.id.billCarNoSeatTv, "${item.licenseNo} / ${item.vehicleSeat}座")
                 helper.setTextColor(R.id.billCarNoSeatTv, R.color.black_sub)
                 helper.setVisible(R.id.billListRightIv, true)
             }
             3 -> {
                 helper.setText(R.id.billTypeTv, "充值")
-                helper.setText(R.id.billMoneyTv, "+ ${item.fee}")
+                helper.setText(R.id.billMoneyTv, "+ ${item.fee.checkIsInt()}")
                 helper.setText(
                     R.id.billCarNoSeatTv,
                     if (item.rechargeType == Config.CHANNEL_APP_ALI) {
@@ -41,7 +42,7 @@ class BillListProvider : BaseItemProvider<BillModel>() {
             }
             4 -> {
                 helper.setText(R.id.billTypeTv, "结算")
-                helper.setText(R.id.billMoneyTv, "- ${item.fee}")
+                helper.setText(R.id.billMoneyTv, "- ${item.fee.checkIsInt()}")
                 //1-审核中 2-审核通过 3-审核拒绝
                 if (item.status == 1) {
                     helper.setText(R.id.billCarNoSeatTv, "待审核")

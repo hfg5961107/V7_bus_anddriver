@@ -118,7 +118,7 @@ class BusinessListActivity : KtxActivity(R.layout.aty_business_list), RecyclerIt
             this,
             RequestResultObserver(
                 successBlock = {
-                    businessTvMoney.text = it.data?.amountMoney.toString()
+                    businessTvMoney.text = it.data?.amountMoney?.checkIsInt()
                     recyclerviewBusiness.onDataSuccessAndEmpty(it.data?.flowing?.toMutableList())
                     recyclerviewBusiness.setEmptyRes(R.drawable.user_icon_no_bill)
                 }, failBlock = {

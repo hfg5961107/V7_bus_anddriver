@@ -17,6 +17,7 @@ import com.rvakva.bus.home.viewmodel.order.OrderOperationViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
+import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.formatDate
 import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
@@ -194,7 +195,7 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
         detailCompleteTimeTv.text =
             formatDate(model.finishTime * 1000, Config.PATTERN_YYYY_MM_DD_HH_MM)
 
-        detailIncomeTv.text = "¥ ${model.realTotalFee}"
+        detailIncomeTv.text = "¥ ${model.realTotalFee.checkIsInt()}"
 
 //        * 1 站点-站点
 //        * 2 站点-送人

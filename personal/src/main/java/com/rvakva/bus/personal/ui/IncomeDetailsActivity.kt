@@ -12,6 +12,7 @@ import com.rvakva.bus.personal.model.FinanceModel
 import com.rvakva.bus.personal.viewmodel.IncomeDetailsViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.base.KtxActivity
+import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.formatDate
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.exception.SpecialApiException
@@ -104,16 +105,16 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             startAddressLabel.text = model.startStationName
             endAddressLabel.text = model.endStationName
 
-            priceLabel.text = model.orderFee.toString()+"元"
-            discountLabel.text = model.couponFee.toString()+"元"
+            priceLabel.text = model.orderFee.checkIsInt()+"元"
+            discountLabel.text = model.couponFee.checkIsInt()+"元"
 
             var realFee = ""
             if (isIncomeType) {
-                realPayLabel.text = model.realFee.toString()+"元"
-                commissionRatioLabel.text = model.proportion.toString()+"%"
-                realFee = model.driverIncome.toString()
+                realPayLabel.text = model.realFee.checkIsInt()+"元"
+                commissionRatioLabel.text = model.proportion.checkIsInt()+"%"
+                realFee = model.driverIncome.checkIsInt()
             } else {
-                realFee = model.realFee.toString()
+                realFee = model.realFee.checkIsInt()
             }
 
             incomeLabel.text = realFee;

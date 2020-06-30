@@ -10,6 +10,7 @@ import com.rvakva.bus.personal.viewmodel.WalletActivityViewModel
 import com.rvakva.bus.personal.widget.ChargeDialog
 import com.rvakva.bus.personal.widget.WalletCloseDialog
 import com.rvakva.travel.devkit.Config
+import com.rvakva.travel.devkit.expend.checkIsInt
 import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.expend.loge
 import com.rvakva.travel.devkit.expend.numberFormat
@@ -97,7 +98,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
             this, RequestEmResultObserver(
                 successBlock = {
                     it?.let {
-                        walletTvBalance.text = it.balance.numberFormat()
+                        walletTvBalance.text = it.balance.checkIsInt()
                     }
                 }, failBlock = {
                     (it as? SpecialApiException)?.let {
