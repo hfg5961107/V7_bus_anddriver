@@ -43,8 +43,10 @@ class IncomeDetailsActivity : KtxActivity(R.layout.activity_income_details) {
             }
             if (isIncomeType) {
                 it.centerText.text = "收入详情"
+                incomeTvLabel.text="你的收入"
             } else {
                 it.centerText.text = "流水详情"
+                incomeTvLabel.text="实际支付"
             }
         }
 

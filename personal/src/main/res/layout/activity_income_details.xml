@@ -366,6 +366,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/incomeTvLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="你的收入"
