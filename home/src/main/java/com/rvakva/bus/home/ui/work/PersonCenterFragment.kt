@@ -68,10 +68,28 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
                 }
             }
 
+            //历史班次
+            pcHistoryScheduleLl.setOnClickListener {view->
+                if (it.applyStatus == UserAuditEnum.SUCCESS.status){
+                    jumpByARouter(Config.USER_HISTORY_SCHEDULE)
+                }else{
+                    ToastBar.show("只有账户通过审核后，才能查看")
+                }
+            }
+
             //我的钱包
             pcWalletLl.setOnClickListener {view->
                 if (it.applyStatus == UserAuditEnum.SUCCESS.status){
                     jumpByARouter(Config.USER_WALLET)
+                }else{
+                    ToastBar.show("只有账户通过审核后，才能查看")
+                }
+            }
+
+            //业务流水
+            pcBusinessList.setOnClickListener {view->
+                if (it.applyStatus == UserAuditEnum.SUCCESS.status){
+                    jumpByARouter(Config.USER_BUSINESS_LIST)
                 }else{
                     ToastBar.show("只有账户通过审核后，才能查看")
                 }
@@ -99,18 +117,18 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     var name : String? = null
 
     private fun setOnClick() {
-        //历史班次
-        pcHistoryScheduleLl.setOnClickListener {
-            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
-        }
+//        //历史班次
+//        pcHistoryScheduleLl.setOnClickListener {
+//            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
+//        }
 //        //我的钱包
 //        pcWalletLl.setOnClickListener {
 //            jumpByARouter(Config.USER_WALLET)
 //        }
-        //业务流水
-        pcBusinessList.setOnClickListener {
-            jumpByARouter(Config.USER_BUSINESS_LIST)
-        }
+//        //业务流水
+//        pcBusinessList.setOnClickListener {
+//            jumpByARouter(Config.USER_BUSINESS_LIST)
+//        }
         //账户认证
         pcAccountApprove.setOnClickListener {
             jumpByARouter(Config.USER_IDENTITY)
