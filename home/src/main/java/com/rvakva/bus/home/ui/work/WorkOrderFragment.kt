@@ -244,12 +244,17 @@ class WorkOrderFragment private constructor() : KtxFragment(R.layout.fragment_wo
 
     private fun requestData() {
         workFragmentViewModel.isRequest = true
-        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            workFragmentViewModel.getOrderList(
-                orderStatusType,
-                mainMrv.currentPage + 1
-            )
-        })
+//        Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
+//            loge("~~~~~~~~~~~~~~~~~~~~`${viewLifecycleOwner.lifecycle.currentState}")
+//            workFragmentViewModel.getOrderList(
+//                orderStatusType,
+//                mainMrv.currentPage + 1
+//            )
+//        })
+        workFragmentViewModel.getOrderList(
+            orderStatusType,
+            mainMrv.currentPage + 1
+        )
     }
 
     private fun requestWithAction(refreshEnable: Boolean = true) {

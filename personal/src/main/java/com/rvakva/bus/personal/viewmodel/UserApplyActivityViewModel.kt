@@ -95,12 +95,16 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
                                 it.removeAt(0)
                             }
                             if (otherOne == null) {
-                                otherOne = it[0]
-                                it.removeAt(0)
+                                if (it.size>0){
+                                    otherOne = it[0]
+                                    it.removeAt(0)
+                                }
                             }
                             if (otherTwo == null) {
-                                otherTwo = it[0]
-                                it.removeAt(0)
+                                if (it.size>0) {
+                                    otherTwo = it[0]
+                                    it.removeAt(0)
+                                }
                             }
                             "frontPath:$frontPath,\nbackPath:$backPath,\notherOne:$otherOne,\notherTwo:$otherTwo".loge()
                             commitDriverInfo(

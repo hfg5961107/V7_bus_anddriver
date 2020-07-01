@@ -11,6 +11,7 @@ import com.rvakva.travel.devkit.livedata.ResumeStateEventLiveData
 object XViewModel {
 
     val newOrderLiveData = ResumeStateEventLiveData<Boolean>()
+    val newDetailsOrderLiveData = ResumeStateEventLiveData<Boolean>()
 
 
 }

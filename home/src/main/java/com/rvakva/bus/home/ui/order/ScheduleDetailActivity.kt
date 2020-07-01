@@ -93,20 +93,9 @@ class ScheduleDetailActivity : KtxActivity(R.layout.activity_schedule_detail),
             )
         )
 
-        KtxViewModel.mqttLiveData.observe(this, EventObserver { it ->
-            String(it.payload).toJsonModel<MqttResultModel>()?.let {
-                when (it.msg) {
-                    "Assign" -> {
-                        requestScheduleData()
-//                        workViewModel.showNotification(true, createIntent())
-//                        X.getInstance().myMediaPlayer.play(MyMediaPlayerType.NEW_ORDER)
-//                        XViewModel.newOrderLiveData.postEventValue(true)
-                    }
-
-                    else -> {
-
-                    }
-                }
+        XViewModel.newDetailsOrderLiveData.observe(this, EventObserver { it ->
+            if (it){
+                requestScheduleData()
             }
         })
 

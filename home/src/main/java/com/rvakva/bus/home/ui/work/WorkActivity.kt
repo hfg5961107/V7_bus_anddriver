@@ -56,6 +56,10 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
                         workViewModel.showNotification(true, createIntent())
                         X.getInstance().myMediaPlayer.play(MyMediaPlayerType.NEW_ORDER)
                         XViewModel.newOrderLiveData.postEventValue(true)
+                        XViewModel.newDetailsOrderLiveData.postEventValue(true)
+                    }
+                    "Cancel" ->{
+                        XViewModel.newDetailsOrderLiveData.postEventValue(true)
                     }
 
                     else -> {
