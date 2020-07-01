@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/f3f4f5"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/f3f4f5"
+    android:orientation="vertical">
 
     <com.rvakva.travel.devkit.widget.MyTitleBar
         android:id="@+id/detailMtb"
@@ -19,181 +19,188 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:layout_above="@+id/orderDetailBottomLin">
+            android:layout_above="@+id/orderDetailBottomLin"
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:background="@color/white"
 
-                android:background="@color/white">
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_16dp">
+                    android:paddingRight="@dimen/size_16dp">
+
                     <TextView
                         android:id="@+id/detailCarNumberSeatTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textColor="@color/black_sub"
-                        android:textSize="@dimen/size_12sp"
-                        />
+                        android:textSize="@dimen/size_12sp" />
+
                     <TextView
                         android:id="@+id/detailRestSeatTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="@dimen/size_12sp"
                         android:gravity="right"
+                        android:text="--"
                         android:textColor="@color/black_sub"
-                        android:visibility="gone"/>
+                        android:textSize="@dimen/size_12sp"
+                        android:visibility="gone" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/detailStartSiteLl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_16dp"
-                    android:gravity="center_vertical">
+                    android:paddingRight="@dimen/size_16dp">
 
                     <ImageView
                         android:layout_width="@dimen/size_16dp"
                         android:layout_height="@dimen/size_16dp"
-                        android:src="@drawable/com_icon_start"/>
+                        android:src="@drawable/com_icon_start" />
 
                     <TextView
                         android:id="@+id/detailStartSiteTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_8dp"
                         android:text="--"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="@dimen/size_14sp"
-                        android:layout_marginLeft="@dimen/size_8dp"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/detailEndSiteLl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/size_16dp"
-                    android:paddingRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_12dp"
-                    android:gravity="center_vertical">
+                    android:paddingRight="@dimen/size_16dp">
 
                     <ImageView
                         android:layout_width="@dimen/size_16dp"
                         android:layout_height="@dimen/size_16dp"
-                        android:src="@drawable/com_icon_end"/>
+                        android:src="@drawable/com_icon_end" />
 
                     <TextView
                         android:id="@+id/detailEndSiteTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_8dp"
                         android:text="--"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14sp"
-                        android:layout_marginLeft="@dimen/size_8dp"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/size_16dp"
                     android:layout_marginTop="@dimen/size_16dp"
                     android:layout_marginRight="@dimen/size_16dp"
-                    android:layout_marginBottom="@dimen/size_16dp">
+                    android:layout_marginBottom="@dimen/size_16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/detailBeginTimeOneTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black_sub"
-                        android:textSize="@dimen/size_14sp"
-                        android:text="2020-05-15"
                         android:drawableLeft="@drawable/home_icon_time"
                         android:drawablePadding="8dp"
                         android:gravity="center_vertical"
-                        android:includeFontPadding="false"/>
+                        android:includeFontPadding="false"
+                        android:text="2020-05-15"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="3dp"
                         android:layout_height="3dp"
-                        android:src="@drawable/oval_666_bg"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="@dimen/size_1dp"/>
+                        android:layout_marginTop="@dimen/size_1dp"
+                        android:src="@drawable/oval_666_bg" />
+
                     <TextView
                         android:id="@+id/detailBeginTimeTwoTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black_sub"
-                        android:textSize="@dimen/size_14sp"
-                        android:text="检票 14:00"
                         android:layout_marginLeft="8dp"
-                        android:includeFontPadding="false"/>
+                        android:includeFontPadding="false"
+                        android:text="检票 14:00"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="3dp"
                         android:layout_height="3dp"
-                        android:src="@drawable/oval_666_bg"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="@dimen/size_1dp"/>
+                        android:layout_marginTop="@dimen/size_1dp"
+                        android:src="@drawable/oval_666_bg" />
+
                     <TextView
                         android:id="@+id/detailBeginTimeThreeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black_sub"
-                        android:textSize="@dimen/size_14sp"
-                        android:text="出发 14:10"
                         android:layout_marginLeft="8dp"
-                        android:includeFontPadding="false"/>
+                        android:includeFontPadding="false"
+                        android:text="出发 14:10"
+                        android:textColor="@color/black_sub"
+                        android:textSize="@dimen/size_14sp" />
                 </LinearLayout>
-
-
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="@color/f3f4f5"/>
-
-
-
+                    android:background="@color/f3f4f5" />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:paddingLeft="@dimen/size_16dp"
                         android:text="乘客信息"
-                        android:textSize="@dimen/size_12sp"
                         android:textColor="@color/black_sub"
-                        android:paddingLeft="@dimen/size_16dp"/>
+                        android:textSize="@dimen/size_12sp" />
+
                     <TextView
                         android:id="@+id/detailCheckTicketTv"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:text="检票"
                         android:background="@drawable/cor_left_blue_bg"
+                        android:drawableRight="@drawable/com_ticket_arraw"
+                        android:gravity="center_vertical"
                         android:paddingLeft="16dp"
                         android:paddingRight="10dp"
+                        android:text="检票"
                         android:textColor="@color/white"
                         android:textSize="@dimen/size_12sp"
-                        android:gravity="center_vertical"
-                        android:drawableRight="@drawable/com_ticket_arraw"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -201,58 +208,56 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:visibility="visible"/>
-
-
-
-
-
+                    android:visibility="visible" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="@color/f3f4f5"/>
-
-
-
+                    android:background="@color/f3f4f5" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:text="班次信息"
-                    android:textSize="@dimen/size_12sp"
-                    android:textColor="@color/black_sub"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"/>
-                
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:text="班次信息"
+                    android:textColor="@color/black_sub"
+                    android:textSize="@dimen/size_12sp" />
+
                 <RelativeLayout
                     android:id="@+id/detailOrderNoRl"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_44dp"
                     android:paddingLeft="@dimen/size_16dp"
                     android:paddingRight="@dimen/size_16dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="班次编号"
-                        android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="@dimen/size_14sp" />
+
                     <TextView
                         android:id="@+id/detailOrderNoTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/black"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                        android:text="--"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_1px"
-                        android:src="@color/color_line"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true"
+                        android:src="@color/color_line" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/detailCancelTimeRl"
                     android:layout_width="match_parent"
@@ -260,28 +265,32 @@
                     android:paddingLeft="@dimen/size_16dp"
                     android:paddingRight="@dimen/size_16dp"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="取消时间"
-                        android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="@dimen/size_14sp" />
+
                     <TextView
                         android:id="@+id/detailCancelTimeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/black"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                        android:text="--"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_1px"
-                        android:src="@color/color_line"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true"
+                        android:src="@color/color_line" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/detailCompleteTimeRl"
                     android:layout_width="match_parent"
@@ -289,28 +298,32 @@
                     android:paddingLeft="@dimen/size_16dp"
                     android:paddingRight="@dimen/size_16dp"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="完成时间"
-                        android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="@dimen/size_14sp" />
+
                     <TextView
                         android:id="@+id/detailCompleteTimeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/black"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                        android:text="--"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_1px"
-                        android:src="@color/color_line"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true"
+                        android:src="@color/color_line" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/detailIncomeRl"
                     android:layout_width="match_parent"
@@ -318,27 +331,30 @@
                     android:paddingLeft="@dimen/size_16dp"
                     android:paddingRight="@dimen/size_16dp"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="总计金额"
-                        android:textSize="@dimen/size_14sp"
                         android:textColor="@color/black"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="@dimen/size_14sp" />
+
                     <TextView
                         android:id="@+id/detailIncomeTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/black"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                        android:text="--"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14sp" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_1px"
-                        android:src="@color/color_line"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true"
+                        android:src="@color/color_line" />
                 </RelativeLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -347,31 +363,32 @@
             android:id="@+id/orderDetailBottomLin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_alignParentBottom="true"
+            android:orientation="vertical"
             android:paddingTop="@dimen/size_16dp">
 
             <LinearLayout
                 android:id="@+id/orderDetailNavigationLin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_44dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/size_12dp"
-                android:background="@drawable/cor4_com_btn_black_bg"
                 android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_12dp"
                 android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/cor4_com_btn_black_bg"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:visibility="gone">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="继续导航"
-                    android:textSize="@dimen/size_16sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:background="@null"
                     android:drawableLeft="@drawable/com_way_navigation"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:text="继续导航"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_16sp" />
             </LinearLayout>
 
             <Button
@@ -379,13 +396,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_44dp"
                 android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_12dp"
                 android:layout_marginRight="@dimen/size_16dp"
                 android:layout_marginBottom="@dimen/size_16dp"
                 android:background="@drawable/cor4_com_btn_blue_bg"
                 android:text=""
-                android:layout_marginTop="@dimen/size_12dp"
-                android:textSize="@dimen/size_16sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_16sp" />
         </LinearLayout>
 
     </RelativeLayout>

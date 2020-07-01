@@ -111,7 +111,7 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
         billActivityViewModel.applyCloseLiveData.observe(
             this, RequestResultObserver(
                 successBlock = {
-                    ToastBar.show("结算成功")
+//                    ToastBar.show("结算成功")
                     getUserBalance(false)
                 }
             )

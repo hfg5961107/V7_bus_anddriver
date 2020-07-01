@@ -329,7 +329,6 @@
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     tools:text="--" />
             </LinearLayout>
 
@@ -363,6 +362,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -395,7 +395,6 @@
                         android:textColor="@color/sy_orange"
                         android:textSize="16sp"
                         android:text="元" />
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
