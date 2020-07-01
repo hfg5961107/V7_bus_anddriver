@@ -75,8 +75,8 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
         if (isFirstInit) {
             workViewModel.getMqttConfig()
             workViewModel.startLocation()
+            workViewModel.getUserInfo()
         }
-        workViewModel.getUserInfo()
         workViewModel.getUserConfig()
 //        workViewModel.getUserStatistics()
     }
@@ -101,10 +101,10 @@ class WorkActivity : KtxActivity(R.layout.activity_work) {
     }
 
     var workFragment : WorkFragment =  WorkFragment.newInstance()
-//    var orderFragment : OrderFragment =  OrderFragment.newInstance()
     var personFragment : PersonCenterFragment =  PersonCenterFragment.newInstance()
 
     private fun switchFragment(targetFragment: Fragment): FragmentTransaction {
+        workViewModel.getUserInfo()
         var transaction = supportFragmentManager.beginTransaction()
         if (!targetFragment.isAdded){
             if (currentFragment!=null){

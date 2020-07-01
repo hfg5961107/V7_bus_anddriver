@@ -80,7 +80,7 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
     }
 
     override fun initData(isFirstInit: Boolean) {
-
+        workViewModel.getUserInfo()
     }
 
     val fragmentList = mutableListOf(

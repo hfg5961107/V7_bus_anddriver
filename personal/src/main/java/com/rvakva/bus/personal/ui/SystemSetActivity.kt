@@ -17,6 +17,7 @@ import com.rvakva.travel.devkit.expend.callPhone
 import com.rvakva.travel.devkit.expend.jumpTo
 import com.rvakva.travel.devkit.expend.resetApplication
 import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
+import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
 import kotlinx.android.synthetic.main.activity_system_set.*
 
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_system_set.*
 class SystemSetActivity : KtxActivity(R.layout.activity_system_set), OnAlertDialogClickListener {
 
     private val systemSettingViewModel by viewModels<SystemSettingViewModel>()
+
 
     override fun initTitle() {
         systemSettingMtb.let {
@@ -90,16 +92,19 @@ class SystemSetActivity : KtxActivity(R.layout.activity_system_set), OnAlertDial
                 fragmentManager = supportFragmentManager
             )
         )
-//        Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
-//            systemSettingTvPhone.text = it.driverHelpPhone
-//        })
+        systemSettingViewModel.appLogoutLiveData.observe(
+            this, RequestResultObserver(
+            successBlock = {
+               resetApplication()
+            }
+        ))
     }
 
     override fun initData(isFirstInit: Boolean) {
     }
 
     override fun onAlertDialogLeftClick(code: Int) {
-        resetApplication()
+        systemSettingViewModel.logout()
     }
 
     override fun onAlertDialogRightClick(code: Int) {

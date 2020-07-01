@@ -15,6 +15,7 @@ import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.model.UserAuditEnum
+import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
 import com.yanzhenjie.permission.runtime.Permission
@@ -223,9 +224,9 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
         userApplyActivityViewModel.uploadPicLiveData.observe(
             this, RequestResultObserver(
                 successBlock = {
-                    ToastBar.show("提交认证成功")
+                    ToastBar.show("提交成功")
                     finish()
-                }
+                },fragmentManager = supportFragmentManager
             )
         )
     }

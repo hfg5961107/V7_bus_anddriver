@@ -2,9 +2,11 @@ package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.rvakva.bus.home.R
 import com.rvakva.bus.home.ui.IndexActivity
+import com.rvakva.bus.home.viewmodel.work.WorkViewModel
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxFragment
@@ -20,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_person_center.*
  * @CreateDate:     2020/5/14 上午9:41
  */
 class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
+
+    private val workViewModel by activityViewModels<WorkViewModel>()
 
     companion object {
 
@@ -110,25 +114,11 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     }
 
     override fun initData(isFirstInit: Boolean) {
-        if (isFirstInit) {
-
-        }
+        workViewModel.getUserInfo()
     }
     var name : String? = null
 
     private fun setOnClick() {
-//        //历史班次
-//        pcHistoryScheduleLl.setOnClickListener {
-//            jumpByARouter(Config.USER_HISTORY_SCHEDULE)
-//        }
-//        //我的钱包
-//        pcWalletLl.setOnClickListener {
-//            jumpByARouter(Config.USER_WALLET)
-//        }
-//        //业务流水
-//        pcBusinessList.setOnClickListener {
-//            jumpByARouter(Config.USER_BUSINESS_LIST)
-//        }
         //账户认证
         pcAccountApprove.setOnClickListener {
             jumpByARouter(Config.USER_IDENTITY)

@@ -91,4 +91,12 @@ interface PersonalService {
     suspend fun getIncomeDetails(
         @Path("orderId") orderId: Int
     ): EmResult<FinanceModel>?
+
+
+
+    /**
+     * 退出app
+     */
+    @POST("api/v1/driver/info/logout")
+    suspend fun logout(): BaseResult?
 }

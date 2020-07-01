@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.lifecycle.Observer
 import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.R
 import com.rvakva.travel.devkit.expend.jumpByARouter
+import com.rvakva.travel.devkit.expend.loge
 import com.rvakva.travel.devkit.expend.setImageResource
 import com.rvakva.travel.devkit.model.UserAuditEnum
 import com.rvakva.travel.devkit.retrofit.ApiConstant
@@ -38,7 +40,7 @@ class MyEmptyView : IBaseEmptyView {
     override val clickLayoutId: Int
         get() = R.id.myEmptyViewTvError
 
-    var emptyRes : Int? = null
+    var emptyRes: Int? = null
 
     override fun changeView(status: Int) {
         myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
@@ -96,31 +98,32 @@ class MyEmptyView : IBaseEmptyView {
     private fun bindEmpty() {
         myEmptyViewTvError.text = emptyText
         var textContent = ""
-        var user = Ktx.getInstance().userDataSource.userInfoLiveData.let { it.value }
-        when (user?.applyStatus) {
-            UserAuditEnum.NON_IDENTITY.status -> {
-                textContent = "前往认证"
-                myEmptyViewTvError.text = "账户还未认证"
-                myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
-            }
-            UserAuditEnum.PROGRESSING.status -> {
-                textContent = "前往查看"
-                myEmptyViewTvError.text = "账户正在审核"
-                myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_processing)
-            }
-            UserAuditEnum.SUCCESS.status -> {
-                if (emptyRes != null){
-                    myEmptyViewTvError.setImageResource(topRes = emptyRes)
-                }else{
+        Ktx.getInstance().userDataSource.userInfoLiveData.observeForever(Observer {
+            when (it?.applyStatus) {
+                UserAuditEnum.NON_IDENTITY.status -> {
+                    textContent = "前往认证"
+                    myEmptyViewTvError.text = "账户还未认证"
                     myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
                 }
+                UserAuditEnum.PROGRESSING.status -> {
+                    textContent = "前往查看"
+                    myEmptyViewTvError.text = "账户正在审核"
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_processing)
+                }
+                UserAuditEnum.SUCCESS.status -> {
+                    if (emptyRes != null) {
+                        myEmptyViewTvError.setImageResource(topRes = emptyRes)
+                    } else {
+                        myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
+                    }
+                }
+                UserAuditEnum.FAIL.status -> {
+                    textContent = "前往查看"
+                    myEmptyViewTvError.text = "账户审核未通过"
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_fail)
+                }
             }
-            UserAuditEnum.FAIL.status -> {
-                textContent = "前往查看"
-                myEmptyViewTvError.text = "账户审核未通过"
-                myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_fail)
-            }
-        }
+        })
         if (textContent.isNotEmpty()) {
             myEmptyViewTvAction.let {
                 it.text = textContent
