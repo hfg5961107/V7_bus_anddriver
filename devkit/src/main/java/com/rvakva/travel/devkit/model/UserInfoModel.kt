@@ -33,6 +33,10 @@ class UserInfoModel(
      */
     @ColumnInfo(name = "idCardBackPath") var idCardBackPath: String? = null,
     /**
+     * 驾驶证
+     */
+    @ColumnInfo(name = "driverLicensePath") var driverLicensePath: String? = null,
+    /**
      * 其他附件地址
      */
     @ColumnInfo(name = "attachmentPath") var attachmentPath: String? = null,

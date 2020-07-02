@@ -99,6 +99,7 @@ class MyEmptyView : IBaseEmptyView {
         myEmptyViewTvError.text = emptyText
         var textContent = ""
         Ktx.getInstance().userDataSource.userInfoLiveData.observeForever(Observer {
+            "~~~~~~~~~~~~`applyStatus:${it?.applyStatus}".loge()
             when (it?.applyStatus) {
                 UserAuditEnum.NON_IDENTITY.status -> {
                     textContent = "前往认证"
@@ -111,11 +112,10 @@ class MyEmptyView : IBaseEmptyView {
                     myEmptyViewTvError.setImageResource(topRes = R.drawable.common_identity_processing)
                 }
                 UserAuditEnum.SUCCESS.status -> {
-                    if (emptyRes != null) {
-                        myEmptyViewTvError.setImageResource(topRes = emptyRes)
-                    } else {
-                        myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
-                    }
+                    textContent=""
+                    myEmptyViewTvAction.visibility=View.GONE
+                    myEmptyViewTvError.text = emptyText
+                    myEmptyViewTvError.setImageResource(topRes = R.drawable.common_empty_base)
                 }
                 UserAuditEnum.FAIL.status -> {
                     textContent = "前往查看"

@@ -15,7 +15,6 @@ import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.base.KtxActivity
 import com.rvakva.travel.devkit.expend.*
 import com.rvakva.travel.devkit.model.UserAuditEnum
-import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.widget.ToastBar
 import com.yanzhenjie.permission.runtime.Permission
@@ -41,10 +40,6 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
     private val photoBackRequestCode = 0x0002
     private val photoOtherOneRequestCode = 0x0003
     private val photoOtherTwoRequestCode = 0x0004
-
-
-    private var otherOne: String? = null
-    private var otherTwo: String? = null
 
     override fun initTitle() {
         applyMtb.let {
@@ -82,32 +77,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                 userApplyIdCardTv.text = idCard
             }
 
-
-            if (it.attachmentPath.isNullOrEmpty()) {
-                userApplyOtherOneIv.setImageResource(R.drawable.user_certification_other)
-                userApplyOtherTwoIv.setImageResource(R.drawable.user_certification_other)
-
-                userApplyOtherOneRl.visibility = View.GONE
-                userApplyOtherTwoRl.visibility = View.GONE
-            } else {
-                if (it.attachmentPath!!.contains(",")) {
-                    var other = it.attachmentPath
-                    other!!.split(",")[0]?.let { path ->
-                        otherOne = path
-                        userApplyOtherOneIv.glideInto(path.getImageUrl())
-                        userApplyOtherOneRl.visibility = View.VISIBLE
-                    }
-                    other.split(",")[1]?.let { path ->
-                        otherTwo = path
-                        userApplyOtherTwoIv.glideInto(path.getImageUrl())
-                        userApplyOtherTwoRl.visibility = View.VISIBLE
-                    }
-                } else {
-                    otherOne = it.attachmentPath
-                    userApplyOtherOneIv.glideInto(otherOne.getImageUrl())
-                    userApplyOtherOneRl.visibility = View.VISIBLE
-                }
-            }
+            //身份证正面
             it.idCardFrontPath?.let { path ->
                 if (path.isNullOrEmpty()) {
                     userApplyIdCardIv.setImageResource(R.drawable.user_certification_id_card)
@@ -117,7 +87,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyIdCardRl.visibility = View.VISIBLE
                 }
             } ?: userApplyIdCardIv.setImageResource(R.drawable.user_certification_id_card)
-
+            //身份证反面
             it.idCardBackPath?.let { path ->
                 if (path.isNullOrEmpty()) {
                     userApplyIdCardBackIv.setImageResource(R.drawable.user_certification_id_card_back)
@@ -127,6 +97,26 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyIdCardBackRl.visibility = View.VISIBLE
                 }
             } ?: userApplyIdCardBackIv.setImageResource(R.drawable.user_certification_id_card_back)
+            //驾驶证
+            it.driverLicensePath?.let { path ->
+                if (path.isNullOrEmpty()) {
+                    userApplyOtherOneIv.setImageResource(R.drawable.user_certification_other)
+                    userApplyOtherOneRl.visibility = View.GONE
+                } else {
+                    userApplyOtherOneIv.glideInto(path.getImageUrl())
+                    userApplyOtherOneRl.visibility = View.VISIBLE
+                }
+            } ?: userApplyOtherOneIv.setImageResource(R.drawable.user_certification_other)
+            //其他证件照
+            it.attachmentPath?.let { path ->
+                if (path.isNullOrEmpty()) {
+                    userApplyOtherTwoIv.setImageResource(R.drawable.user_certification_other)
+                    userApplyOtherTwoRl.visibility = View.GONE
+                } else {
+                    userApplyOtherTwoIv.glideInto(path.getImageUrl())
+                    userApplyOtherTwoRl.visibility = View.VISIBLE
+                }
+            } ?: userApplyOtherTwoIv.setImageResource(R.drawable.user_certification_other)
 
             when (it.applyStatus) {
                 UserAuditEnum.NON_IDENTITY.status -> {
@@ -214,8 +204,8 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                 userApplyIdCardEt.text.toString(),
                 userApplyActivityViewModel.userInfoModel?.idCardFrontPath ?: "",
                 userApplyActivityViewModel.userInfoModel?.idCardBackPath ?: "",
-                otherOne ?: null,
-                otherTwo ?: null
+                userApplyActivityViewModel.userInfoModel?.driverLicensePath ?: null,
+                userApplyActivityViewModel.userInfoModel?.attachmentPath ?: null
             )
         }
     }

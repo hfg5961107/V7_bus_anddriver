@@ -1,6 +1,7 @@
 package com.rvakva.bus.home.ui.work
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
@@ -111,9 +112,9 @@ class WorkFragment : KtxFragment(R.layout.fragment_work) {
         }
 
         mainVp.registerOnPageChangeCallback(object : OnPageChangeCallback(){
-
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                workViewModel.getUserInfo()
                 if (position == 0){
                     mainTv.visibility = View.GONE
                 }

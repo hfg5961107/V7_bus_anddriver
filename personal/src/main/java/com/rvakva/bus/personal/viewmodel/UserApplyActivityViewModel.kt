@@ -136,17 +136,13 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
             otherOne: String?,
             otherTwo: String?
     ): BaseResult {
-        if (otherOne != null && otherTwo != null) {
-            attachmentPat = "$otherOne,$otherTwo"
-        } else if (otherOne == null && otherTwo != null) {
+         if ( otherTwo != null) {
             attachmentPat = otherTwo
-        } else if (otherOne != null && otherTwo == null) {
-            attachmentPat = otherOne
-        } else if (otherOne == null && otherTwo == null){
+        }else if ( otherTwo == null){
             attachmentPat = null
         }
         return ApiManager.getInstance().createService(PersonalService::class.java)
-                .commitDriverInfo(userName, idCard, frontPath ?: "", backPath ?: "", attachmentPat ?: "")
+                .commitDriverInfo(userName, idCard, frontPath ?: "", backPath ?: "", otherOne ?: "",attachmentPat ?: "")
                 .requestMap()
     }
 }

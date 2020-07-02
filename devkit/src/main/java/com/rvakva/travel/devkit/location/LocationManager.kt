@@ -1,22 +1,17 @@
 package com.rvakva.travel.devkit.location
 
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.lifecycle.Observer
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
-import com.google.gson.Gson
-import com.rvakva.travel.devkit.Config
 import com.rvakva.travel.devkit.Ktx
 import com.rvakva.travel.devkit.KtxViewModel
 import com.rvakva.travel.devkit.expend.*
-import com.rvakva.travel.devkit.model.DriverStatusPojo
 import com.rvakva.travel.devkit.model.LocationModel
 import com.rvakva.travel.devkit.model.UserInfoModel
 import com.rvakva.travel.devkit.mqtt.MqttManager
 import com.rvakva.travel.devkit.x.XDataBase
-import org.eclipse.paho.client.mqttv3.MqttException
-import org.eclipse.paho.client.mqttv3.MqttMessage
-import org.eclipse.paho.client.mqttv3.MqttPersistenceException
-import org.json.JSONObject
 
 
 /**
@@ -52,7 +47,7 @@ class LocationManager {
             }
             it.setLocationOption(createOption())
             NotificationEnum.LOCATION.let { notificationEnum ->
-                notificationEnum.buildNotification()?.let { notification ->
+                notificationEnum.buildNotification(Intent("com.rvakva.bus.home.WorkActivity"))?.let { notification ->
                     it.enableBackgroundLocation(notificationEnum.channelCode, notification)
                 }
             }

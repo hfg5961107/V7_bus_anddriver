@@ -11,7 +11,13 @@
         <activity android:name=".ui.IndexActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.work.WorkActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="com.rvakva.bus.home.WorkActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.order.NavigationActivity"
             android:theme="@style/NavigationTheme"
             android:screenOrientation="portrait"/>
