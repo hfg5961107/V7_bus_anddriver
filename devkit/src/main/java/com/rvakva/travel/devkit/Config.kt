@@ -8,7 +8,7 @@ package com.rvakva.travel.devkit
  */
 object Config{
     //value
-    const val HOST_UP_PIC = "http://up-z2.qiniu.com"
+    const val HOST_UP_PIC = "http://up-z1.qiniu.com"
 
     const val CHANNEL_APP_ALI = "CHANNEL_APP_ALI"
     const val CHANNEL_APP_WECHAT = "CHANNEL_APP_WECHAT"
