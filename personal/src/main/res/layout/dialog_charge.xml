@@ -99,7 +99,8 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:background="@drawable/cor4_blue_line_sub"
-            android:layout_marginTop="@dimen/size_12dp">
+            android:layout_marginTop="@dimen/size_12dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
