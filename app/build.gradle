@@ -24,8 +24,8 @@ android {
         applicationId "com.rvakva.bus.driver"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 1
-        versionName "1.0.3"
+        versionCode 2
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

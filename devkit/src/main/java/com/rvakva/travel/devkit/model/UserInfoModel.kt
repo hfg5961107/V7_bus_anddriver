@@ -36,6 +36,12 @@ class UserInfoModel(
      * 驾驶证
      */
     @ColumnInfo(name = "driverLicensePath") var driverLicensePath: String? = null,
+
+    /**
+     * 从业资格证
+     */
+    @ColumnInfo(name = "qualificationsPath") var qualificationsPath: String? = null,
+
     /**
      * 其他附件地址
      */
