@@ -90,7 +90,7 @@
             android:enabled="false"
             android:paddingLeft="16dp"
             android:text="获取验证码"
-            android:textColor="@color/lc_blue"
+            android:textColor="@color/enable__blue__sub"
             android:textSize="@dimen/sp_14" />
     </RelativeLayout>
 

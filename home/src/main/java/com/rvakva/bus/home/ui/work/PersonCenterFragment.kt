@@ -25,6 +25,8 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
     private val workViewModel by activityViewModels<WorkViewModel>()
 
+    var headAvater: String? = null
+
     companion object {
 
         @JvmStatic
@@ -38,73 +40,76 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
 
     override fun initObserver() {
         Ktx.getInstance().userDataSource.userInfoLiveData.observe(viewLifecycleOwner, Observer {
-            if(it.name.isNullOrEmpty()){
+            if (it.name.isNullOrEmpty()) {
                 pcDriverNameTv.text = "先生/女士"
-            }else{
+            } else {
                 pcDriverNameTv.text = it.name
             }
 
             pcDriverPhoneTv.text = it.phone?.let {
-                it.substring(0,3)+"****"+it.substring(7,it.length)
+                it.substring(0, 3) + "****" + it.substring(7, it.length)
             }
 
             pcServicePhoneTv.text = it.driverServicePhone
             it.headPortrait?.let {
-                pcHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
+                if (headAvater == null || !headAvater.equals(it)){
+                    pcHeaderIv.glideWithOvalInto(Config.IMAGE_SERVER + it)
+                    headAvater = it
+                }
             } ?: pcHeaderIv.setImageResource(R.drawable.home_personal_profile_photo)
 
-            when(it.applyStatus){
-                UserAuditEnum.NON_IDENTITY.status ->{
+            when (it.applyStatus) {
+                UserAuditEnum.NON_IDENTITY.status -> {
                     myTextApproveState.text = "待认证"
                     myTextApproveState.setTextColor(resources.getColor(R.color.black_desc))
                 }
-                UserAuditEnum.PROGRESSING.status ->{
+                UserAuditEnum.PROGRESSING.status -> {
                     myTextApproveState.text = "认证中"
                     myTextApproveState.setTextColor(resources.getColor(R.color.color_yellow))
                 }
-                UserAuditEnum.SUCCESS.status ->{
+                UserAuditEnum.SUCCESS.status -> {
                     myTextApproveState.text = "已认证"
                     myTextApproveState.setTextColor(resources.getColor(R.color.black_desc))
                 }
-                UserAuditEnum.FAIL.status ->{
+                UserAuditEnum.FAIL.status -> {
                     myTextApproveState.text = "认证失败"
                     myTextApproveState.setTextColor(resources.getColor(R.color.color_red))
                 }
             }
 
             //历史班次
-            pcHistoryScheduleLl.setOnClickListener {view->
-                if (it.applyStatus == UserAuditEnum.SUCCESS.status){
+            pcHistoryScheduleLl.setOnClickListener { view ->
+                if (it.applyStatus == UserAuditEnum.SUCCESS.status) {
                     jumpByARouter(Config.USER_HISTORY_SCHEDULE)
-                }else{
+                } else {
                     ToastBar.show("只有账户通过审核后，才能查看")
                 }
             }
 
             //我的钱包
-            pcWalletLl.setOnClickListener {view->
-                if (it.applyStatus == UserAuditEnum.SUCCESS.status){
+            pcWalletLl.setOnClickListener { view ->
+                if (it.applyStatus == UserAuditEnum.SUCCESS.status) {
                     jumpByARouter(Config.USER_WALLET)
-                }else{
+                } else {
                     ToastBar.show("只有账户通过审核后，才能查看")
                 }
             }
 
             //业务流水
-            pcBusinessList.setOnClickListener {view->
-                if (it.applyStatus == UserAuditEnum.SUCCESS.status){
+            pcBusinessList.setOnClickListener { view ->
+                if (it.applyStatus == UserAuditEnum.SUCCESS.status) {
                     jumpByARouter(Config.USER_BUSINESS_LIST)
-                }else{
+                } else {
                     ToastBar.show("只有账户通过审核后，才能查看")
                 }
             }
         })
 
         Ktx.getInstance().userDataSource.userConfigLiveData.observe(this, Observer {
-            if (it.balance != null){
-                myTextMony.text="¥${it.balance.checkIsInt()}"
-            }else{
-                myTextMony.text="¥0"
+            if (it.balance != null) {
+                myTextMony.text = "¥${it.balance.checkIsInt()}"
+            } else {
+                myTextMony.text = "¥0"
             }
         })
     }
@@ -116,7 +121,8 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     override fun initData(isFirstInit: Boolean) {
         workViewModel.getUserInfo()
     }
-    var name : String? = null
+
+    var name: String? = null
 
     private fun setOnClick() {
         //账户认证
