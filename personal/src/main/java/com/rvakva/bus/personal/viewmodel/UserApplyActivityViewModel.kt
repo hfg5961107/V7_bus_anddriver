@@ -42,7 +42,7 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
             defaultFrontPath: String = "",
             defaultBackPath: String = "",
             defaultOtherOnePath: String? = null,
-            defaultOtherTwoPath: String? = null
+            defaultOtherTwoPath: String = ""
     ) {
         val uploadList = mutableListOf<String>()
 
@@ -56,15 +56,15 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
             null
         } else defaultBackPath
 
-        var otherOne = if (otherOnePath.isNotEmpty()) {
-            uploadList.add(otherOnePath)
-            null
-        } else defaultOtherOnePath
-
         var otherTwo = if (otherTwoPath.isNotEmpty()) {
             uploadList.add(otherTwoPath)
             null
         } else defaultOtherTwoPath
+
+        var otherOne = if (otherOnePath.isNotEmpty()) {
+            uploadList.add(otherOnePath)
+            null
+        } else defaultOtherOnePath
 
         when {
             frontPath?.isEmpty() == true -> {
@@ -72,6 +72,9 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
             }
             backPath?.isEmpty() == true -> {
                 ToastBar.show("请上传身份证背面")
+            }
+            otherTwo?.isEmpty() == true -> {
+                ToastBar.show("请上传从业资格证")
             }
 
             else ->
@@ -94,15 +97,13 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
                                 backPath = it[0]
                                 it.removeAt(0)
                             }
-                            if (otherOne == null) {
-                                if (it.size>0){
-                                    otherOne = it[0]
-                                    it.removeAt(0)
-                                }
-                            }
                             if (otherTwo == null) {
-                                if (it.size>0) {
-                                    otherTwo = it[0]
+                                otherTwo = it[0]
+                                it.removeAt(0)
+                            }
+                            if (otherOne == null) {
+                                if (it.size > 0) {
+                                    otherOne = it[0]
                                     it.removeAt(0)
                                 }
                             }
@@ -136,13 +137,9 @@ class UserApplyActivityViewModel(application: Application) : AndroidViewModel(ap
             otherOne: String?,
             otherTwo: String?
     ): BaseResult {
-         if ( otherTwo != null) {
-            attachmentPat = otherTwo
-        }else if ( otherTwo == null){
-            attachmentPat = null
-        }
         return ApiManager.getInstance().createService(PersonalService::class.java)
-                .commitDriverInfo(userName, idCard, frontPath ?: "", backPath ?: "", otherOne ?: "",attachmentPat ?: "")
+                .commitDriverInfo(userName, idCard, frontPath ?: "", backPath ?: "", otherOne
+                        ?: "", otherTwo ?: "", null)
                 .requestMap()
     }
 }

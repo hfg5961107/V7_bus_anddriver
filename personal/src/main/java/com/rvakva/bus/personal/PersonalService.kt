@@ -54,6 +54,7 @@ interface PersonalService {
         @Field("idCardFrontPath") idCardFrontPath: String,
         @Field("idCardBackPath") idCardBackPath: String,
         @Field("driverLicensePath") driverLicensePath: String,
+        @Field("qualificationsPath") qualificationsPath: String,
         @Field("attachmentPath") attachmentPath: String?
     ): BaseResult?
 

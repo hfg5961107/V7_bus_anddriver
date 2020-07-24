@@ -107,8 +107,8 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                     userApplyOtherOneRl.visibility = View.VISIBLE
                 }
             } ?: userApplyOtherOneIv.setImageResource(R.drawable.user_certification_other)
-            //其他证件照
-            it.attachmentPath?.let { path ->
+            //从业资格证
+            it.qualificationsPath?.let { path ->
                 if (path.isNullOrEmpty()) {
                     userApplyOtherTwoIv.setImageResource(R.drawable.user_certification_other)
                     userApplyOtherTwoRl.visibility = View.GONE
@@ -205,7 +205,7 @@ class UserApplyActivity : KtxActivity(R.layout.activity_user_apply) {
                 userApplyActivityViewModel.userInfoModel?.idCardFrontPath ?: "",
                 userApplyActivityViewModel.userInfoModel?.idCardBackPath ?: "",
                 userApplyActivityViewModel.userInfoModel?.driverLicensePath ?: null,
-                userApplyActivityViewModel.userInfoModel?.attachmentPath ?: null
+                userApplyActivityViewModel.userInfoModel?.qualificationsPath ?: ""
             )
         }
     }

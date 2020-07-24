@@ -1,14 +1,17 @@
 package com.rvakva.travel.devkit.x
 
 import android.content.Context
-import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.annotation.NonNull
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rvakva.travel.devkit.dao.UserConfigModelDao
 import com.rvakva.travel.devkit.dao.UserInfoModelDao
 import com.rvakva.travel.devkit.model.UserConfigModel
 import com.rvakva.travel.devkit.model.UserInfoModel
-import java.lang.Exception
-import java.lang.NullPointerException
+
 
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
@@ -16,7 +19,11 @@ import java.lang.NullPointerException
  * @Author:         胡峰
  * @CreateDate:     2020/4/27 下午4:03
  */
-@Database(entities = [UserInfoModel::class, UserConfigModel::class],version = 1, exportSchema = false)
+@Database(
+    entities = [UserInfoModel::class, UserConfigModel::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class XDataBase : RoomDatabase() {
 
     abstract fun userInfoModelDao(): UserInfoModelDao
@@ -25,21 +32,32 @@ abstract class XDataBase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE : XDataBase? = null
+        private var INSTANCE: XDataBase? = null
+
         //internal 同一模块下可见   A ?: B  A!=null -->A   A==null -->B
-        internal fun initialize(context: Context){
-            INSTANCE ?: synchronized(this){
+        internal fun initialize(context: Context) {
+            INSTANCE ?: synchronized(this) {
                 INSTANCE ?: createDataBase(context).let { INSTANCE = it }
             }
         }
 
 
         private fun createDataBase(context: Context) =
-                Room.databaseBuilder(context,XDataBase::class.java,"v5DataBase").build()
+            Room.databaseBuilder(context, XDataBase::class.java, "v5DataBase")
+                .addMigrations(Migration_1_2())
+                .build()
 
-        fun getInstance() = INSTANCE ?: throw NullPointerException("Have you invoke initialize() before111111?")
+        fun getInstance() =
+            INSTANCE ?: throw NullPointerException("Have you invoke initialize() before?")
+
+        fun Migration_1_2(): Migration? {
+            return object : Migration(1, 2) {
+                override fun migrate(@NonNull db: SupportSQLiteDatabase) {
+                    db.execSQL("ALTER TABLE userInfo ADD COLUMN qualificationsPath TEXT")
+                }
+            }
+        }
     }
-
 
 
 }
