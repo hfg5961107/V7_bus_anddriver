@@ -73,15 +73,16 @@ android {
     productFlavors {
         product {
             dimension = 'app'
-            buildConfigField "String", "HOST", '"https://api-bus.rvaka.cn/"'
+            buildConfigField "String", "HOST", '"https://apibus.xiaokacloud.com"'
             buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
+            buildConfigField "String", "APP_KEY", '"4ji3EvuwNziPKF8QXqXMTukGqPmlwOFJ"'
             buildConfigField "String", "IMG_SERVER", '"https://bus-image.rvaka.cn/"'
         }
         dev {
             dimension = 'app'
             buildConfigField "String", "HOST", '"http://10.10.2.3:10001/"'
             buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
-//            buildConfigField "String", "IMG_SERVER", '"http://q6ndef29k.bkt.clouddn.com/"'
+            buildConfigField "String", "APP_KEY", '"4ji3EvuwNziPKF8QXqXMTukGqPmlwOFJ"'
             buildConfigField "String", "IMG_SERVER", '"https://bus-image.rvaka.cn/"'
         }
     }
