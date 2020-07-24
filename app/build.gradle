@@ -75,14 +75,14 @@ android {
             dimension = 'app'
             buildConfigField "String", "HOST", '"https://sapi.rvaka.cn/"'
             buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
-            buildConfigField "String", "IMG_SERVER", '"https://eyimg.rvaka.cn/"'
+            buildConfigField "String", "IMG_SERVER", '"https://bus-image.rvaka.cn/"'
         }
         dev {
             dimension = 'app'
-            buildConfigField "String", "HOST", '"http://10.10.2.3:10002/"'
+            buildConfigField "String", "HOST", '"http://10.10.2.95:10001/"'
             buildConfigField "String", "WECHAT_ID", '"' + project.android.defaultConfig.manifestPlaceholders.get("WECHAT_ID") + '"'
 //            buildConfigField "String", "IMG_SERVER", '"http://q6ndef29k.bkt.clouddn.com/"'
-            buildConfigField "String", "IMG_SERVER", '"http://eyimg.rvaka.cn/"'
+            buildConfigField "String", "IMG_SERVER", '"https://bus-image.rvaka.cn/"'
         }
     }
 }
