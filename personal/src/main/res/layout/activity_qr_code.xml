@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.rvakva.bus.personal.ui.QrCodeActivity">
+
+    <com.rvakva.travel.devkit.widget.MyTitleBar
+        android:id="@+id/walletMtb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.rvakva.bus.personal.widget.MyPercentLayout
+        android:layout_width="match_parent"
+        android:layout_height="327dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginLeft="@dimen/size_24dp"
+        android:layout_marginRight="@dimen/size_24dp"
+        app:proportion="1">
+
+        <ImageView
+            android:id="@+id/imgCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.rvakva.bus.personal.widget.MyPercentLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/permission_sp_16"
+        android:text="使用微信、小程序扫码"
+        android:textSize="16sp"
+        android:textColor="#666666"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="完成极速购票"
+        android:textSize="16sp"
+        android:textColor="#666666"/>
+
+
+</LinearLayout>

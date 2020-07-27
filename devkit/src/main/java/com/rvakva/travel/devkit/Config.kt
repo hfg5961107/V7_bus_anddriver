@@ -50,6 +50,7 @@ object Config{
     const val USER_INCOME_DETAILS = "/personal/income"
     const val USER_IDENTITY = "/user/identity/"
     const val USER_BUSINESS_LIST = "/user/business/list"
+    const val USER_QR_CODE = "/personal/qrcode"
 
     const val HOME_SCHEDULE_DETAIL = "/home/schedule/detail"
 

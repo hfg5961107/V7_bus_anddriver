@@ -50,6 +50,19 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
                 it.substring(0, 3) + "****" + it.substring(7, it.length)
             }
 
+            //todo 缺少是否绑定车辆字段 这里先模拟数据
+           var  isBound :Boolean=true
+            if (isBound){
+                pcDriverCarTv.setText("川A 55443 白色")
+                pcDriverCarTv.setBackgroundResource(R.drawable.bg_car_bound)
+                pcDrivercodeImg.visibility=View.VISIBLE
+            }else{
+                pcDriverCarTv.setText("未绑定车辆")
+                pcDriverCarTv.setBackgroundResource(R.drawable.bg_car_not_bound)
+                pcDrivercodeImg.visibility=View.GONE
+            }
+            //todo 缺少是否绑定车辆字段 这里先模拟数据
+
             pcServicePhoneTv.text = it.driverServicePhone
             it.headPortrait?.let {
                 if (headAvater == null || !headAvater.equals(it)){
@@ -125,6 +138,10 @@ class PersonCenterFragment : KtxFragment(R.layout.fragment_person_center) {
     var name: String? = null
 
     private fun setOnClick() {
+        //极速下单二维码
+        pcDrivercodeImg.setOnClickListener {
+            jumpByARouter(Config.USER_QR_CODE);
+        }
         //账户认证
         pcAccountApprove.setOnClickListener {
             jumpByARouter(Config.USER_IDENTITY)
