@@ -1,7 +1,9 @@
 package com.rvakva.bus.personal.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.rvakva.bus.common.base.PayActivity
 import com.rvakva.bus.personal.R
@@ -10,10 +12,9 @@ import com.rvakva.bus.personal.viewmodel.WalletActivityViewModel
 import com.rvakva.bus.personal.widget.ChargeDialog
 import com.rvakva.bus.personal.widget.WalletCloseDialog
 import com.rvakva.travel.devkit.Config
-import com.rvakva.travel.devkit.expend.checkIsInt
-import com.rvakva.travel.devkit.expend.jumpTo
-import com.rvakva.travel.devkit.expend.loge
-import com.rvakva.travel.devkit.expend.numberFormat
+import com.rvakva.travel.devkit.Ktx
+import com.rvakva.travel.devkit.expend.*
+import com.rvakva.travel.devkit.model.UserAuditEnum
 import com.rvakva.travel.devkit.observer.request.RequestEmResultObserver
 import com.rvakva.travel.devkit.observer.request.RequestResultObserver
 import com.rvakva.travel.devkit.retrofit.exception.SpecialApiException
@@ -77,6 +78,14 @@ class WalletActivity : PayActivity(R.layout.activity_wallet) {
         if (isFirstInit) {
             getUserBalance(isFirstInit)
         }
+        Ktx.getInstance().userDataSource.userInfoLiveData.observe(this, Observer {
+
+                if (it.driverRecharge==2){
+                    walletTvCharge.visibility=View.GONE
+                }else{
+                    walletTvCharge.visibility=View.VISIBLE
+                }
+        })
     }
 
     private fun getUserBalance(isFirst: Boolean) {

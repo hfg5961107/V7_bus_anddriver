@@ -1,11 +1,8 @@
 package com.rvakva.travel.devkit.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 /**
  * Copyright (C), 2020 - 2999, Sichuan Xiaoka Technology Co., Ltd.
  * @Description:
@@ -76,6 +73,26 @@ class UserInfoModel(
     /**
      * 拒绝原因
      */
-    @ColumnInfo(name = "auditRemark") var refusalReason: String? = null
+    @ColumnInfo(name = "auditRemark") var refusalReason: String? = null,
+
+    /**
+     * 司机充值功能：1-开启，2-关闭
+     */
+    @ColumnInfo(name = "driverRecharge") var driverRecharge: Int = 2,
+
+    /**
+     * 车辆id
+     */
+    @ColumnInfo(name = "vehicleId") var vehicleId: Long = 0,
+
+    /**
+     * 车牌号
+     */
+    @ColumnInfo(name = "licenseNo") var licenseNo: String? = null,
+
+    /**
+     * 车牌颜色
+     */
+    @ColumnInfo(name = "licenseColor") var licenseColor: String? = null
 
 ) : IModel

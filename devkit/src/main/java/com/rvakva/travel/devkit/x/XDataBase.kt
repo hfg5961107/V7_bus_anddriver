@@ -21,7 +21,7 @@ import com.rvakva.travel.devkit.model.UserInfoModel
  */
 @Database(
     entities = [UserInfoModel::class, UserConfigModel::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class XDataBase : RoomDatabase() {
@@ -41,10 +41,10 @@ abstract class XDataBase : RoomDatabase() {
             }
         }
 
-
         private fun createDataBase(context: Context) =
             Room.databaseBuilder(context, XDataBase::class.java, "v5DataBase")
                 .addMigrations(Migration_1_2())
+                .addMigrations(Migration_2_3())
                 .build()
 
         fun getInstance() =
@@ -54,6 +54,17 @@ abstract class XDataBase : RoomDatabase() {
             return object : Migration(1, 2) {
                 override fun migrate(@NonNull db: SupportSQLiteDatabase) {
                     db.execSQL("ALTER TABLE userInfo ADD COLUMN qualificationsPath TEXT")
+                }
+            }
+        }
+
+        fun Migration_2_3(): Migration? {
+            return object : Migration(2, 3) {
+                override fun migrate(@NonNull db: SupportSQLiteDatabase) {
+                    db.execSQL("ALTER TABLE userInfo ADD COLUMN driverRecharge INTEGER NOT NULL DEFAULT 2")
+                    db.execSQL("ALTER TABLE userInfo ADD COLUMN vehicleId INTEGER NOT NULL DEFAULT 0")
+                    db.execSQL("ALTER TABLE userInfo ADD COLUMN licenseNo TEXT")
+                    db.execSQL("ALTER TABLE userInfo ADD COLUMN licenseColor TEXT")
                 }
             }
         }

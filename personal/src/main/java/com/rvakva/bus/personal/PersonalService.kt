@@ -94,6 +94,15 @@ interface PersonalService {
         @Path("orderId") orderId: Int
     ): EmResult<FinanceModel>?
 
+    /**
+     * 查看车辆二维码
+     */
+    @POST("api/v1/driver/info/qr_code")
+    suspend fun getCode(
+        @Query("vehicleId") vehicleId: Long,
+        @Query("appKey") fee: String
+    ): EmResult<String>?
+
 
 
     /**
