@@ -8,7 +8,7 @@ android {
 
     signingConfigs {
         defaultConfig {
-            storeFile file('../v7_driver.keystore')
+            storeFile file('../keystore.keystore')
             storePassword 'easymin'
             keyAlias = '司机端'
             keyPassword 'easymin'

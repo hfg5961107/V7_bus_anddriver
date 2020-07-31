@@ -68,14 +68,14 @@ ext.deps = [
                 'amap_search'            : "com.amap.api:search:7.1.0",
 
                 'wechat'                 : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.5.8",
+
+                'matisse'                : "com.zhihu.android:matisse:0.5.3-beta3",
         ],
 
         //'pandora'
         'pandora_debug'                  : "com.github.whataa:pandora:androidx_v2.1.0",
+        'pandora_release'                : "com.github.whataa:pandora-no-op:v2.0.1",
 
         'arouter_compiler'       : "com.alibaba:arouter-compiler:1.2.2",
         'glide_compiler'         : "com.github.bumptech.glide:compiler:${versions.glideLibrary}",
-
-        'matisse'                : "com.zhihu.android:matisse:0.5.3-beta3",
-
 ]

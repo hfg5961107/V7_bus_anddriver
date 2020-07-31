@@ -54,7 +54,7 @@ dependencies {
     }
     kapt deps.glide_compiler
     debugImplementation deps.pandora_debug
-    debugApi deps.matisse
+    releaseApi deps.pandora_release
 
     //alipaySdk
     implementation project(path: ':alipaySdk-15.7.3-20200217092949-noUtdid')
